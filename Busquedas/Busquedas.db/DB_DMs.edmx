@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_DMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="CAT_Materiales_Sel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scDMs">
+          <Parameter Name="pManejaLotes" Type="bit" Mode="In" />
+          <Parameter Name="pActivo" Type="bit" Mode="In" />
+          <Parameter Name="pMigrarSAP" Type="bit" Mode="In" />
+          <Parameter Name="pBusqueda" Type="varchar(max)" Mode="In" />
+          <Parameter Name="pInicio" Type="int" Mode="In" />
+          <Parameter Name="pTamanioLote" Type="int" Mode="In" />
+          <Parameter Name="pOrden" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CAT_Materiales_TotalRegistrosBuscados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scDMs">
+          <Parameter Name="pManejaLotes" Type="bit" Mode="In" />
+          <Parameter Name="pActivo" Type="bit" Mode="In" />
+          <Parameter Name="pMigrarSAP" Type="bit" Mode="In" />
+          <Parameter Name="pBusqueda" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scDMs">
+          <Parameter Name="pIdMaterialSistema" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="DB_DMsModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_DMsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB_DMsEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="CAT_Materiales_TotalRegistrosBuscados" ReturnType="Collection(DB_DMsModel.CAT_Materiales_TotalRegistrosBuscados_Result)">
+            <Parameter Name="pManejaLotes" Mode="In" Type="Boolean" />
+            <Parameter Name="pActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="pMigrarSAP" Mode="In" Type="Boolean" />
+            <Parameter Name="pBusqueda" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel" ReturnType="Collection(DB_DMsModel.VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel_Result)">
+          <Parameter Name="pIdMaterialSistema" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="CAT_Materiales_Sel" ReturnType="Collection(DB_DMsModel.CAT_Materiales_Sel_Result)">
+            <Parameter Name="pManejaLotes" Mode="In" Type="Boolean" />
+            <Parameter Name="pActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="pMigrarSAP" Mode="In" Type="Boolean" />
+            <Parameter Name="pBusqueda" Mode="In" Type="String" />
+            <Parameter Name="pInicio" Mode="In" Type="Int32" />
+            <Parameter Name="pTamanioLote" Mode="In" Type="Int32" />
+            <Parameter Name="pOrden" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="CAT_Materiales_TotalRegistrosBuscados_Result">
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="31" />
+        </ComplexType>
+        <ComplexType Name="VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel_Result">
+          <Property Type="Int64" Name="IdMaterialSistema" Nullable="false" />
+          <Property Type="Int32" Name="IdSistemaCatalogo" Nullable="false" />
+          <Property Type="Int32" Name="CompanyBuildId" Nullable="false" />
+          <Property Type="Int64" Name="IdMaterial" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="FullDescription" Nullable="false" MaxLength="1063" />
+        </ComplexType>
+        <ComplexType Name="CAT_Materiales_Sel_Result">
+          <Property Type="Int64" Name="IdMaterial" Nullable="false" />
+          <Property Type="Int32" Name="IdSistemaCatalogo" Nullable="false" />
+          <Property Type="String" Name="NombreSistema" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NombreCatalogo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NombreBase" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="ManejaLote" Nullable="false" />
+          <Property Type="Int32" Name="DiasVencimiento" Nullable="true" />
+          <Property Type="Int64" Name="IdMaterialSistemaBase" Nullable="false" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="Boolean" Name="MigrarSAP" Nullable="false" />
+          <Property Type="String" Name="CodigoTipoMaterial" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="TipoMaterialDescripcion" Nullable="false" MaxLength="25" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_DMsModelStoreContainer" CdmEntityContainer="DB_DMsEntities" >
+          <FunctionImportMapping FunctionImportName="CAT_Materiales_TotalRegistrosBuscados" FunctionName="DB_DMsModel.Store.CAT_Materiales_TotalRegistrosBuscados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.CAT_Materiales_TotalRegistrosBuscados_Result">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel" FunctionName="DB_DMsModel.Store.VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.VW_CAT_MaterialesEquivalentesDescripcionLarga_Sel_Result">
+                <ScalarProperty Name="IdMaterialSistema" ColumnName="IdMaterialSistema" />
+                <ScalarProperty Name="IdSistemaCatalogo" ColumnName="IdSistemaCatalogo" />
+                <ScalarProperty Name="CompanyBuildId" ColumnName="CompanyBuildId" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CAT_Materiales_Sel" FunctionName="DB_DMsModel.Store.CAT_Materiales_Sel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.CAT_Materiales_Sel_Result">
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="IdSistemaCatalogo" ColumnName="IdSistemaCatalogo" />
+                <ScalarProperty Name="NombreSistema" ColumnName="NombreSistema" />
+                <ScalarProperty Name="NombreCatalogo" ColumnName="NombreCatalogo" />
+                <ScalarProperty Name="NombreBase" ColumnName="NombreBase" />
+                <ScalarProperty Name="ManejaLote" ColumnName="ManejaLote" />
+                <ScalarProperty Name="DiasVencimiento" ColumnName="DiasVencimiento" />
+                <ScalarProperty Name="IdMaterialSistemaBase" ColumnName="IdMaterialSistemaBase" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="MigrarSAP" ColumnName="MigrarSAP" />
+                <ScalarProperty Name="CodigoTipoMaterial" ColumnName="CodigoTipoMaterial" />
+                <ScalarProperty Name="TipoMaterialDescripcion" ColumnName="TipoMaterialDescripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
