@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_DMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agrupaciones">
+          <Key>
+            <PropertyRef Name="IdAgrupacion" />
+          </Key>
+          <Property Name="IdAgrupacion" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo" Type="int" Nullable="false" />
+          <Property Name="NombreAgrupacion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CamposCatalogoReferencias">
+          <Key>
+            <PropertyRef Name="CatalogoCampoId" />
+            <PropertyRef Name="CatalogoCampoIdRef" />
+            <PropertyRef Name="UpdateRule" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="CatalogoCampoId" Type="bigint" Nullable="false" />
+          <Property Name="CatalogoCampoIdRef" Type="bigint" Nullable="false" />
+          <Property Name="UpdateRule" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CAT_Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Esquema" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatalogoCampos">
+          <Key>
+            <PropertyRef Name="CatalogoCampoId" />
+          </Key>
+          <Property Name="CatalogoCampoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCatalogo" Type="int" Nullable="false" />
+          <Property Name="IdAgrupacion" Type="int" />
+          <Property Name="NombreCampo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="NombreTecnico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoDato" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tamanio" Type="int" Nullable="false" />
+          <Property Name="Precision" Type="int" />
+          <Property Name="CampoConReferencia" Type="bit" Nullable="false" />
+          <Property Name="Requerido" Type="bit" Nullable="false" />
+          <Property Name="LlavePrimaria" Type="bit" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Catalogos">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="NombreCatalogo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NombreFisico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TablaCreada" Type="bit" Nullable="false" />
+          <Property Name="Referenciada" Type="bit" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Agrupaciones_Catalogos">
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
+          <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Agrupaciones">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos">
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
+          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="CamposCatalogoReferencias">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos1">
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
+          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="CamposCatalogoReferencias">
+              <PropertyRef Name="CatalogoCampoIdRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatalogoCampos_Agrupaciones">
+          <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="0..1" />
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agrupaciones">
+              <PropertyRef Name="IdAgrupacion" />
+            </Principal>
+            <Dependent Role="CatalogoCampos">
+              <PropertyRef Name="IdAgrupacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatalogoCampos_Catalogos">
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="CatalogoCampos">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalogos_CAT_Categoria">
+          <End Role="CAT_Categoria" Type="Self.CAT_Categoria" Multiplicity="1" />
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Catalogos">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_DMsModelStoreContainer">
+          <EntitySet Name="Agrupaciones" EntityType="Self.Agrupaciones" Schema="scConfiguration" store:Type="Tables" />
+          <EntitySet Name="CAT_Categoria" EntityType="Self.CAT_Categoria" Schema="scConfiguration" store:Type="Tables" />
+          <EntitySet Name="CatalogoCampos" EntityType="Self.CatalogoCampos" Schema="scConfiguration" store:Type="Tables" />
+          <EntitySet Name="Catalogos" EntityType="Self.Catalogos" Schema="scConfiguration" store:Type="Tables" />
+          <EntitySet Name="CamposCatalogoReferencias" EntityType="Self.CamposCatalogoReferencias" store:Type="Tables" store:Schema="scConfiguration">
+            <DefiningQuery>SELECT 
+    [CamposCatalogoReferencias].[CatalogoCampoId] AS [CatalogoCampoId], 
+    [CamposCatalogoReferencias].[CatalogoCampoIdRef] AS [CatalogoCampoIdRef], 
+    [CamposCatalogoReferencias].[UpdateRule] AS [UpdateRule], 
+    [CamposCatalogoReferencias].[Activo] AS [Activo]
+    FROM [scConfiguration].[CamposCatalogoReferencias] AS [CamposCatalogoReferencias]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Agrupaciones_Catalogos" Association="Self.FK_Agrupaciones_Catalogos">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="Agrupaciones" EntitySet="Agrupaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos1" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos1">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatalogoCampos_Agrupaciones" Association="Self.FK_CatalogoCampos_Agrupaciones">
+            <End Role="Agrupaciones" EntitySet="Agrupaciones" />
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatalogoCampos_Catalogos" Association="Self.FK_CatalogoCampos_Catalogos">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalogos_CAT_Categoria" Association="Self.FK_Catalogos_CAT_Categoria">
+            <End Role="CAT_Categoria" EntitySet="CAT_Categoria" />
+            <End Role="Catalogos" EntitySet="Catalogos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_DMsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agrupaciones">
+          <Key>
+            <PropertyRef Name="IdAgrupacion" />
+          </Key>
+          <Property Name="IdAgrupacion" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <Property Name="NombreAgrupacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Catalogos" Relationship="Self.FK_Agrupaciones_Catalogos" FromRole="Agrupaciones" ToRole="Catalogos" />
+          <NavigationProperty Name="CatalogoCampos" Relationship="Self.FK_CatalogoCampos_Agrupaciones" FromRole="Agrupaciones" ToRole="CatalogoCampos" />
+        </EntityType>
+        <EntityType Name="CAT_Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Esquema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Catalogos" Relationship="Self.FK_Catalogos_CAT_Categoria" FromRole="CAT_Categoria" ToRole="Catalogos" />
+        </EntityType>
+        <EntityType Name="CatalogoCampos">
+          <Key>
+            <PropertyRef Name="CatalogoCampoId" />
+          </Key>
+          <Property Name="CatalogoCampoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <Property Name="IdAgrupacion" Type="Int32" />
+          <Property Name="NombreCampo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="NombreTecnico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoDato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tamanio" Type="Int32" Nullable="false" />
+          <Property Name="Precision" Type="Int32" />
+          <Property Name="CampoConReferencia" Type="Boolean" Nullable="false" />
+          <Property Name="Requerido" Type="Boolean" Nullable="false" />
+          <Property Name="LlavePrimaria" Type="Boolean" Nullable="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agrupaciones" Relationship="Self.FK_CatalogoCampos_Agrupaciones" FromRole="CatalogoCampos" ToRole="Agrupaciones" />
+          <NavigationProperty Name="CamposCatalogoReferencias" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos" FromRole="CatalogoCampos" ToRole="CamposCatalogoReferencias" />
+          <NavigationProperty Name="CamposCatalogoReferenciasFK" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos1" FromRole="CatalogoCampos" ToRole="CamposCatalogoReferencias" />
+          <NavigationProperty Name="Catalogos" Relationship="Self.FK_CatalogoCampos_Catalogos" FromRole="CatalogoCampos" ToRole="Catalogos" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Catalogos">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="NombreCatalogo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreFisico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TablaCreada" Type="Boolean" Nullable="false" />
+          <Property Name="Referenciada" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Agrupaciones" Relationship="Self.FK_Agrupaciones_Catalogos" FromRole="Catalogos" ToRole="Agrupaciones" />
+          <NavigationProperty Name="CAT_Categoria" Relationship="Self.FK_Catalogos_CAT_Categoria" FromRole="Catalogos" ToRole="CAT_Categoria" />
+          <NavigationProperty Name="CatalogoCampos" Relationship="Self.FK_CatalogoCampos_Catalogos" FromRole="Catalogos" ToRole="CatalogoCampos" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CamposCatalogoReferencias">
+          <Key>
+            <PropertyRef Name="CatalogoCampoId" />
+            <PropertyRef Name="CatalogoCampoIdRef" />
+            <PropertyRef Name="UpdateRule" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="CatalogoCampoId" Type="Int64" Nullable="false" />
+          <Property Name="CatalogoCampoIdRef" Type="Int64" Nullable="false" />
+          <Property Name="UpdateRule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CatalogoCampos" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos" FromRole="CamposCatalogoReferencias" ToRole="CatalogoCampos" />
+          <NavigationProperty Name="CatalogoCamposFK" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos1" FromRole="CamposCatalogoReferencias" ToRole="CatalogoCampos" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Agrupaciones_Catalogos">
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
+          <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Agrupaciones">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatalogoCampos_Agrupaciones">
+          <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="0..1" />
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agrupaciones">
+              <PropertyRef Name="IdAgrupacion" />
+            </Principal>
+            <Dependent Role="CatalogoCampos">
+              <PropertyRef Name="IdAgrupacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalogos_CAT_Categoria">
+          <End Role="CAT_Categoria" Type="Self.CAT_Categoria" Multiplicity="1" />
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Catalogos">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos">
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
+          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="CamposCatalogoReferencias">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos1">
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
+          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="CamposCatalogoReferencias">
+              <PropertyRef Name="CatalogoCampoIdRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatalogoCampos_Catalogos">
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="CatalogoCampos">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_DMsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agrupaciones" EntityType="Self.Agrupaciones" />
+          <EntitySet Name="CAT_Categoria" EntityType="Self.CAT_Categoria" />
+          <EntitySet Name="CatalogoCampos" EntityType="Self.CatalogoCampos" />
+          <EntitySet Name="Catalogos" EntityType="Self.Catalogos" />
+          <EntitySet Name="CamposCatalogoReferencias" EntityType="Self.CamposCatalogoReferencias" />
+          <AssociationSet Name="FK_Agrupaciones_Catalogos" Association="Self.FK_Agrupaciones_Catalogos">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="Agrupaciones" EntitySet="Agrupaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatalogoCampos_Agrupaciones" Association="Self.FK_CatalogoCampos_Agrupaciones">
+            <End Role="Agrupaciones" EntitySet="Agrupaciones" />
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalogos_CAT_Categoria" Association="Self.FK_Catalogos_CAT_Categoria">
+            <End Role="CAT_Categoria" EntitySet="CAT_Categoria" />
+            <End Role="Catalogos" EntitySet="Catalogos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos1" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos1">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatalogoCampos_Catalogos" Association="Self.FK_CatalogoCampos_Catalogos">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_DMsModelStoreContainer" CdmEntityContainer="DB_DMsEntities">
+          <EntitySetMapping Name="Agrupaciones">
+            <EntityTypeMapping TypeName="DB_DMsModel.Agrupaciones">
+              <MappingFragment StoreEntitySet="Agrupaciones">
+                <ScalarProperty Name="IdAgrupacion" ColumnName="IdAgrupacion" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="NombreAgrupacion" ColumnName="NombreAgrupacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAT_Categoria">
+            <EntityTypeMapping TypeName="DB_DMsModel.CAT_Categoria">
+              <MappingFragment StoreEntitySet="CAT_Categoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Esquema" ColumnName="Esquema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatalogoCampos">
+            <EntityTypeMapping TypeName="DB_DMsModel.CatalogoCampos">
+              <MappingFragment StoreEntitySet="CatalogoCampos">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CatalogoCampoId" ColumnName="CatalogoCampoId" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="IdAgrupacion" ColumnName="IdAgrupacion" />
+                <ScalarProperty Name="NombreCampo" ColumnName="NombreCampo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreTecnico" ColumnName="NombreTecnico" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+                <ScalarProperty Name="Tamanio" ColumnName="Tamanio" />
+                <ScalarProperty Name="Precision" ColumnName="Precision" />
+                <ScalarProperty Name="CampoConReferencia" ColumnName="CampoConReferencia" />
+                <ScalarProperty Name="Requerido" ColumnName="Requerido" />
+                <ScalarProperty Name="LlavePrimaria" ColumnName="LlavePrimaria" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Catalogos">
+            <EntityTypeMapping TypeName="DB_DMsModel.Catalogos">
+              <MappingFragment StoreEntitySet="Catalogos">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreCatalogo" ColumnName="NombreCatalogo" />
+                <ScalarProperty Name="NombreFisico" ColumnName="NombreFisico" />
+                <ScalarProperty Name="TablaCreada" ColumnName="TablaCreada" />
+                <ScalarProperty Name="Referenciada" ColumnName="Referenciada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CamposCatalogoReferencias">
+            <EntityTypeMapping TypeName="DB_DMsModel.CamposCatalogoReferencias">
+              <MappingFragment StoreEntitySet="CamposCatalogoReferencias">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CatalogoCampoId" ColumnName="CatalogoCampoId" />
+                <ScalarProperty Name="CatalogoCampoIdRef" ColumnName="CatalogoCampoIdRef" />
+                <ScalarProperty Name="UpdateRule" ColumnName="UpdateRule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

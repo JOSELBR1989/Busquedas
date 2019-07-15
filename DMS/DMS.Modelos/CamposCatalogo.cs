@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMS.Modelos
 {
-    public class CamposCatalogo
+    public class CamposCatalogo: IDefaultDatasource
     {
         private long codigoCampoCatalogo;
         private Catalogos catalogo;
@@ -20,6 +20,8 @@ namespace DMS.Modelos
         private bool requerido;
         private bool llavePrimaria;
         private int orden;
+        private Agrupaciones agrupacion;
+        private bool activo;
 
         public CamposCatalogo()
         {
@@ -197,5 +199,59 @@ namespace DMS.Modelos
             }
         }
 
+        public Agrupaciones Agrupacion
+        {
+            get
+            {
+                return agrupacion;
+            }
+
+            set
+            {
+                agrupacion = value;
+            }
+        }
+
+        public bool Activo
+        {
+            get
+            {
+                return activo;
+            }
+
+            set
+            {
+                activo = value;
+            }
+        }
+
+        public string NameWithTechnicalCode
+        {
+            get {
+                return this.NombreCampo + "(" + this.NombreTecnicoCampo + ")";
+            }
+        }
+        public string getDisplayName
+        {
+            get
+            {
+                return "NameWithTechnicalCode";
+            }
+        }
+
+
+
+        public string getValueMember
+        {
+            get
+            {
+                return "CodigoCampoCatalogo";
+
+            }
+
+        }
+
     }
+
 }
+

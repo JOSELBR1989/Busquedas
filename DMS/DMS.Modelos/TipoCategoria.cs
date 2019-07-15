@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMS.Modelos
 {
-    public class TipoCategoria
+    public class TipoCategoria: IDefaultDatasource
     {
         private int codigo;
         private string nombre;
@@ -62,7 +62,20 @@ namespace DMS.Modelos
             }
         }
 
+        public string getDisplayName
+        {
+            get
+            {
+                return "Nombre"; 
+            }
+        }
 
-
+        public string getValueMember
+        {
+            get
+            {
+                return "Codigo";
+            }
+        }
     }
 }

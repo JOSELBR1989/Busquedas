@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ccbacb3ffce8433da40bb02a23c8a47e" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_DMsModel.Agrupaciones" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_DMsModel.CAT_Categoria" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_DMsModel.CatalogoCampos" Width="2.875" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_DMsModel.Catalogos" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_DMsModel.CamposCatalogoReferencias" Width="4" PointX="11.5" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_DMsModel.FK_Agrupaciones_Catalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_DMsModel.FK_CatalogoCampos_Agrupaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_DMsModel.FK_Catalogos_CAT_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_DMsModel.FK_CamposCatalogoReferencias_CatalogoCampos" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_DMsModel.FK_CamposCatalogoReferencias_CatalogoCampos1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_DMsModel.FK_CatalogoCampos_Catalogos" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
