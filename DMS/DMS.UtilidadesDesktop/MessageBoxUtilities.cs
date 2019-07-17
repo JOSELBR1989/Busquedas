@@ -14,6 +14,13 @@ namespace DMS.UtilidadesDesktop
             string mensaje = "Desea guardar la información del " + catalogo + " modificado?";
             return MessageBox.Show(mensaje, "Actualizar información?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
+
+        public static DialogResult mensajePreguntaBorrar(string catalogo)
+        {
+            string mensaje = "Desea eliminar el registro seleccionado del catalogo: " + catalogo + "?";
+            return MessageBox.Show(mensaje, "Actualizar información?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
         public static void registroAlmacenadoCorrectamente()
         {
             MessageBox.Show("Registros almacenados de forma correcta", "Almacenado", MessageBoxButtons.OK, MessageBoxIcon.Information);

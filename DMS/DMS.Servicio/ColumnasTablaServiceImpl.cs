@@ -47,6 +47,16 @@ namespace DMS.Servicio
             columnasTablaDao.crearAsociacionCampos(campoFK, campoPK); 
         }
 
+        public void desactivarCampo(long codigoCampoCatalogo, bool activo)
+        {
+            columnasTablaDao.desactivarCampo(codigoCampoCatalogo, activo);
+        }
+
+        public void eliminarCampo(long codigoCampoCatalogo)
+        {
+            columnasTablaDao.eliminarCampo(codigoCampoCatalogo);
+        }
+
         public void nuevo(CamposCatalogo campo)
         {
             columnasTablaDao.nuevo(campo);
@@ -60,6 +70,11 @@ namespace DMS.Servicio
         public List<object> obtenerAsociacionesColumna(CamposCatalogo campo)
         {
             return columnasTablaDao.obtenerAsociacionesColumna(campo); 
+        }
+
+        public void quitarAsociacionCampos(long CatalogoCampoId, long CatalogoCampoIdRef)
+        {
+            columnasTablaDao.quitarAsociacionCampos(CatalogoCampoId, CatalogoCampoIdRef);
         }
     }
 }

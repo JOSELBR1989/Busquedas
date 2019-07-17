@@ -66,7 +66,7 @@
             // txtNombreColumna
             // 
             this.txtNombreColumna.Location = new System.Drawing.Point(109, 121);
-            this.txtNombreColumna.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNombreColumna.Margin = new System.Windows.Forms.Padding(2);
             this.txtNombreColumna.MaxLength = 100;
             this.txtNombreColumna.Name = "txtNombreColumna";
             this.txtNombreColumna.Size = new System.Drawing.Size(342, 22);
@@ -78,7 +78,7 @@
             this.cmbAgrupacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAgrupacion.FormattingEnabled = true;
             this.cmbAgrupacion.Location = new System.Drawing.Point(109, 93);
-            this.cmbAgrupacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbAgrupacion.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAgrupacion.Name = "cmbAgrupacion";
             this.cmbAgrupacion.Size = new System.Drawing.Size(192, 24);
             this.cmbAgrupacion.TabIndex = 2;
@@ -212,9 +212,11 @@
             this.txtOrden.Location = new System.Drawing.Point(109, 273);
             this.txtOrden.MaxLength = 20;
             this.txtOrden.Name = "txtOrden";
+            this.txtOrden.ReadOnly = true;
             this.txtOrden.Size = new System.Drawing.Size(192, 22);
             this.txtOrden.TabIndex = 24;
             this.txtOrden.Tag = "Orden";
+            this.txtOrden.Text = "0";
             // 
             // label8
             // 

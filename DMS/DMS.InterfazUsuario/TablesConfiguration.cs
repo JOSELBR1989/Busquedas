@@ -19,17 +19,28 @@ namespace DMS.InterfazUsuario
         private bool creandoNuevo { get; set; }
         private int currentRowIndex { get; set; }
 
-        private Catalogos catalogoGeneral = new Catalogos(); 
+        bool refrescarDatos { get; set; }
+
+        private Catalogos catalogoGeneral = new Catalogos();
 
         public TablesConfiguration()
         {
             InitializeComponent();
             creandoNuevo = false;
             currentRowIndex = -1;
-            obtenerCatalogos();
-            obtenerTipoCatalogos();
+            refrescarDatos = false;
 
-            #region "Datos de "
+            DMS.UtilidadesDesktop.ListBoxUtilities.fill(((new DMS.Servicio.TipoCategoriaServiceImpl()).tiposCategoria()).Cast<Object>().ToList(), (new Modelos.TipoCategoria()), ref lstCategorias);
+
+            for (int i = 0; i < lstCategorias.Items.Count; i++)
+                lstCategorias.SetSelected(i, true);
+
+            obtenerTipoCatalogos();
+            obtenerCatalogos();
+
+
+
+            #region "Datos de eventos"
 
             txtBuscarCatalogo.KeyPress += TxtBuscarCatalogo_KeyPress;
             dtgCatalogos.SelectionChanged += DtgCatalogos_SelectionChanged;
@@ -45,11 +56,64 @@ namespace DMS.InterfazUsuario
             dtgLLavePrimaria.CellClick += DtgLLavePrimaria_CellClick;
             dtgBusquedaCatalogos.CellDoubleClick += DtbBusquedaCatalogos_CellDoubleClick;
             lstColumnas.SelectedValueChanged += LstColumnas_SelectedValueChanged;
-
+            lstCategorias.SelectedIndexChanged += LstCategorias_SelectedIndexChanged;
             lstCampoHacerReferencia.MouseDoubleClick += LstCampoHacerReferencia_MouseDoubleClick;
             btnCopy.Click += BtnCopy_Click;
+            btnEliminar.Click += BtnEliminar_Click;
+            btnQuitarRelacion.Click += BtnQuitarRelacion_Click;
             #endregion
 
+            refrescarDatos = true; 
+
+        }
+
+        private void BtnQuitarRelacion_Click(object sender, EventArgs e)
+        {
+            if (dtgRelaciones.Rows.Count > 0)
+            {
+                if (DialogResult.Yes == UtilidadesDesktop.MessageBoxUtilities.mensajePreguntaBorrar(catalogoGeneral.NombreFisico + " - " + DatagridViewUtilities.ObtenerValorCeldaActual(dtgRelaciones, "NombreCampoCatalogoBase").ToString()))
+                {
+
+                    try
+                    {
+                        (new DMS.Servicio.ColumnasTablaServiceImpl()).quitarAsociacionCampos(
+                        Convert.ToInt64(DatagridViewUtilities.ObtenerValorCeldaActual(dtgRelaciones, "CodigoCatalogoBase")),
+                        Convert.ToInt64(DatagridViewUtilities.ObtenerValorCeldaActual(dtgRelaciones, "CodigoCataloReferencia")));
+                        MessageBoxUtilities.registroAlmacenadoCorrectamente();
+                        ObtenerRelaciones(); 
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBoxUtilities.errorAlmacenarRegistros(ex);
+                    }
+                    
+                }
+            }
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dtgDetalleColumnas.Rows.Count > 0)
+            {
+                if (UtilidadesDesktop.MessageBoxUtilities.mensajePreguntaBorrar(catalogoGeneral.NombreFisico) == DialogResult.Yes)
+                {
+                    if (chkPendienteCrear.Enabled)
+                    {
+                        (new DMS.Servicio.ColumnasTablaServiceImpl()).eliminarCampo(Convert.ToInt64(UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgDetalleColumnas, "CatalogoCampoId")));
+                    }
+                    else {
+                        (new DMS.Servicio.ColumnasTablaServiceImpl()).desactivarCampo(Convert.ToInt64(UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgDetalleColumnas, "CatalogoCampoId")),false);
+
+                    }
+                    ObtenerInformacionCatalogo();
+                }
+            }
+        }
+
+        private void LstCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            obtenerCatalogos();
         }
 
         private void BtnCopy_Click(object sender, EventArgs e)
@@ -204,17 +268,30 @@ namespace DMS.InterfazUsuario
 
         private void obtenerCatalogos()
         {
-            try
-            {
-                dtgCatalogos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dtgCatalogos.AutoGenerateColumns = false;
-                dtgCatalogos.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).busquedaPorDescripcion(txtBuscarCatalogo.Text);
-            }
-            catch 
-            {
-            }
+
+                try
+                {
+                    refrescarDatos = false;
+                    List<string> result = new List<string>();
+                    foreach (TipoCategoria item in lstCategorias.SelectedItems)
+                    {
+                        result.Add(item.EsquemaFisico);
+                    }
+
+                    dtgCatalogos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    dtgCatalogos.AutoGenerateColumns = false;
+                    dtgCatalogos.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).busquedaPorDescripcion(txtBuscarCatalogo.Text, result.ToArray());
+                    ObtenerInformacionCatalogo();
+
+                    refrescarDatos = true;
+                }
+                catch
+                {
+                }
+            
 
         }
+        
 
         private void obtenerCatalogosReferencia()
         {
@@ -232,7 +309,7 @@ namespace DMS.InterfazUsuario
 
         private void obtenerTipoCatalogos()
         {
-            catalogoGeneral = new Catalogos(); 
+            catalogoGeneral = new Catalogos();
             DMS.UtilidadesDesktop.ComboboxUtilities.fillCombobox(((new DMS.Servicio.TipoCategoriaServiceImpl()).tiposCategoria()).Cast<Object>().ToList(), (new Modelos.TipoCategoria()), ref cmbTipoCatalogo);
         }
 
@@ -256,44 +333,79 @@ namespace DMS.InterfazUsuario
         {
             try
             {
-                Catalogos catalogos = new Catalogos(); 
-                catalogos.CodigoCatalogo = Convert.ToInt64(DatagridViewUtilities.ObtenerValorCeldaActual(dtgCatalogos, "IdCatalogo").ToString());  
-                catalogos.NombreCatalogo = DMS.UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgCatalogos, "NombreCatalogo").ToString();
-                catalogos.NombreFisico = DMS.UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgCatalogos, "NombreFisicoCatalogo").ToString();
-                catalogos.TipoCategoria = ((TipoCategoria)cmbTipoCatalogo.SelectedItem);
-                catalogos.Activo = Convert.ToBoolean(
-                    UtilidadesDesktop.StringUtilities.convertirStringBool(DMS.UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgCatalogos, "Activo").ToString())); 
+                Catalogos catalogos = new Catalogos();
+                catalogos = (new DMS.Servicio.CatalogoServiceImpl()).obtenerCatalogo(Convert.ToInt64(DatagridViewUtilities.ObtenerValorCeldaActual(dtgCatalogos, "IdCatalogo").ToString()));
+                var categoriaActual = catalogos.TipoCategoria;
+                catalogoGeneral = catalogos;
+
+
                 txtCodigoCatalogo.Text = catalogos.CodigoCatalogo.ToString();
                 txtNombreCatalogo.Text = catalogos.NombreCatalogo;
                 txtNombreFisicoCatalogo.Text = catalogos.NombreFisico;
-                cmbTipoCatalogo.Enabled = false;
-
-                catalogoGeneral = catalogos; 
                 txtNombreFisicoCatalogo.Enabled = false;
+                chkActivo.Checked = catalogos.Activo;
+                chkPendienteCrear.Checked = catalogos.TablaCreada;
+                chkReferenciaDesdeOtra.Checked = catalogos.TablaReferenciada;
+
+                for (int i = 0; i < cmbTipoCatalogo.Items.Count; i++)
+                {
+                    if (((TipoCategoria)cmbTipoCatalogo.Items[i]).Codigo == categoriaActual.Codigo)
+                        cmbTipoCatalogo.SelectedIndex = i;
+                }
+                cmbTipoCatalogo.Enabled = !chkPendienteCrear.Checked;
 
                 var objeto = (new DMS.Servicio.ColumnasTablaServiceImpl()).columnasTabla(catalogos);
-                catalogoPadre = catalogos; 
+                catalogoPadre = catalogos;
                 try
                 {
                     DMS.UtilidadesDesktop.DatagridViewUtilities.llenarDatagridView(objeto, ref dtgDetalleColumnas, false);
                     ListBoxUtilities.fill(objeto, ref lstColumnas, "NameWithTechnicalCode", "CatalogoCampoId");
                     fillPrimaryKeyINfo(objeto);
-                    dataGridView2.DataSource = (new Servicio.CatalogoServiceImpl()).executeQuery(StringUtilities.getSqlQuery("[" + catalogos.TipoCategoria.EsquemaFisico + "].[" + txtNombreFisicoCatalogo.Text + "]", dtgDetalleColumnas));
 
                 }
                 catch (Exception ex)
                 {
                 }
-                groupGrupos.Visible = true; 
+
+                mostrarRelaciones();
+                groupGrupos.Visible = true;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LimpiarDatos();
             }
+            
 
         }
+        public void mostrarRelaciones()
+        {
+            bool mostrarPendienteCrear = false;
+            try
+            {
+                dataGridView2.Visible = true;
+                dataGridView2.DataSource = (new Servicio.CatalogoServiceImpl()).executeQuery(StringUtilities.getSqlQuery("[" + catalogoGeneral.TipoCategoria.EsquemaFisico + "].[" + txtNombreFisicoCatalogo.Text + "]", dtgDetalleColumnas));
+                mostrarPendienteCrear = true;
+            }
+            catch (Exception ex)
+            {
+                dataGridView2.Visible = false;
+            }
 
+            if (mostrarPendienteCrear)
+            {
+                if (dataGridView2.Rows.Count > 0)
+                {
+                    chkPendienteCrear.Enabled = false;
+                }
+                else
+                    chkPendienteCrear.Enabled = true;
+            }
+            else
+            {
+                chkPendienteCrear.Enabled = true;
+            }
+        }
         public void obtenerInformacionCatalogosReferencias()
         {
             Catalogos catalogosLlave = new Catalogos();
@@ -369,15 +481,13 @@ namespace DMS.InterfazUsuario
 
             }
             var resultado = (new Servicio.ColumnasTablaServiceImpl()).obtenerAsociacionesColumna(campo);
-            UtilidadesDesktop.DatagridViewUtilities.llenarDatagridView(resultado, ref dataGridView1, false);
+            UtilidadesDesktop.DatagridViewUtilities.llenarDatagridView(resultado, ref dtgRelaciones, false);
 
 
         }
 
         private void updateRelation()
         {
-            if (dataGridView1.Rows.Count == 0)
-            {
                 var campoReferencia = lstColumnas.SelectedItem;
                 var campoPK = lstCampoHacerReferencia.SelectedItem;
 
@@ -395,9 +505,7 @@ namespace DMS.InterfazUsuario
                 {
                     UtilidadesDesktop.MessageBoxUtilities.errorAlmacenarRegistros(ex); 
                 }
-            }
-            else
-                MessageBox.Show("No se puede agregar otra relación, ya cuenta con una activa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          
 
             ObtenerRelaciones(); 
         }

@@ -63,7 +63,7 @@ namespace DMS.UtilidadesDesktop
             }
 
 
-            strb.AppendLine("FROM " + tableName);
+            strb.AppendLine("FROM [DB_DMs]." + tableName);
 
 
             return strb.ToString();

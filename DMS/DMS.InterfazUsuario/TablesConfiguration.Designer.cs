@@ -41,60 +41,16 @@
             this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlGeneral = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lstCategorias = new System.Windows.Forms.ListBox();
             this.txtBuscarCatalogo = new System.Windows.Forms.TextBox();
             this.tabPageDetalleCatalogo = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.btnActualizarCampos = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregarCampo = new System.Windows.Forms.Button();
             this.dtgDetalleColumnas = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dtgLLavePrimaria = new System.Windows.Forms.DataGridView();
-            this.dtCatalogoCampoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNombreCampo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNombreTecnico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtTipoDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtLlavePrimaria = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtBusquedaTabla = new System.Windows.Forms.TextBox();
-            this.lstColumnas = new System.Windows.Forms.ListBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupGrupos = new System.Windows.Forms.GroupBox();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.Nuevo = new System.Windows.Forms.Button();
-            this.dtgColumns = new System.Windows.Forms.DataGridView();
-            this.txtCodigoCatalogo = new System.Windows.Forms.TextBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtNombreCatalogo = new System.Windows.Forms.RichTextBox();
-            this.chkReferenciaDesdeOtra = new System.Windows.Forms.CheckBox();
-            this.txtNombreFisicoCatalogo = new System.Windows.Forms.TextBox();
-            this.chkPendienteCrear = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtgBusquedaCatalogos = new System.Windows.Forms.DataGridView();
-            this.lstCampoHacerReferencia = new System.Windows.Forms.ListBox();
-            this.dtNameIdCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameNombreCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameIdCatalogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameNombreCatalogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameNombreFisicoCatalogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameTablaCreada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameReferenciada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtNameActivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CodigoCatalogoBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreCampoCatalogoBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreTablaReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CodigoCataloReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreCataloReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.dtActivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CatalogoCampoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdAgrupacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,7 +65,53 @@
             this.Requerido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreAgrupacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCopy = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dtgLLavePrimaria = new System.Windows.Forms.DataGridView();
+            this.dtCatalogoCampoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNombreCampo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNombreTecnico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtTipoDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtLlavePrimaria = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lstCampoHacerReferencia = new System.Windows.Forms.ListBox();
+            this.dtgBusquedaCatalogos = new System.Windows.Forms.DataGridView();
+            this.dtNameIdCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameNombreCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameIdCatalogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameNombreCatalogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameNombreFisicoCatalogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameTablaCreada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameReferenciada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtNameActivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnQuitarRelacion = new System.Windows.Forms.Button();
+            this.dtgRelaciones = new System.Windows.Forms.DataGridView();
+            this.CodigoCatalogoBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreCampoCatalogoBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreTablaReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoCataloReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreCataloReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtBusquedaTabla = new System.Windows.Forms.TextBox();
+            this.lstColumnas = new System.Windows.Forms.ListBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkActivo = new System.Windows.Forms.CheckBox();
+            this.groupGrupos = new System.Windows.Forms.GroupBox();
+            this.btnQuitar = new System.Windows.Forms.Button();
+            this.Nuevo = new System.Windows.Forms.Button();
+            this.dtgColumns = new System.Windows.Forms.DataGridView();
+            this.txtCodigoCatalogo = new System.Windows.Forms.TextBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtNombreCatalogo = new System.Windows.Forms.RichTextBox();
+            this.chkReferenciaDesdeOtra = new System.Windows.Forms.CheckBox();
+            this.txtNombreFisicoCatalogo = new System.Windows.Forms.TextBox();
+            this.chkPendienteCrear = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dtgCatalogos)).BeginInit();
             this.tabControlGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -120,13 +122,13 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgLLavePrimaria)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgRelaciones)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupGrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbTipoCatalogo
@@ -164,12 +166,12 @@
             this.TablaCreada,
             this.Referenciada,
             this.Activo});
-            this.dtgCatalogos.Location = new System.Drawing.Point(6, 50);
+            this.dtgCatalogos.Location = new System.Drawing.Point(191, 50);
             this.dtgCatalogos.MultiSelect = false;
             this.dtgCatalogos.Name = "dtgCatalogos";
             this.dtgCatalogos.ReadOnly = true;
             this.dtgCatalogos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgCatalogos.Size = new System.Drawing.Size(1155, 398);
+            this.dtgCatalogos.Size = new System.Drawing.Size(970, 398);
             this.dtgCatalogos.TabIndex = 2;
             // 
             // IdCategoria
@@ -245,6 +247,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lstCategorias);
             this.tabPage1.Controls.Add(this.txtBuscarCatalogo);
             this.tabPage1.Controls.Add(this.dtgCatalogos);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -254,6 +257,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Catalogos existentes";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lstCategorias
+            // 
+            this.lstCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstCategorias.FormattingEnabled = true;
+            this.lstCategorias.ItemHeight = 20;
+            this.lstCategorias.Location = new System.Drawing.Point(6, 50);
+            this.lstCategorias.Name = "lstCategorias";
+            this.lstCategorias.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstCategorias.Size = new System.Drawing.Size(179, 384);
+            this.lstCategorias.TabIndex = 4;
             // 
             // txtBuscarCatalogo
             // 
@@ -285,6 +300,7 @@
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
             this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Location = new System.Drawing.Point(452, 6);
             this.tabControl2.Name = "tabControl2";
@@ -296,7 +312,7 @@
             // 
             this.tabPage3.Controls.Add(this.btnCopy);
             this.tabPage3.Controls.Add(this.btnActualizarCampos);
-            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.btnEliminar);
             this.tabPage3.Controls.Add(this.btnAgregarCampo);
             this.tabPage3.Controls.Add(this.dtgDetalleColumnas);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
@@ -307,6 +323,15 @@
             this.tabPage3.Text = "Columnas";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnCopy
+            // 
+            this.btnCopy.Location = new System.Drawing.Point(413, 24);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(109, 23);
+            this.btnCopy.TabIndex = 4;
+            this.btnCopy.Text = "Copiar columna";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            // 
             // btnActualizarCampos
             // 
             this.btnActualizarCampos.Location = new System.Drawing.Point(267, 24);
@@ -316,14 +341,14 @@
             this.btnActualizarCampos.Text = "Actualizar campos";
             this.btnActualizarCampos.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnEliminar
             // 
-            this.button2.Location = new System.Drawing.Point(121, 24);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Eliminar seleccionado";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEliminar.Location = new System.Drawing.Point(121, 24);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(140, 23);
+            this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Text = "Eliminar seleccionado";
+            this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnAgregarCampo
             // 
@@ -364,6 +389,108 @@
             this.dtgDetalleColumnas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgDetalleColumnas.Size = new System.Drawing.Size(689, 353);
             this.dtgDetalleColumnas.TabIndex = 0;
+            // 
+            // dtActivo
+            // 
+            this.dtActivo.DataPropertyName = "Activo";
+            this.dtActivo.HeaderText = "Activo";
+            this.dtActivo.Name = "dtActivo";
+            this.dtActivo.ReadOnly = true;
+            this.dtActivo.Width = 42;
+            // 
+            // CatalogoCampoId
+            // 
+            this.CatalogoCampoId.DataPropertyName = "CatalogoCampoId";
+            this.CatalogoCampoId.HeaderText = "CatalogoCampoId";
+            this.CatalogoCampoId.Name = "CatalogoCampoId";
+            this.CatalogoCampoId.Visible = false;
+            this.CatalogoCampoId.Width = 118;
+            // 
+            // IdAgrupacion
+            // 
+            this.IdAgrupacion.DataPropertyName = "IdAgrupacion";
+            this.IdAgrupacion.HeaderText = "IdAgrupacion";
+            this.IdAgrupacion.Name = "IdAgrupacion";
+            this.IdAgrupacion.Visible = false;
+            this.IdAgrupacion.Width = 96;
+            // 
+            // LlavePrimaria
+            // 
+            this.LlavePrimaria.DataPropertyName = "LlavePrimaria";
+            this.LlavePrimaria.HeaderText = "PK";
+            this.LlavePrimaria.Name = "LlavePrimaria";
+            this.LlavePrimaria.Width = 47;
+            // 
+            // NombreTecnico
+            // 
+            this.NombreTecnico.DataPropertyName = "NombreTecnico";
+            this.NombreTecnico.HeaderText = "Nombre Técnico";
+            this.NombreTecnico.Name = "NombreTecnico";
+            this.NombreTecnico.Width = 111;
+            // 
+            // TipoDato
+            // 
+            this.TipoDato.DataPropertyName = "TipoDato";
+            this.TipoDato.HeaderText = "Tipo de Dato";
+            this.TipoDato.Name = "TipoDato";
+            this.TipoDato.Width = 94;
+            // 
+            // Tamanio
+            // 
+            this.Tamanio.DataPropertyName = "Tamanio";
+            this.Tamanio.HeaderText = "Ancho";
+            this.Tamanio.Name = "Tamanio";
+            this.Tamanio.Width = 63;
+            // 
+            // Precision
+            // 
+            this.Precision.DataPropertyName = "Precision";
+            this.Precision.HeaderText = "Presición";
+            this.Precision.Name = "Precision";
+            this.Precision.Width = 76;
+            // 
+            // NombreCampo
+            // 
+            this.NombreCampo.DataPropertyName = "NombreCampo";
+            this.NombreCampo.HeaderText = "Nombre campo";
+            this.NombreCampo.Name = "NombreCampo";
+            this.NombreCampo.Width = 105;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.Visible = false;
+            this.Descripcion.Width = 88;
+            // 
+            // CampoConReferencia
+            // 
+            this.CampoConReferencia.DataPropertyName = "CampoConReferencia";
+            this.CampoConReferencia.HeaderText = "Llave Foranea";
+            this.CampoConReferencia.Name = "CampoConReferencia";
+            this.CampoConReferencia.Width = 103;
+            // 
+            // Requerido
+            // 
+            this.Requerido.DataPropertyName = "Requerido";
+            this.Requerido.HeaderText = "Requerido";
+            this.Requerido.Name = "Requerido";
+            this.Requerido.Width = 83;
+            // 
+            // Orden
+            // 
+            this.Orden.DataPropertyName = "Orden";
+            this.Orden.HeaderText = "No. Orden";
+            this.Orden.Name = "Orden";
+            this.Orden.Width = 83;
+            // 
+            // NombreAgrupacion
+            // 
+            this.NombreAgrupacion.DataPropertyName = "NombreAgrupacion";
+            this.NombreAgrupacion.HeaderText = "Grupo de datos";
+            this.NombreAgrupacion.Name = "NombreAgrupacion";
+            this.NombreAgrupacion.Width = 106;
             // 
             // tabPage4
             // 
@@ -434,8 +561,8 @@
             // 
             this.tabPage2.Controls.Add(this.lstCampoHacerReferencia);
             this.tabPage2.Controls.Add(this.dtgBusquedaCatalogos);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.btnQuitarRelacion);
+            this.tabPage2.Controls.Add(this.dtgRelaciones);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.txtBusquedaTabla);
             this.tabPage2.Controls.Add(this.lstColumnas);
@@ -447,34 +574,172 @@
             this.tabPage2.Text = "Agregar referencias";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // lstCampoHacerReferencia
             // 
-            this.button1.Location = new System.Drawing.Point(254, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(142, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Quitar Relación";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lstCampoHacerReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.lstCampoHacerReferencia.FormattingEnabled = true;
+            this.lstCampoHacerReferencia.ItemHeight = 16;
+            this.lstCampoHacerReferencia.Location = new System.Drawing.Point(254, 307);
+            this.lstCampoHacerReferencia.Name = "lstCampoHacerReferencia";
+            this.lstCampoHacerReferencia.Size = new System.Drawing.Size(441, 100);
+            this.lstCampoHacerReferencia.TabIndex = 16;
+            // 
+            // dtgBusquedaCatalogos
+            // 
+            this.dtgBusquedaCatalogos.AllowUserToAddRows = false;
+            this.dtgBusquedaCatalogos.AllowUserToDeleteRows = false;
+            this.dtgBusquedaCatalogos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtgBusquedaCatalogos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgBusquedaCatalogos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dtNameIdCategoria,
+            this.dtNameNombreCategoria,
+            this.dtNameIdCatalogo,
+            this.dtNameNombreCatalogo,
+            this.dtNameNombreFisicoCatalogo,
+            this.dtNameTablaCreada,
+            this.dtNameReferenciada,
+            this.dtNameActivo});
+            this.dtgBusquedaCatalogos.Location = new System.Drawing.Point(254, 161);
+            this.dtgBusquedaCatalogos.MultiSelect = false;
+            this.dtgBusquedaCatalogos.Name = "dtgBusquedaCatalogos";
+            this.dtgBusquedaCatalogos.ReadOnly = true;
+            this.dtgBusquedaCatalogos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgBusquedaCatalogos.Size = new System.Drawing.Size(441, 140);
+            this.dtgBusquedaCatalogos.TabIndex = 15;
+            // 
+            // dtNameIdCategoria
+            // 
+            this.dtNameIdCategoria.DataPropertyName = "IdCategoria";
+            this.dtNameIdCategoria.HeaderText = "IdCategoria";
+            this.dtNameIdCategoria.Name = "dtNameIdCategoria";
+            this.dtNameIdCategoria.ReadOnly = true;
+            this.dtNameIdCategoria.Visible = false;
+            // 
+            // dtNameNombreCategoria
+            // 
+            this.dtNameNombreCategoria.DataPropertyName = "NombreCategoria";
+            this.dtNameNombreCategoria.HeaderText = "Categoria";
+            this.dtNameNombreCategoria.Name = "dtNameNombreCategoria";
+            this.dtNameNombreCategoria.ReadOnly = true;
+            // 
+            // dtNameIdCatalogo
+            // 
+            this.dtNameIdCatalogo.DataPropertyName = "IdCatalogo";
+            this.dtNameIdCatalogo.HeaderText = "IdCatalogo";
+            this.dtNameIdCatalogo.Name = "dtNameIdCatalogo";
+            this.dtNameIdCatalogo.ReadOnly = true;
+            this.dtNameIdCatalogo.Visible = false;
+            // 
+            // dtNameNombreCatalogo
+            // 
+            this.dtNameNombreCatalogo.DataPropertyName = "NombreCatalogo";
+            this.dtNameNombreCatalogo.HeaderText = "Catalogo";
+            this.dtNameNombreCatalogo.Name = "dtNameNombreCatalogo";
+            this.dtNameNombreCatalogo.ReadOnly = true;
+            // 
+            // dtNameNombreFisicoCatalogo
+            // 
+            this.dtNameNombreFisicoCatalogo.DataPropertyName = "NombreFisicoCatalogo";
+            this.dtNameNombreFisicoCatalogo.HeaderText = "Tabla Física";
+            this.dtNameNombreFisicoCatalogo.Name = "dtNameNombreFisicoCatalogo";
+            this.dtNameNombreFisicoCatalogo.ReadOnly = true;
+            // 
+            // dtNameTablaCreada
+            // 
+            this.dtNameTablaCreada.DataPropertyName = "TablaCreada";
+            this.dtNameTablaCreada.HeaderText = "Tabla Creada";
+            this.dtNameTablaCreada.Name = "dtNameTablaCreada";
+            this.dtNameTablaCreada.ReadOnly = true;
+            this.dtNameTablaCreada.Visible = false;
+            // 
+            // dtNameReferenciada
+            // 
+            this.dtNameReferenciada.DataPropertyName = "Referenciada";
+            this.dtNameReferenciada.HeaderText = "Referenciada";
+            this.dtNameReferenciada.Name = "dtNameReferenciada";
+            this.dtNameReferenciada.ReadOnly = true;
+            this.dtNameReferenciada.Visible = false;
+            // 
+            // dtNameActivo
+            // 
+            this.dtNameActivo.DataPropertyName = "Activo";
+            this.dtNameActivo.HeaderText = "Activo";
+            this.dtNameActivo.Name = "dtNameActivo";
+            this.dtNameActivo.ReadOnly = true;
+            // 
+            // btnQuitarRelacion
+            // 
+            this.btnQuitarRelacion.Location = new System.Drawing.Point(254, 3);
+            this.btnQuitarRelacion.Name = "btnQuitarRelacion";
+            this.btnQuitarRelacion.Size = new System.Drawing.Size(142, 23);
+            this.btnQuitarRelacion.TabIndex = 13;
+            this.btnQuitarRelacion.Text = "Quitar Relación";
+            this.btnQuitarRelacion.UseVisualStyleBackColor = true;
+            // 
+            // dtgRelaciones
+            // 
+            this.dtgRelaciones.AllowUserToAddRows = false;
+            this.dtgRelaciones.AllowUserToDeleteRows = false;
+            this.dtgRelaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtgRelaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dtgRelaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgRelaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CodigoCatalogoBase,
             this.NombreCampoCatalogoBase,
             this.NombreTablaReferencia,
             this.CodigoCataloReferencia,
             this.NombreCataloReferencia});
-            this.dataGridView1.Location = new System.Drawing.Point(254, 32);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(441, 79);
-            this.dataGridView1.TabIndex = 14;
+            this.dtgRelaciones.Location = new System.Drawing.Point(254, 32);
+            this.dtgRelaciones.Name = "dtgRelaciones";
+            this.dtgRelaciones.ReadOnly = true;
+            this.dtgRelaciones.Size = new System.Drawing.Size(441, 79);
+            this.dtgRelaciones.TabIndex = 14;
+            // 
+            // CodigoCatalogoBase
+            // 
+            this.CodigoCatalogoBase.DataPropertyName = "CodigoCatalogoBase";
+            this.CodigoCatalogoBase.HeaderText = "CodigoCatalogoBase";
+            this.CodigoCatalogoBase.Name = "CodigoCatalogoBase";
+            this.CodigoCatalogoBase.ReadOnly = true;
+            this.CodigoCatalogoBase.Visible = false;
+            this.CodigoCatalogoBase.Width = 133;
+            // 
+            // NombreCampoCatalogoBase
+            // 
+            this.NombreCampoCatalogoBase.DataPropertyName = "NombreCampoCatalogoBase";
+            this.NombreCampoCatalogoBase.HeaderText = "Campo";
+            this.NombreCampoCatalogoBase.Name = "NombreCampoCatalogoBase";
+            this.NombreCampoCatalogoBase.ReadOnly = true;
+            this.NombreCampoCatalogoBase.Width = 67;
+            // 
+            // NombreTablaReferencia
+            // 
+            this.NombreTablaReferencia.DataPropertyName = "NombreTablaReferencia";
+            this.NombreTablaReferencia.HeaderText = "Tabla";
+            this.NombreTablaReferencia.Name = "NombreTablaReferencia";
+            this.NombreTablaReferencia.ReadOnly = true;
+            this.NombreTablaReferencia.Width = 60;
+            // 
+            // CodigoCataloReferencia
+            // 
+            this.CodigoCataloReferencia.DataPropertyName = "CodigoCataloReferencia";
+            this.CodigoCataloReferencia.HeaderText = "CodigoCataloReferencia";
+            this.CodigoCataloReferencia.Name = "CodigoCataloReferencia";
+            this.CodigoCataloReferencia.ReadOnly = true;
+            this.CodigoCataloReferencia.Visible = false;
+            this.CodigoCataloReferencia.Width = 148;
+            // 
+            // NombreCataloReferencia
+            // 
+            this.NombreCataloReferencia.DataPropertyName = "NombreCataloReferencia";
+            this.NombreCataloReferencia.HeaderText = "Columna";
+            this.NombreCataloReferencia.Name = "NombreCataloReferencia";
+            this.NombreCataloReferencia.ReadOnly = true;
+            this.NombreCataloReferencia.Width = 75;
             // 
             // label5
             // 
@@ -509,7 +774,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(541, 413);
+            this.tabPage5.Size = new System.Drawing.Size(701, 413);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Datos";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -521,11 +786,12 @@
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(6, 27);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(529, 380);
+            this.dataGridView2.Size = new System.Drawing.Size(689, 380);
             this.dataGridView2.TabIndex = 4;
             // 
             // groupBox1
@@ -551,6 +817,18 @@
             this.groupBox1.Size = new System.Drawing.Size(440, 442);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
+            // 
+            // chkActivo
+            // 
+            this.chkActivo.AutoSize = true;
+            this.chkActivo.Checked = true;
+            this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActivo.Location = new System.Drawing.Point(217, 173);
+            this.chkActivo.Name = "chkActivo";
+            this.chkActivo.Size = new System.Drawing.Size(55, 20);
+            this.chkActivo.TabIndex = 13;
+            this.chkActivo.Text = "Activo";
+            this.chkActivo.UseVisualStyleBackColor = true;
             // 
             // groupGrupos
             // 
@@ -682,266 +960,15 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Nombre fisico";
             // 
-            // dtgBusquedaCatalogos
+            // tabPage6
             // 
-            this.dtgBusquedaCatalogos.AllowUserToAddRows = false;
-            this.dtgBusquedaCatalogos.AllowUserToDeleteRows = false;
-            this.dtgBusquedaCatalogos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtgBusquedaCatalogos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgBusquedaCatalogos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dtNameIdCategoria,
-            this.dtNameNombreCategoria,
-            this.dtNameIdCatalogo,
-            this.dtNameNombreCatalogo,
-            this.dtNameNombreFisicoCatalogo,
-            this.dtNameTablaCreada,
-            this.dtNameReferenciada,
-            this.dtNameActivo});
-            this.dtgBusquedaCatalogos.Location = new System.Drawing.Point(254, 161);
-            this.dtgBusquedaCatalogos.MultiSelect = false;
-            this.dtgBusquedaCatalogos.Name = "dtgBusquedaCatalogos";
-            this.dtgBusquedaCatalogos.ReadOnly = true;
-            this.dtgBusquedaCatalogos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgBusquedaCatalogos.Size = new System.Drawing.Size(441, 140);
-            this.dtgBusquedaCatalogos.TabIndex = 15;
-            // 
-            // lstCampoHacerReferencia
-            // 
-            this.lstCampoHacerReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstCampoHacerReferencia.FormattingEnabled = true;
-            this.lstCampoHacerReferencia.ItemHeight = 16;
-            this.lstCampoHacerReferencia.Location = new System.Drawing.Point(254, 307);
-            this.lstCampoHacerReferencia.Name = "lstCampoHacerReferencia";
-            this.lstCampoHacerReferencia.Size = new System.Drawing.Size(441, 100);
-            this.lstCampoHacerReferencia.TabIndex = 16;
-            // 
-            // dtNameIdCategoria
-            // 
-            this.dtNameIdCategoria.DataPropertyName = "IdCategoria";
-            this.dtNameIdCategoria.HeaderText = "IdCategoria";
-            this.dtNameIdCategoria.Name = "dtNameIdCategoria";
-            this.dtNameIdCategoria.ReadOnly = true;
-            this.dtNameIdCategoria.Visible = false;
-            // 
-            // dtNameNombreCategoria
-            // 
-            this.dtNameNombreCategoria.DataPropertyName = "NombreCategoria";
-            this.dtNameNombreCategoria.HeaderText = "Categoria";
-            this.dtNameNombreCategoria.Name = "dtNameNombreCategoria";
-            this.dtNameNombreCategoria.ReadOnly = true;
-            // 
-            // dtNameIdCatalogo
-            // 
-            this.dtNameIdCatalogo.DataPropertyName = "IdCatalogo";
-            this.dtNameIdCatalogo.HeaderText = "IdCatalogo";
-            this.dtNameIdCatalogo.Name = "dtNameIdCatalogo";
-            this.dtNameIdCatalogo.ReadOnly = true;
-            this.dtNameIdCatalogo.Visible = false;
-            // 
-            // dtNameNombreCatalogo
-            // 
-            this.dtNameNombreCatalogo.DataPropertyName = "NombreCatalogo";
-            this.dtNameNombreCatalogo.HeaderText = "Catalogo";
-            this.dtNameNombreCatalogo.Name = "dtNameNombreCatalogo";
-            this.dtNameNombreCatalogo.ReadOnly = true;
-            // 
-            // dtNameNombreFisicoCatalogo
-            // 
-            this.dtNameNombreFisicoCatalogo.DataPropertyName = "NombreFisicoCatalogo";
-            this.dtNameNombreFisicoCatalogo.HeaderText = "Tabla Física";
-            this.dtNameNombreFisicoCatalogo.Name = "dtNameNombreFisicoCatalogo";
-            this.dtNameNombreFisicoCatalogo.ReadOnly = true;
-            // 
-            // dtNameTablaCreada
-            // 
-            this.dtNameTablaCreada.DataPropertyName = "TablaCreada";
-            this.dtNameTablaCreada.HeaderText = "Tabla Creada";
-            this.dtNameTablaCreada.Name = "dtNameTablaCreada";
-            this.dtNameTablaCreada.ReadOnly = true;
-            this.dtNameTablaCreada.Visible = false;
-            // 
-            // dtNameReferenciada
-            // 
-            this.dtNameReferenciada.DataPropertyName = "Referenciada";
-            this.dtNameReferenciada.HeaderText = "Referenciada";
-            this.dtNameReferenciada.Name = "dtNameReferenciada";
-            this.dtNameReferenciada.ReadOnly = true;
-            this.dtNameReferenciada.Visible = false;
-            // 
-            // dtNameActivo
-            // 
-            this.dtNameActivo.DataPropertyName = "Activo";
-            this.dtNameActivo.HeaderText = "Activo";
-            this.dtNameActivo.Name = "dtNameActivo";
-            this.dtNameActivo.ReadOnly = true;
-            // 
-            // CodigoCatalogoBase
-            // 
-            this.CodigoCatalogoBase.DataPropertyName = "CodigoCatalogoBase";
-            this.CodigoCatalogoBase.HeaderText = "CodigoCatalogoBase";
-            this.CodigoCatalogoBase.Name = "CodigoCatalogoBase";
-            this.CodigoCatalogoBase.ReadOnly = true;
-            this.CodigoCatalogoBase.Visible = false;
-            this.CodigoCatalogoBase.Width = 133;
-            // 
-            // NombreCampoCatalogoBase
-            // 
-            this.NombreCampoCatalogoBase.DataPropertyName = "NombreCampoCatalogoBase";
-            this.NombreCampoCatalogoBase.HeaderText = "Campo";
-            this.NombreCampoCatalogoBase.Name = "NombreCampoCatalogoBase";
-            this.NombreCampoCatalogoBase.ReadOnly = true;
-            this.NombreCampoCatalogoBase.Width = 67;
-            // 
-            // NombreTablaReferencia
-            // 
-            this.NombreTablaReferencia.DataPropertyName = "NombreTablaReferencia";
-            this.NombreTablaReferencia.HeaderText = "Tabla";
-            this.NombreTablaReferencia.Name = "NombreTablaReferencia";
-            this.NombreTablaReferencia.ReadOnly = true;
-            this.NombreTablaReferencia.Width = 60;
-            // 
-            // CodigoCataloReferencia
-            // 
-            this.CodigoCataloReferencia.DataPropertyName = "CodigoCataloReferencia";
-            this.CodigoCataloReferencia.HeaderText = "CodigoCataloReferencia";
-            this.CodigoCataloReferencia.Name = "CodigoCataloReferencia";
-            this.CodigoCataloReferencia.ReadOnly = true;
-            this.CodigoCataloReferencia.Visible = false;
-            this.CodigoCataloReferencia.Width = 148;
-            // 
-            // NombreCataloReferencia
-            // 
-            this.NombreCataloReferencia.DataPropertyName = "NombreCataloReferencia";
-            this.NombreCataloReferencia.HeaderText = "Columna";
-            this.NombreCataloReferencia.Name = "NombreCataloReferencia";
-            this.NombreCataloReferencia.ReadOnly = true;
-            this.NombreCataloReferencia.Width = 75;
-            // 
-            // chkActivo
-            // 
-            this.chkActivo.AutoSize = true;
-            this.chkActivo.Checked = true;
-            this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActivo.Location = new System.Drawing.Point(217, 173);
-            this.chkActivo.Name = "chkActivo";
-            this.chkActivo.Size = new System.Drawing.Size(55, 20);
-            this.chkActivo.TabIndex = 13;
-            this.chkActivo.Text = "Activo";
-            this.chkActivo.UseVisualStyleBackColor = true;
-            // 
-            // dtActivo
-            // 
-            this.dtActivo.DataPropertyName = "Activo";
-            this.dtActivo.HeaderText = "Activo";
-            this.dtActivo.Name = "dtActivo";
-            this.dtActivo.ReadOnly = true;
-            this.dtActivo.Width = 42;
-            // 
-            // CatalogoCampoId
-            // 
-            this.CatalogoCampoId.DataPropertyName = "CatalogoCampoId";
-            this.CatalogoCampoId.HeaderText = "CatalogoCampoId";
-            this.CatalogoCampoId.Name = "CatalogoCampoId";
-            this.CatalogoCampoId.Visible = false;
-            this.CatalogoCampoId.Width = 118;
-            // 
-            // IdAgrupacion
-            // 
-            this.IdAgrupacion.DataPropertyName = "IdAgrupacion";
-            this.IdAgrupacion.HeaderText = "IdAgrupacion";
-            this.IdAgrupacion.Name = "IdAgrupacion";
-            this.IdAgrupacion.Visible = false;
-            this.IdAgrupacion.Width = 96;
-            // 
-            // LlavePrimaria
-            // 
-            this.LlavePrimaria.DataPropertyName = "LlavePrimaria";
-            this.LlavePrimaria.HeaderText = "PK";
-            this.LlavePrimaria.Name = "LlavePrimaria";
-            this.LlavePrimaria.Width = 47;
-            // 
-            // NombreTecnico
-            // 
-            this.NombreTecnico.DataPropertyName = "NombreTecnico";
-            this.NombreTecnico.HeaderText = "Nombre Técnico";
-            this.NombreTecnico.Name = "NombreTecnico";
-            this.NombreTecnico.Width = 111;
-            // 
-            // TipoDato
-            // 
-            this.TipoDato.DataPropertyName = "TipoDato";
-            this.TipoDato.HeaderText = "Tipo de Dato";
-            this.TipoDato.Name = "TipoDato";
-            this.TipoDato.Width = 94;
-            // 
-            // Tamanio
-            // 
-            this.Tamanio.DataPropertyName = "Tamanio";
-            this.Tamanio.HeaderText = "Ancho";
-            this.Tamanio.Name = "Tamanio";
-            this.Tamanio.Width = 63;
-            // 
-            // Precision
-            // 
-            this.Precision.DataPropertyName = "Precision";
-            this.Precision.HeaderText = "Presición";
-            this.Precision.Name = "Precision";
-            this.Precision.Width = 76;
-            // 
-            // NombreCampo
-            // 
-            this.NombreCampo.DataPropertyName = "NombreCampo";
-            this.NombreCampo.HeaderText = "Nombre campo";
-            this.NombreCampo.Name = "NombreCampo";
-            this.NombreCampo.Width = 105;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Visible = false;
-            this.Descripcion.Width = 88;
-            // 
-            // CampoConReferencia
-            // 
-            this.CampoConReferencia.DataPropertyName = "CampoConReferencia";
-            this.CampoConReferencia.HeaderText = "Llave Foranea";
-            this.CampoConReferencia.Name = "CampoConReferencia";
-            this.CampoConReferencia.Width = 103;
-            // 
-            // Requerido
-            // 
-            this.Requerido.DataPropertyName = "Requerido";
-            this.Requerido.HeaderText = "Requerido";
-            this.Requerido.Name = "Requerido";
-            this.Requerido.Width = 83;
-            // 
-            // Orden
-            // 
-            this.Orden.DataPropertyName = "Orden";
-            this.Orden.HeaderText = "No. Orden";
-            this.Orden.Name = "Orden";
-            this.Orden.Width = 83;
-            // 
-            // NombreAgrupacion
-            // 
-            this.NombreAgrupacion.DataPropertyName = "NombreAgrupacion";
-            this.NombreAgrupacion.HeaderText = "Grupo de datos";
-            this.NombreAgrupacion.Name = "NombreAgrupacion";
-            this.NombreAgrupacion.Width = 106;
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Location = new System.Drawing.Point(413, 24);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(109, 23);
-            this.btnCopy.TabIndex = 4;
-            this.btnCopy.Text = "Copiar columna";
-            this.btnCopy.UseVisualStyleBackColor = true;
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(701, 413);
+            this.tabPage6.TabIndex = 4;
+            this.tabPage6.Text = "Errores de llaves Foraneas";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // TablesConfiguration
             // 
@@ -966,14 +993,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgLLavePrimaria)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgRelaciones)).EndInit();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupGrupos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1011,7 +1038,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dtgDetalleColumnas;
         private System.Windows.Forms.Button btnAgregarCampo;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dtgColumns;
         private System.Windows.Forms.GroupBox groupGrupos;
         private System.Windows.Forms.Button Nuevo;
@@ -1029,8 +1056,8 @@
         private System.Windows.Forms.ListBox lstColumnas;
         private System.Windows.Forms.TextBox txtBusquedaTabla;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dtgRelaciones;
+        private System.Windows.Forms.Button btnQuitarRelacion;
         private System.Windows.Forms.DataGridView dtgBusquedaCatalogos;
         private System.Windows.Forms.ListBox lstCampoHacerReferencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn dtNameIdCategoria;
@@ -1062,5 +1089,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Orden;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreAgrupacion;
         private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.ListBox lstCategorias;
+        private System.Windows.Forms.TabPage tabPage6;
     }
 }

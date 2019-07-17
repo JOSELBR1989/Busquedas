@@ -21,5 +21,6 @@ namespace DMS.UtilidadesDesktop
             list.DisplayMember = displayName;
             list.ValueMember = valueMember;
         }
+
     }
 }

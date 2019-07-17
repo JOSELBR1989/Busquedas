@@ -14,5 +14,10 @@ namespace DMS.Servicio
         {
             return tipoCategoria.tiposCategoria(); 
         }
+
+        public TipoCategoria tiposCategoriaId(int id)
+        {
+            return tipoCategoria.tiposCategoriaId(id);
+        }
     }
 }

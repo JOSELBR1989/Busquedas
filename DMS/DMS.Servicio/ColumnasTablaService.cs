@@ -18,8 +18,14 @@ namespace DMS.Servicio
         void actualizarGrupo(DMS.Modelos.CamposCatalogo campo);
 
         void crearAsociacionCampos(DMS.Modelos.CamposCatalogo campoFK, DMS.Modelos.CamposCatalogo campoPK);
+        void quitarAsociacionCampos(long CatalogoCampoId, long CatalogoCampoIdRef);
         List<object> obtenerAsociacionesColumna(DMS.Modelos.CamposCatalogo campo);
         CamposCatalogo obtenePorId(DMS.Modelos.CamposCatalogo campoBusqueda);
 
+        #region "Eliminar desactivar registros"
+        void desactivarCampo(long codigoCampoCatalogo, bool activo);
+        void eliminarCampo(long codigoCampoCatalogo);
+
+        #endregion
     }
 }

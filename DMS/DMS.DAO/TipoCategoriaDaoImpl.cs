@@ -26,5 +26,24 @@ namespace DMS.DAO
 
             return result; 
         }
+
+        public TipoCategoria tiposCategoriaId(int id)
+        {
+            TipoCategoria result = new TipoCategoria();
+
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                result = (from da in db.CAT_Categoria
+                          where da.IdCategoria == id
+                          select new TipoCategoria
+                          {
+                              Codigo = da.IdCategoria,
+                              Nombre = da.Nombre,
+                              EsquemaFisico = da.Esquema
+                          }).ToList().FirstOrDefault();
+            }
+
+            return result;
+        }
     }
 }

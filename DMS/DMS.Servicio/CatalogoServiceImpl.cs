@@ -22,9 +22,19 @@ namespace DMS.Servicio
             return catalogoDato.busquedaPorDescripcion(busqueda);
         }
 
+        public List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria)
+        {
+            return catalogoDato.busquedaPorDescripcion(busqueda, tipoCategoria); 
+        }
+
         public List<object> busquedaPorDescripcionActivos(string busqueda)
         {
             return catalogoDato.busquedaPorDescripcionActivos(busqueda);
+        }
+
+        public List<object> busquedaPorDescripcionActivos(string busqueda, string[] tipoCategoria)
+        {
+            return catalogoDato.busquedaPorDescripcionActivos(busqueda, tipoCategoria);
         }
 
         public DataTable executeQuery(string Query)
@@ -35,6 +45,11 @@ namespace DMS.Servicio
         public void nuevo(Catalogos catalogo)
         {
             catalogoDato.nuevo(catalogo);
+        }
+
+        public Catalogos obtenerCatalogo(long codigoCatalogo)
+        {
+            return catalogoDato.obtenerCatalogo(codigoCatalogo); 
         }
     }
 }

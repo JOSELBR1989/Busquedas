@@ -14,6 +14,36 @@ namespace DMS.DAO
     public class CatalogoDaoImpl : CatalogoDao
     {
         private db.DB_DMsEntities db;
+
+        public DMS.Modelos.Catalogos obtenerCatalogo(long codigoCatalogo)
+        {
+            Catalogos catalogos = new Catalogos();
+
+            try
+            {
+                using (db = new DMS.db.DB_DMsEntities())
+                {
+                    var dato = (from da in db.Catalogos
+                                where da.IdCatalogo == codigoCatalogo
+                                select da).ToList().FirstOrDefault();
+
+                    catalogos.CodigoCatalogo = dato.IdCatalogo;
+                    catalogos.NombreCatalogo = dato.NombreCatalogo;
+                    catalogos.NombreFisico = dato.NombreFisico;
+                    catalogos.TablaCreada = dato.TablaCreada;
+                    catalogos.TablaReferenciada = dato.Referenciada;
+                    catalogos.Activo = dato.Activa;
+                    catalogos.TipoCategoria = new TipoCategoria(dato.CAT_Categoria.IdCategoria, dato.CAT_Categoria.Nombre,dato.CAT_Categoria.Esquema);
+
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+
+            return catalogos; 
+        }
+
         public void actualizarCatalogo(Catalogos catalogoUpdate)
         {
             try
@@ -56,6 +86,31 @@ namespace DMS.DAO
             return resultado;
         }
 
+        public List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria)
+        {
+            List<Object> resultado = new List<object>();
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                resultado = (from da in db.Catalogos
+                             where (da.NombreCatalogo.Contains(busqueda) ||
+                             da.NombreFisico.Contains(busqueda)) &&
+                             tipoCategoria.Contains(da.CAT_Categoria.Esquema)
+                             select new
+                             {
+                                 IdCategoria = da.CAT_Categoria.IdCategoria,
+                                 NombreCategoria = da.CAT_Categoria.Nombre,
+                                 IdCatalogo = da.IdCatalogo,
+                                 NombreCatalogo = da.NombreCatalogo,
+                                 NombreFisicoCatalogo = da.NombreFisico,
+                                 TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
+                                 Referenciada = (da.Referenciada == true) ? "SI" : "NO",
+                                 Activo = (da.Activa == true) ? "SI" : "NO"
+                             }).ToList().Cast<Object>().ToList();
+            }
+            return resultado;
+
+        }
+
         public List<object> busquedaPorDescripcionActivos(string busqueda)
         {
             List<Object> resultado = new List<object>();
@@ -64,6 +119,30 @@ namespace DMS.DAO
                 resultado = (from da in db.Catalogos
                              where (da.NombreCatalogo.Contains(busqueda) ||
                              da.NombreFisico.Contains(busqueda)) && da.Activa == true
+                             select new
+                             {
+                                 IdCategoria = da.CAT_Categoria.IdCategoria,
+                                 NombreCategoria = da.CAT_Categoria.Nombre,
+                                 IdCatalogo = da.IdCatalogo,
+                                 NombreCatalogo = da.NombreCatalogo,
+                                 NombreFisicoCatalogo = da.NombreFisico,
+                                 TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
+                                 Referenciada = (da.Referenciada == true) ? "SI" : "NO",
+                                 Activo = (da.Activa == true) ? "SI" : "NO"
+                             }).ToList().Cast<Object>().ToList();
+            }
+            return resultado;
+        }
+
+        public List<object> busquedaPorDescripcionActivos(string busqueda, string[]  esquemas)
+        {
+            List<Object> resultado = new List<object>();
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                resultado = (from da in db.Catalogos
+                             where (da.NombreCatalogo.Contains(busqueda) ||
+                             da.NombreFisico.Contains(busqueda)) && da.Activa == true
+                             && esquemas.Contains(da.CAT_Categoria.Esquema)
                              select new
                              {
                                  IdCategoria = da.CAT_Categoria.IdCategoria,
@@ -123,7 +202,7 @@ namespace DMS.DAO
 
                     cat.IdCategoria = catalogo.TipoCategoria.Codigo;
                     cat.NombreCatalogo = catalogo.NombreCatalogo;
-                    cat.NombreFisico = catalogo.NombreFisico;
+                    cat.NombreFisico = catalogo.NombreFisico.Replace(" ","");
                     cat.TablaCreada = catalogo.TablaCreada;
                     cat.Referenciada = catalogo.TablaReferenciada;
                     cat.Activa = catalogo.Activo;

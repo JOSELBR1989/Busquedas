@@ -162,39 +162,28 @@ namespace DMS.DAO
         {
             using (db = new DMS.db.DB_DMsEntities())
             {
-                DMS.db.CamposCatalogoReferencias cat = new DMS.db.CamposCatalogoReferencias();
-                cat.CatalogoCampoId = campoFK.CodigoCampoCatalogo;
-                cat.CatalogoCampoIdRef = campoPK.CodigoCampoCatalogo;
-                cat.Activo = true;
-                cat.UpdateRule = "";
-                db.CamposCatalogoReferencias.Add(cat);
-                db.SaveChanges(); 
-            }
-        }
-
-        public DataTable executeQuery(string Query)
-        {
-            var dt = new DataTable();
-            Query = "INSERT INTO scConfiguration.CamposCatalogoReferencias(CatalogoCampoId,CatalogoCampoIdRef,UpdateRule,Activo)";
-            using (db = new DMS.db.DB_DMsEntities())
-            {
                 var conn = db.Database.Connection;
                 var connectionState = conn.State;
+                StringBuilder strb = new StringBuilder();
+                strb.AppendLine("INSERT INTO scConfiguration.CamposCatalogoReferencias(CatalogoCampoId,CatalogoCampoIdRef,Activo)");
+                strb.AppendLine("VALUES(");
+                strb.AppendLine(campoFK.CodigoCampoCatalogo.ToString() + ",");
+                strb.AppendLine(campoPK.CodigoCampoCatalogo.ToString() + ",");
+                strb.AppendLine("1");
+                strb.AppendLine(")");
                 try
                 {
                     if (connectionState != ConnectionState.Open) conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = Query;
+                        cmd.CommandText = strb.ToString();
                         cmd.CommandType = CommandType.Text;
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            dt.Load(reader);
-                        }
+                        var reader = cmd.ExecuteReader();
                     }
                 }
                 catch (Exception ex)
                 {
+
                     throw;
                 }
                 finally
@@ -203,8 +192,44 @@ namespace DMS.DAO
                 }
 
             }
+        }
 
-            return dt;
+        public void desactivarCampo(long codigoCampoCatalogo, bool activo)
+        {
+            try
+            {
+                using (db = new DMS.db.DB_DMsEntities())
+                {
+                    var dato = (from da in db.CatalogoCampos
+                                where da.CatalogoCampoId == codigoCampoCatalogo
+                                select da).FirstOrDefault();
+                    dato.Activo = activo;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void eliminarCampo(long codigoCampoCatalogo)
+        {
+            try
+            {
+                using (db = new DMS.db.DB_DMsEntities())
+                {
+                    var dato = (from da in db.CatalogoCampos
+                                where da.CatalogoCampoId == codigoCampoCatalogo
+                                select da).FirstOrDefault();
+                    db.CatalogoCampos.Remove(dato);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void nuevo(CamposCatalogo campo)
@@ -273,12 +298,47 @@ namespace DMS.DAO
                              {
                                  CodigoCatalogoBase = da.CatalogoCampos.CatalogoCampoId,
                                  NombreCampoCatalogoBase = da.CatalogoCampos.NombreCampo + " [" + da.CatalogoCampos.NombreTecnico + "]",
-                                 NombreTablaReferencia = da.CatalogoCampos.Catalogos.NombreCatalogo + " [" + da.CatalogoCampos.Catalogos.NombreFisico + "]",
+                                 NombreTablaReferencia = da.CatalogoCamposFK.Catalogos.NombreCatalogo + " [" + da.CatalogoCamposFK.Catalogos.NombreFisico + "]",
                                  CodigoCataloReferencia = da.CatalogoCampoIdRef,
                                  NombreCataloReferencia = da.CatalogoCamposFK.NombreCampo + " [" + da.CatalogoCamposFK.NombreTecnico  + "]"
                              }).ToList().Cast<Object>().ToList();
             }
             return resultado; 
         }
-    }
+
+        public void quitarAsociacionCampos(long CatalogoCampoId, long CatalogoCampoIdRef)
+        {
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                var conn = db.Database.Connection;
+                var connectionState = conn.State;
+                StringBuilder strb = new StringBuilder();
+                strb.AppendLine("UPDATE ccr SET ccr.Activo	 = 0 FROM	scConfiguration.CamposCatalogoReferencias ccr ");
+                strb.AppendLine("WHERE ccr.CatalogoCampoId = " + CatalogoCampoId.ToString());
+                strb.AppendLine("AND ccr.CatalogoCampoIdRef =  " + CatalogoCampoIdRef.ToString());
+
+                try
+                {
+                    if (connectionState != ConnectionState.Open) conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = strb.ToString();
+                        cmd.CommandType = CommandType.Text;
+                        var reader = cmd.ExecuteReader();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    if (connectionState != ConnectionState.Closed) conn.Close();
+                }
+
+
+            }
+        }
+        }
 }

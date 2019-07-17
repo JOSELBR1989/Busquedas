@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DMS.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace DMS.Servicio
 {
     public interface TipoCategoriaService
     {
-        List<DMS.Modelos.TipoCategoria> tiposCategoria();
+        List<TipoCategoria> tiposCategoria();
+        TipoCategoria tiposCategoriaId(int id);
     }
 }
