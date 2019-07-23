@@ -11,6 +11,7 @@ namespace DMS.Servicio
     {
         Modelos.Catalogos obtenerCatalogo(long codigoCatalogo);
         List<Object> busquedaPorDescripcion(string busqueda);
+        List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria, bool estado);
         List<Object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria);
         List<Object> busquedaPorDescripcionActivos(string busqueda);
         List<Object> busquedaPorDescripcionActivos(string busqueda, string[] tipoCategoria);

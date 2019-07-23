@@ -142,7 +142,7 @@ namespace DMS.InterfazUsuario.CreacionEstructura
             else {
                 if (cmbTipoDato.Text == "DECIMAL")
                 {
-                    ResetEnabledNumeric(true, 1, 8, 1, numPresicion);
+                    ResetEnabledNumeric(true, 0, 8, 1, numPresicion);
                     ResetEnabledNumeric(true, 1, 4000, 1, numTamanio);
                 }
 

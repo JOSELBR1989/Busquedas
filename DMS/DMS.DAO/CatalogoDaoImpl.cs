@@ -33,7 +33,9 @@ namespace DMS.DAO
                     catalogos.TablaCreada = dato.TablaCreada;
                     catalogos.TablaReferenciada = dato.Referenciada;
                     catalogos.Activo = dato.Activa;
+                    catalogos.ListoParaCrear = dato.ListoParaCrear;
                     catalogos.TipoCategoria = new TipoCategoria(dato.CAT_Categoria.IdCategoria, dato.CAT_Categoria.Nombre,dato.CAT_Categoria.Esquema);
+                    catalogos.ListoParaCrear = dato.ListoParaCrear; 
 
                 }
             }
@@ -55,10 +57,13 @@ namespace DMS.DAO
                                 select da).FirstOrDefault();
                     dato.NombreCatalogo = catalogoUpdate.NombreCatalogo;
                     dato.TablaCreada = catalogoUpdate.TablaCreada;
+                    dato.Activa = catalogoUpdate.Activo;
+                    dato.ListoParaCrear = catalogoUpdate.ListoParaCrear;
+
                     db.SaveChanges(); 
                 }
             }
-            catch
+            catch(Exception ex)
             {
             }
         }
@@ -80,7 +85,8 @@ namespace DMS.DAO
                                  NombreFisicoCatalogo = da.NombreFisico,
                                  TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
-                                 Activo = (da.Activa == true) ? "SI" : "NO"
+                                 Activo = (da.Activa == true) ? "SI" : "NO",
+                                 ListoParaCrear = da.ListoParaCrear
                              }).ToList().Cast<Object>().ToList();
             }
             return resultado;
@@ -104,7 +110,8 @@ namespace DMS.DAO
                                  NombreFisicoCatalogo = da.NombreFisico,
                                  TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
-                                 Activo = (da.Activa == true) ? "SI" : "NO"
+                                 Activo = (da.Activa == true) ? "SI" : "NO",
+                                 ListoParaCrear = da.ListoParaCrear
                              }).ToList().Cast<Object>().ToList();
             }
             return resultado;
@@ -128,7 +135,8 @@ namespace DMS.DAO
                                  NombreFisicoCatalogo = da.NombreFisico,
                                  TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
-                                 Activo = (da.Activa == true) ? "SI" : "NO"
+                                 Activo = (da.Activa == true) ? "SI" : "NO",
+                                 ListoParaCrear = da.ListoParaCrear
                              }).ToList().Cast<Object>().ToList();
             }
             return resultado;
@@ -152,7 +160,8 @@ namespace DMS.DAO
                                  NombreFisicoCatalogo = da.NombreFisico,
                                  TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
-                                 Activo = (da.Activa == true) ? "SI" : "NO"
+                                 Activo = (da.Activa == true) ? "SI" : "NO",
+                                 ListoParaCrear = da.ListoParaCrear
                              }).ToList().Cast<Object>().ToList();
             }
             return resultado;
@@ -206,6 +215,9 @@ namespace DMS.DAO
                     cat.TablaCreada = catalogo.TablaCreada;
                     cat.Referenciada = catalogo.TablaReferenciada;
                     cat.Activa = catalogo.Activo;
+                    cat.ListoParaCrear = catalogo.ListoParaCrear;
+                    cat.IdCategoria = catalogo.TipoCategoria.Codigo;
+                    cat.ListoParaCrear = false;
 
                     db.Catalogos.Add(cat);
                     db.SaveChanges();
@@ -215,6 +227,31 @@ namespace DMS.DAO
             {
                 throw;
             }
+        }
+
+        public List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria, bool estado)
+        {
+            List<Object> resultado = new List<object>();
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                resultado = (from da in db.Catalogos
+                             where (da.NombreCatalogo.Contains(busqueda) ||
+                             da.NombreFisico.Contains(busqueda)) &&
+                             tipoCategoria.Contains(da.CAT_Categoria.Esquema) && da.Activa == estado
+                             select new
+                             {
+                                 IdCategoria = da.CAT_Categoria.IdCategoria,
+                                 NombreCategoria = da.CAT_Categoria.Nombre,
+                                 IdCatalogo = da.IdCatalogo,
+                                 NombreCatalogo = da.NombreCatalogo,
+                                 NombreFisicoCatalogo = da.NombreFisico,
+                                 TablaCreada = (da.TablaCreada == true) ? "SI" : "NO",
+                                 Referenciada = (da.Referenciada == true) ? "SI" : "NO",
+                                 Activo = (da.Activa == true) ? "SI" : "NO",
+                                 ListoParaCrear = da.ListoParaCrear
+                             }).ToList().Cast<Object>().ToList();
+            }
+            return resultado;
         }
     }
 }

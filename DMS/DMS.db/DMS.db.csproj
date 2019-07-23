@@ -57,6 +57,9 @@
     <Compile Include="CamposCatalogoReferencias.cs">
       <DependentUpon>SecurityDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="CamposCatalogoReferenciasPorCatalogo_Result.cs">
+      <DependentUpon>SecurityDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="CatalogoCampos.cs">
       <DependentUpon>SecurityDB.tt</DependentUpon>
     </Compile>

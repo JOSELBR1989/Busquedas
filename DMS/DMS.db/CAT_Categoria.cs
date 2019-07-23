@@ -23,6 +23,8 @@ namespace DMS.db
         public int IdCategoria { get; set; }
         public string Nombre { get; set; }
         public string Esquema { get; set; }
+        public Nullable<int> TotalEsperado { get; set; }
+        public Nullable<int> TotalObligatorio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Catalogos> Catalogos { get; set; }

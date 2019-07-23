@@ -22,6 +22,11 @@ namespace DMS.Servicio
             return catalogoDato.busquedaPorDescripcion(busqueda);
         }
 
+        public List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria, bool estado)
+        {
+            return catalogoDato.busquedaPorDescripcion(busqueda, tipoCategoria, estado);
+        }
+
         public List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria)
         {
             return catalogoDato.busquedaPorDescripcion(busqueda, tipoCategoria); 

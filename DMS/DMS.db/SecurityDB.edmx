@@ -15,13 +15,13 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DB_DMASAs.scConfiguration.CamposCatalogoReferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CamposCatalogoReferencias">
           <Key>
             <PropertyRef Name="CatalogoCampoId" />
             <PropertyRef Name="CatalogoCampoIdRef" />
-            <PropertyRef Name="UpdateRule" />
             <PropertyRef Name="Activo" />
+            <PropertyRef Name="UpdateRule" />
           </Key>
           <Property Name="CatalogoCampoId" Type="bigint" Nullable="false" />
           <Property Name="CatalogoCampoIdRef" Type="bigint" Nullable="false" />
@@ -35,6 +35,8 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
           <Property Name="IdCategoria" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Esquema" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalEsperado" Type="int" />
+          <Property Name="TotalObligatorio" Type="int" />
         </EntityType>
         <EntityType Name="CatalogoCampos">
           <Key>
@@ -66,6 +68,7 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
           <Property Name="TablaCreada" Type="bit" Nullable="false" />
           <Property Name="Referenciada" Type="bit" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="ListoParaCrear" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Agrupaciones_Catalogos">
           <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
@@ -139,6 +142,24 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CamposCatalogoReferenciasPorCatalogo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="scConfiguration">
+          <Parameter Name="pIdCatalogo" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="CatalogoCampoIdPK" Type="int" />
+                <Property Name="NombreCompletoCatalogoPK" Type="varchar(max)" />
+                <Property Name="NombreTecnicoCampoPK" Type="varchar(max)" />
+                <Property Name="NombreTecnicoCampoFK" Type="varchar(max)" />
+                <Property Name="TipoDato" Type="varchar(max)" />
+                <Property Name="Largo" Type="int" />
+                <Property Name="Precision" Type="int" />
+                <Property Name="CatalogoCampoIdFK" Type="int" />
+                <Property Name="DetalleError" Type="varchar" MaxLength="100" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="DB_DMsModelStoreContainer">
           <EntitySet Name="Agrupaciones" EntityType="Self.Agrupaciones" Schema="scConfiguration" store:Type="Tables" />
           <EntitySet Name="CAT_Categoria" EntityType="Self.CAT_Categoria" Schema="scConfiguration" store:Type="Tables" />
@@ -200,6 +221,8 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Esquema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Catalogos" Relationship="Self.FK_Catalogos_CAT_Categoria" FromRole="CAT_Categoria" ToRole="Catalogos" />
+          <Property Name="TotalEsperado" Type="Int32" />
+          <Property Name="TotalObligatorio" Type="Int32" />
         </EntityType>
         <EntityType Name="CatalogoCampos">
           <Key>
@@ -238,6 +261,7 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
           <NavigationProperty Name="CAT_Categoria" Relationship="Self.FK_Catalogos_CAT_Categoria" FromRole="Catalogos" ToRole="CAT_Categoria" />
           <NavigationProperty Name="CatalogoCampos" Relationship="Self.FK_CatalogoCampos_Catalogos" FromRole="Catalogos" ToRole="CatalogoCampos" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="ListoParaCrear" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CamposCatalogoReferencias">
           <Key>
@@ -355,7 +379,21 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
             <End Role="Catalogos" EntitySet="Catalogos" />
             <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
           </AssociationSet>
+          <FunctionImport Name="CamposCatalogoReferenciasPorCatalogo" IsComposable="true" ReturnType="Collection(DB_DMsModel.CamposCatalogoReferenciasPorCatalogo_Result)">
+            <Parameter Name="pIdCatalogo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="CamposCatalogoReferenciasPorCatalogo_Result">
+          <Property Type="Int32" Name="CatalogoCampoIdPK" Nullable="true" />
+          <Property Type="String" Name="NombreCompletoCatalogoPK" Nullable="true" />
+          <Property Type="String" Name="NombreTecnicoCampoPK" Nullable="true" />
+          <Property Type="String" Name="NombreTecnicoCampoFK" Nullable="true" />
+          <Property Type="String" Name="TipoDato" Nullable="true" />
+          <Property Type="Int32" Name="Largo" Nullable="true" />
+          <Property Type="Int32" Name="Precision" Nullable="true" />
+          <Property Type="Int32" Name="CatalogoCampoIdFK" Nullable="true" />
+          <Property Type="String" Name="DetalleError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -375,6 +413,8 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
           <EntitySetMapping Name="CAT_Categoria">
             <EntityTypeMapping TypeName="DB_DMsModel.CAT_Categoria">
               <MappingFragment StoreEntitySet="CAT_Categoria">
+                <ScalarProperty Name="TotalObligatorio" ColumnName="TotalObligatorio" />
+                <ScalarProperty Name="TotalEsperado" ColumnName="TotalEsperado" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Esquema" ColumnName="Esquema" />
@@ -404,6 +444,7 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
           <EntitySetMapping Name="Catalogos">
             <EntityTypeMapping TypeName="DB_DMsModel.Catalogos">
               <MappingFragment StoreEntitySet="Catalogos">
+                <ScalarProperty Name="ListoParaCrear" ColumnName="ListoParaCrear" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
                 <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
@@ -424,6 +465,21 @@ warning 6002: The table/view 'DB_DMs.scConfiguration.CamposCatalogoReferencias' 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CamposCatalogoReferenciasPorCatalogo" FunctionName="DB_DMsModel.Store.CamposCatalogoReferenciasPorCatalogo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.CamposCatalogoReferenciasPorCatalogo_Result">
+                <ScalarProperty Name="CatalogoCampoIdPK" ColumnName="CatalogoCampoIdPK" />
+                <ScalarProperty Name="NombreCompletoCatalogoPK" ColumnName="NombreCompletoCatalogoPK" />
+                <ScalarProperty Name="NombreTecnicoCampoPK" ColumnName="NombreTecnicoCampoPK" />
+                <ScalarProperty Name="NombreTecnicoCampoFK" ColumnName="NombreTecnicoCampoFK" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+                <ScalarProperty Name="Largo" ColumnName="Largo" />
+                <ScalarProperty Name="Precision" ColumnName="Precision" />
+                <ScalarProperty Name="CatalogoCampoIdFK" ColumnName="CatalogoCampoIdFK" />
+                <ScalarProperty Name="DetalleError" ColumnName="DetalleError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -27,17 +27,17 @@ namespace DMS.Servicio
             columnasTablaDao.actualizarPK(campo);
         }
 
-        public List<object> columnasTabla(Catalogos catalogoPadre)
+        public List<Object> columnasTabla(Catalogos catalogoPadre)
         {
             return columnasTablaDao.columnasTabla(catalogoPadre); 
         }
 
-        public List<object> columnasTablaPK(Catalogos catalogoPadre)
+        public List<Object> columnasTablaPK(Catalogos catalogoPadre)
         {
             return columnasTablaDao.columnasTablaPK(catalogoPadre);
         }
 
-        public List<object> columnasYTablas(string busqueda, CamposCatalogo campos)
+        public List<Object> columnasYTablas(string busqueda, CamposCatalogo campos)
         {
             return columnasTablaDao.columnasYTablas(busqueda, campos);
         }
@@ -57,6 +57,11 @@ namespace DMS.Servicio
             columnasTablaDao.eliminarCampo(codigoCampoCatalogo);
         }
 
+        public List<object> erroresAsociaciones(int catalogo)
+        {
+            return columnasTablaDao.erroresAsociaciones(catalogo);
+        }
+
         public void nuevo(CamposCatalogo campo)
         {
             columnasTablaDao.nuevo(campo);
@@ -67,7 +72,7 @@ namespace DMS.Servicio
             return columnasTablaDao.obtenePorId(campoBusqueda); 
         }
 
-        public List<object> obtenerAsociacionesColumna(CamposCatalogo campo)
+        public List<Object> obtenerAsociacionesColumna(CamposCatalogo campo)
         {
             return columnasTablaDao.obtenerAsociacionesColumna(campo); 
         }

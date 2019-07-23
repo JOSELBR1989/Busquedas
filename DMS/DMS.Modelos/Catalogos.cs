@@ -14,7 +14,8 @@ namespace DMS.Modelos
         private string nombreFisico;
         private bool tablaCreada;
         private bool tablaReferenciada;
-        private bool activo; 
+        private bool activo;
+        private bool listoParaCrear;
         public Catalogos()
         {
         }
@@ -117,6 +118,19 @@ namespace DMS.Modelos
             set
             {
                 activo = value;
+            }
+        }
+
+        public bool ListoParaCrear
+        {
+            get
+            {
+                return listoParaCrear;
+            }
+
+            set
+            {
+                listoParaCrear = value;
             }
         }
     }

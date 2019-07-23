@@ -28,6 +28,7 @@ namespace DMS.db
         public bool TablaCreada { get; set; }
         public bool Referenciada { get; set; }
         public bool Activa { get; set; }
+        public bool ListoParaCrear { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agrupaciones> Agrupaciones { get; set; }

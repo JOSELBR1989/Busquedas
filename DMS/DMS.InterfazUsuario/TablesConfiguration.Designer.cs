@@ -41,6 +41,9 @@
             this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlGeneral = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rdbtnInactivo = new System.Windows.Forms.RadioButton();
+            this.rdbtnActivo = new System.Windows.Forms.RadioButton();
+            this.rdbtnTodos = new System.Windows.Forms.RadioButton();
             this.lstCategorias = new System.Windows.Forms.ListBox();
             this.txtBuscarCatalogo = new System.Windows.Forms.TextBox();
             this.tabPageDetalleCatalogo = new System.Windows.Forms.TabPage();
@@ -93,9 +96,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtBusquedaTabla = new System.Windows.Forms.TextBox();
             this.lstColumnas = new System.Windows.Forms.ListBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkListoCrear = new System.Windows.Forms.CheckBox();
             this.chkActivo = new System.Windows.Forms.CheckBox();
             this.groupGrupos = new System.Windows.Forms.GroupBox();
             this.btnQuitar = new System.Windows.Forms.Button();
@@ -111,7 +116,9 @@
             this.txtNombreFisicoCatalogo = new System.Windows.Forms.TextBox();
             this.chkPendienteCrear = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.dtgErroresReferencia = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgCatalogos)).BeginInit();
             this.tabControlGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -124,11 +131,13 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgRelaciones)).BeginInit();
+            this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupGrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbTipoCatalogo
@@ -247,6 +256,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rdbtnInactivo);
+            this.tabPage1.Controls.Add(this.rdbtnActivo);
+            this.tabPage1.Controls.Add(this.rdbtnTodos);
             this.tabPage1.Controls.Add(this.lstCategorias);
             this.tabPage1.Controls.Add(this.txtBuscarCatalogo);
             this.tabPage1.Controls.Add(this.dtgCatalogos);
@@ -258,16 +270,51 @@
             this.tabPage1.Text = "Catalogos existentes";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // rdbtnInactivo
+            // 
+            this.rdbtnInactivo.AutoSize = true;
+            this.rdbtnInactivo.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnInactivo.Location = new System.Drawing.Point(6, 102);
+            this.rdbtnInactivo.Name = "rdbtnInactivo";
+            this.rdbtnInactivo.Size = new System.Drawing.Size(67, 20);
+            this.rdbtnInactivo.TabIndex = 7;
+            this.rdbtnInactivo.Text = "Inactivos";
+            this.rdbtnInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbtnActivo
+            // 
+            this.rdbtnActivo.AutoSize = true;
+            this.rdbtnActivo.Checked = true;
+            this.rdbtnActivo.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnActivo.Location = new System.Drawing.Point(6, 76);
+            this.rdbtnActivo.Name = "rdbtnActivo";
+            this.rdbtnActivo.Size = new System.Drawing.Size(59, 20);
+            this.rdbtnActivo.TabIndex = 6;
+            this.rdbtnActivo.TabStop = true;
+            this.rdbtnActivo.Text = "Activos";
+            this.rdbtnActivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbtnTodos
+            // 
+            this.rdbtnTodos.AutoSize = true;
+            this.rdbtnTodos.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnTodos.Location = new System.Drawing.Point(6, 50);
+            this.rdbtnTodos.Name = "rdbtnTodos";
+            this.rdbtnTodos.Size = new System.Drawing.Size(56, 20);
+            this.rdbtnTodos.TabIndex = 5;
+            this.rdbtnTodos.Text = "Todos";
+            this.rdbtnTodos.UseVisualStyleBackColor = true;
+            // 
             // lstCategorias
             // 
             this.lstCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lstCategorias.FormattingEnabled = true;
             this.lstCategorias.ItemHeight = 20;
-            this.lstCategorias.Location = new System.Drawing.Point(6, 50);
+            this.lstCategorias.Location = new System.Drawing.Point(6, 130);
             this.lstCategorias.Name = "lstCategorias";
             this.lstCategorias.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstCategorias.Size = new System.Drawing.Size(179, 384);
+            this.lstCategorias.Size = new System.Drawing.Size(179, 304);
             this.lstCategorias.TabIndex = 4;
             // 
             // txtBuscarCatalogo
@@ -762,11 +809,25 @@
             this.lstColumnas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lstColumnas.FormattingEnabled = true;
+            this.lstColumnas.HorizontalScrollbar = true;
             this.lstColumnas.ItemHeight = 16;
             this.lstColumnas.Location = new System.Drawing.Point(6, 4);
             this.lstColumnas.Name = "lstColumnas";
             this.lstColumnas.Size = new System.Drawing.Size(242, 404);
             this.lstColumnas.TabIndex = 0;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.button2);
+            this.tabPage6.Controls.Add(this.button1);
+            this.tabPage6.Controls.Add(this.dtgErroresReferencia);
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(701, 413);
+            this.tabPage6.TabIndex = 4;
+            this.tabPage6.Text = "Errores de llaves Foraneas";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
@@ -798,6 +859,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.chkListoCrear);
             this.groupBox1.Controls.Add(this.chkActivo);
             this.groupBox1.Controls.Add(this.groupGrupos);
             this.groupBox1.Controls.Add(this.txtCodigoCatalogo);
@@ -817,6 +879,16 @@
             this.groupBox1.Size = new System.Drawing.Size(440, 442);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
+            // 
+            // chkListoCrear
+            // 
+            this.chkListoCrear.AutoSize = true;
+            this.chkListoCrear.Location = new System.Drawing.Point(217, 202);
+            this.chkListoCrear.Name = "chkListoCrear";
+            this.chkListoCrear.Size = new System.Drawing.Size(101, 20);
+            this.chkListoCrear.TabIndex = 14;
+            this.chkListoCrear.Text = "Listo para crear";
+            this.chkListoCrear.UseVisualStyleBackColor = true;
             // 
             // chkActivo
             // 
@@ -960,15 +1032,35 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Nombre fisico";
             // 
-            // tabPage6
+            // dtgErroresReferencia
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 25);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(701, 413);
-            this.tabPage6.TabIndex = 4;
-            this.tabPage6.Text = "Errores de llaves Foraneas";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.dtgErroresReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtgErroresReferencia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dtgErroresReferencia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgErroresReferencia.Location = new System.Drawing.Point(6, 44);
+            this.dtgErroresReferencia.Name = "dtgErroresReferencia";
+            this.dtgErroresReferencia.Size = new System.Drawing.Size(689, 357);
+            this.dtgErroresReferencia.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Validar Referencias";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(159, 15);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Regenerar referencias";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // TablesConfiguration
             // 
@@ -995,12 +1087,14 @@
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgRelaciones)).EndInit();
+            this.tabPage6.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupGrupos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1091,5 +1185,12 @@
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.ListBox lstCategorias;
         private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.RadioButton rdbtnTodos;
+        private System.Windows.Forms.RadioButton rdbtnActivo;
+        private System.Windows.Forms.RadioButton rdbtnInactivo;
+        private System.Windows.Forms.CheckBox chkListoCrear;
+        private System.Windows.Forms.DataGridView dtgErroresReferencia;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

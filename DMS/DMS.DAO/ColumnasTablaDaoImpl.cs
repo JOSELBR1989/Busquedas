@@ -44,7 +44,6 @@ namespace DMS.DAO
             {
             }
         }
-
         public void actualizarGrupo(CamposCatalogo campo)
         {
             try
@@ -63,7 +62,6 @@ namespace DMS.DAO
                 throw ex;
             }
         }
-
         public void actualizarPK(CamposCatalogo campo)
         {
             try
@@ -82,15 +80,15 @@ namespace DMS.DAO
                 throw ex;
             }
         }
-
-        public List<object> columnasTabla(Catalogos catalogoPadre)
+        public List<Object> columnasTabla(Catalogos catalogoPadre)
         {
             List<Object> resultado = new List<object>();
 
             using (db = new DMS.db.DB_DMsEntities())
             {
                 resultado = (from da in db.CatalogoCampos
-                             where da.IdCatalogo == catalogoPadre.CodigoCatalogo
+                             where da.IdCatalogo == catalogoPadre.CodigoCatalogo &&
+                             da.Activo == true
                              select new
                              {
                                  da.CatalogoCampoId,
@@ -113,8 +111,7 @@ namespace DMS.DAO
 
             return resultado;
         }
-
-        public List<object> columnasTablaPK(Catalogos catalogoPadre)
+        public List<Object> columnasTablaPK(Catalogos catalogoPadre)
         {
             List<Object> resultado = new List<object>();
 
@@ -133,8 +130,7 @@ namespace DMS.DAO
             return resultado;
 
         }
-
-        public List<object> columnasYTablas(string busqueda, CamposCatalogo campos)
+        public List<Object> columnasYTablas(string busqueda, CamposCatalogo campos)
         {
             List<Object> resultado = new List<object>();
 
@@ -157,7 +153,6 @@ namespace DMS.DAO
 
             return resultado;
         }
-
         public void crearAsociacionCampos(CamposCatalogo campoFK, CamposCatalogo campoPK)
         {
             using (db = new DMS.db.DB_DMsEntities())
@@ -193,7 +188,6 @@ namespace DMS.DAO
 
             }
         }
-
         public void desactivarCampo(long codigoCampoCatalogo, bool activo)
         {
             try
@@ -212,11 +206,42 @@ namespace DMS.DAO
                 throw ex;
             }
         }
-
         public void eliminarCampo(long codigoCampoCatalogo)
         {
             try
             {
+                using (db = new DMS.db.DB_DMsEntities())
+                {
+                    var conn = db.Database.Connection;
+                    var connectionState = conn.State;
+                    StringBuilder strb = new StringBuilder();
+                    strb.AppendLine("DELETE FROM CC");
+                    strb.AppendLine("FROM	scConfiguration.CamposCatalogoReferencias AS CC");
+                    strb.AppendLine("WHERE CatalogoCampoId = " + codigoCampoCatalogo.ToString() + ";");
+                    strb.AppendLine("DELETE FROM CC");
+                    strb.AppendLine("FROM	scConfiguration.CamposCatalogoReferencias AS CC");
+                    strb.AppendLine("WHERE CatalogoCampoIdRef = " + codigoCampoCatalogo.ToString() + ";");
+                    try
+                    {
+                        if (connectionState != ConnectionState.Open) conn.Open();
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = strb.ToString();
+                            cmd.CommandType = CommandType.Text;
+                            var reader = cmd.ExecuteReader();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+                    finally
+                    {
+                        if (connectionState != ConnectionState.Closed) conn.Close();
+                    }
+                }
+
                 using (db = new DMS.db.DB_DMsEntities())
                 {
                     var dato = (from da in db.CatalogoCampos
@@ -231,7 +256,16 @@ namespace DMS.DAO
                 throw ex;
             }
         }
-
+        public List<Object> erroresAsociaciones(int catalogo)
+        {
+            List<Object> resultado = new List<object>();
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                resultado = (from da in db.CamposCatalogoReferenciasPorCatalogo(catalogo)
+                             select da).ToList().Cast<Object>().ToList();
+            }
+            return resultado; 
+        }
         public void nuevo(CamposCatalogo campo)
         {
             using (db = new DMS.db.DB_DMsEntities())
@@ -260,7 +294,6 @@ namespace DMS.DAO
                 db.SaveChanges(); 
             }
         }
-
         public CamposCatalogo obtenePorId(CamposCatalogo campoBusqueda)
         {
             CamposCatalogo result = new CamposCatalogo();
@@ -285,8 +318,7 @@ namespace DMS.DAO
             }
             return result; 
         }
-
-        public List<object> obtenerAsociacionesColumna(CamposCatalogo campo)
+        public List<Object> obtenerAsociacionesColumna(CamposCatalogo campo)
         {
             List<Object> resultado = new List<object>();
             using (db = new DMS.db.DB_DMsEntities())
@@ -305,7 +337,6 @@ namespace DMS.DAO
             }
             return resultado; 
         }
-
         public void quitarAsociacionCampos(long CatalogoCampoId, long CatalogoCampoIdRef)
         {
             using (db = new DMS.db.DB_DMsEntities())
@@ -340,5 +371,7 @@ namespace DMS.DAO
 
             }
         }
+
+
         }
 }
