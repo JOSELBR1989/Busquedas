@@ -16,6 +16,9 @@
         <AssociationConnector Association="DB_DMsModel.FK_CamposCatalogoReferencias_CatalogoCampos" ManuallyRouted="false" />
         <AssociationConnector Association="DB_DMsModel.FK_CamposCatalogoReferencias_CatalogoCampos1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_DMsModel.FK_CatalogoCampos_Catalogos" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB_DMsModel.CatalogoConsultas" Width="1.5" PointX="5.25" PointY="5.25" />
+        <AssociationConnector Association="DB_DMsModel.FK_CatalogoConsultas_Catalogos" />
+        <EntityTypeShape EntityType="DB_DMsModel.VW_Campos" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

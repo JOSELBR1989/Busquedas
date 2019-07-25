@@ -97,8 +97,17 @@
             this.txtBusquedaTabla = new System.Windows.Forms.TextBox();
             this.lstColumnas = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dtgErroresReferencia = new System.Windows.Forms.DataGridView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.btnEliminarScript = new System.Windows.Forms.Button();
+            this.btnAgregarScript = new System.Windows.Forms.Button();
+            this.lstScripts = new System.Windows.Forms.ListBox();
+            this.btnGuardarScript = new System.Windows.Forms.Button();
+            this.richScriptExecute = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkListoCrear = new System.Windows.Forms.CheckBox();
             this.chkActivo = new System.Windows.Forms.CheckBox();
@@ -116,9 +125,10 @@
             this.txtNombreFisicoCatalogo = new System.Windows.Forms.TextBox();
             this.chkPendienteCrear = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dtgErroresReferencia = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.txtBusquedaGeneral = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtgCatalogos)).BeginInit();
             this.tabControlGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -132,12 +142,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgRelaciones)).BeginInit();
             this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupGrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).BeginInit();
+            this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbTipoCatalogo
@@ -248,6 +261,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlGeneral.Controls.Add(this.tabPage1);
             this.tabControlGeneral.Controls.Add(this.tabPageDetalleCatalogo);
+            this.tabControlGeneral.Controls.Add(this.tabPage8);
             this.tabControlGeneral.Location = new System.Drawing.Point(12, 12);
             this.tabControlGeneral.Name = "tabControlGeneral";
             this.tabControlGeneral.SelectedIndex = 0;
@@ -349,6 +363,7 @@
             this.tabControl2.Controls.Add(this.tabPage2);
             this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Location = new System.Drawing.Point(452, 6);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -829,6 +844,36 @@
             this.tabPage6.Text = "Errores de llaves Foraneas";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(159, 15);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Regenerar referencias";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Validar Referencias";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // dtgErroresReferencia
+            // 
+            this.dtgErroresReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtgErroresReferencia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dtgErroresReferencia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgErroresReferencia.Location = new System.Drawing.Point(6, 44);
+            this.dtgErroresReferencia.Name = "dtgErroresReferencia";
+            this.dtgErroresReferencia.Size = new System.Drawing.Size(689, 357);
+            this.dtgErroresReferencia.TabIndex = 0;
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.dataGridView2);
@@ -854,6 +899,75 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.Size = new System.Drawing.Size(689, 380);
             this.dataGridView2.TabIndex = 4;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.label6);
+            this.tabPage7.Controls.Add(this.btnEliminarScript);
+            this.tabPage7.Controls.Add(this.btnAgregarScript);
+            this.tabPage7.Controls.Add(this.lstScripts);
+            this.tabPage7.Controls.Add(this.btnGuardarScript);
+            this.tabPage7.Controls.Add(this.richScriptExecute);
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(701, 413);
+            this.tabPage7.TabIndex = 5;
+            this.tabPage7.Text = "Script Usuario";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminarScript
+            // 
+            this.btnEliminarScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEliminarScript.Location = new System.Drawing.Point(87, 370);
+            this.btnEliminarScript.Name = "btnEliminarScript";
+            this.btnEliminarScript.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarScript.TabIndex = 5;
+            this.btnEliminarScript.Text = "Eliminar";
+            this.btnEliminarScript.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarScript
+            // 
+            this.btnAgregarScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAgregarScript.Location = new System.Drawing.Point(6, 370);
+            this.btnAgregarScript.Name = "btnAgregarScript";
+            this.btnAgregarScript.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarScript.TabIndex = 4;
+            this.btnAgregarScript.Text = "Agregar";
+            this.btnAgregarScript.UseVisualStyleBackColor = true;
+            // 
+            // lstScripts
+            // 
+            this.lstScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstScripts.FormattingEnabled = true;
+            this.lstScripts.ItemHeight = 16;
+            this.lstScripts.Location = new System.Drawing.Point(6, 38);
+            this.lstScripts.Name = "lstScripts";
+            this.lstScripts.Size = new System.Drawing.Size(196, 324);
+            this.lstScripts.TabIndex = 3;
+            // 
+            // btnGuardarScript
+            // 
+            this.btnGuardarScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardarScript.Location = new System.Drawing.Point(620, 370);
+            this.btnGuardarScript.Name = "btnGuardarScript";
+            this.btnGuardarScript.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarScript.TabIndex = 2;
+            this.btnGuardarScript.Text = "Guardar";
+            this.btnGuardarScript.UseVisualStyleBackColor = true;
+            // 
+            // richScriptExecute
+            // 
+            this.richScriptExecute.AcceptsTab = true;
+            this.richScriptExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richScriptExecute.Location = new System.Drawing.Point(208, 39);
+            this.richScriptExecute.Name = "richScriptExecute";
+            this.richScriptExecute.Size = new System.Drawing.Size(487, 325);
+            this.richScriptExecute.TabIndex = 0;
+            this.richScriptExecute.Text = "";
             // 
             // groupBox1
             // 
@@ -1032,35 +1146,50 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Nombre fisico";
             // 
-            // dtgErroresReferencia
+            // tabPage8
             // 
-            this.dtgErroresReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabPage8.Controls.Add(this.txtBusquedaGeneral);
+            this.tabPage8.Controls.Add(this.dataGridView1);
+            this.tabPage8.Location = new System.Drawing.Point(4, 29);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1167, 454);
+            this.tabPage8.TabIndex = 2;
+            this.tabPage8.Text = "Busquedas generales";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // txtBusquedaGeneral
+            // 
+            this.txtBusquedaGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBusquedaGeneral.Location = new System.Drawing.Point(6, 37);
+            this.txtBusquedaGeneral.Name = "txtBusquedaGeneral";
+            this.txtBusquedaGeneral.Size = new System.Drawing.Size(1155, 26);
+            this.txtBusquedaGeneral.TabIndex = 1;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtgErroresReferencia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dtgErroresReferencia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgErroresReferencia.Location = new System.Drawing.Point(6, 44);
-            this.dtgErroresReferencia.Name = "dtgErroresReferencia";
-            this.dtgErroresReferencia.Size = new System.Drawing.Size(689, 357);
-            this.dtgErroresReferencia.TabIndex = 0;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 69);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(1155, 379);
+            this.dataGridView1.TabIndex = 0;
             // 
-            // button1
+            // label6
             // 
-            this.button1.Location = new System.Drawing.Point(6, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Validar Referencias";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(159, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Regenerar referencias";
-            this.button2.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(205, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(461, 16);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Agregar una busqueda debe de ser con  @pBusqueda y siempre colocar USE DB_DMs";
             // 
             // TablesConfiguration
             // 
@@ -1088,13 +1217,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgBusquedaCatalogos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgRelaciones)).EndInit();
             this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).EndInit();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupGrupos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).EndInit();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1192,5 +1326,15 @@
         private System.Windows.Forms.DataGridView dtgErroresReferencia;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.RichTextBox richScriptExecute;
+        private System.Windows.Forms.Button btnGuardarScript;
+        private System.Windows.Forms.ListBox lstScripts;
+        private System.Windows.Forms.Button btnAgregarScript;
+        private System.Windows.Forms.Button btnEliminarScript;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox txtBusquedaGeneral;
+        private System.Windows.Forms.Label label6;
     }
 }

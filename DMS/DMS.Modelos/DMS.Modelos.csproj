@@ -43,6 +43,7 @@
     <Compile Include="Agrupaciones.cs" />
     <Compile Include="CamposCatalogo.cs" />
     <Compile Include="Catalogos.cs" />
+    <Compile Include="ConsultasPorCatalogo.cs" />
     <Compile Include="IDefaultDatasource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoCategoria.cs" />

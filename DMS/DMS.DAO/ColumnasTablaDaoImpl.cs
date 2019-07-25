@@ -80,6 +80,24 @@ namespace DMS.DAO
                 throw ex;
             }
         }
+
+        public List<object> busquedaGeneral(string busqueda)
+        {
+            List<Object> resultado = new List<object>();
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                resultado = (from da in db.VW_Campos
+                             where (da.NombreCatalogo.Contains(busqueda) ||
+                             da.NombreFisico.Contains(busqueda) ||
+                             da.NombreCompletoCatalogo.Contains(busqueda) ||
+                             da.NombreTecnico.Contains(busqueda) ||
+                             da.DescriptionCampo.Contains(busqueda)) && da.Activa == true && da.Activo == true
+                             select da).ToList().Cast<Object>().ToList();
+            }
+
+            return resultado; 
+        }
+
         public List<Object> columnasTabla(Catalogos catalogoPadre)
         {
             List<Object> resultado = new List<object>();

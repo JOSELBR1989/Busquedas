@@ -19,6 +19,7 @@ namespace DMS.db
         {
             this.Agrupaciones = new HashSet<Agrupaciones>();
             this.CatalogoCampos = new HashSet<CatalogoCampos>();
+            this.CatalogoConsultas = new HashSet<CatalogoConsultas>();
         }
     
         public int IdCatalogo { get; set; }
@@ -35,5 +36,7 @@ namespace DMS.db
         public virtual CAT_Categoria CAT_Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CatalogoCampos> CatalogoCampos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CatalogoConsultas> CatalogoConsultas { get; set; }
     }
 }

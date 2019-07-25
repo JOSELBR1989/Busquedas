@@ -32,6 +32,8 @@ namespace DMS.db
         public virtual DbSet<CatalogoCampos> CatalogoCampos { get; set; }
         public virtual DbSet<Catalogos> Catalogos { get; set; }
         public virtual DbSet<CamposCatalogoReferencias> CamposCatalogoReferencias { get; set; }
+        public virtual DbSet<CatalogoConsultas> CatalogoConsultas { get; set; }
+        public virtual DbSet<VW_Campos> VW_Campos { get; set; }
     
         [DbFunction("DB_DMsEntities", "CamposCatalogoReferenciasPorCatalogo")]
         public virtual IQueryable<CamposCatalogoReferenciasPorCatalogo_Result> CamposCatalogoReferenciasPorCatalogo(Nullable<int> pIdCatalogo)

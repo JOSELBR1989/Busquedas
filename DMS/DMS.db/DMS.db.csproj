@@ -63,6 +63,9 @@
     <Compile Include="CatalogoCampos.cs">
       <DependentUpon>SecurityDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="CatalogoConsultas.cs">
+      <DependentUpon>SecurityDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Catalogos.cs">
       <DependentUpon>SecurityDB.tt</DependentUpon>
     </Compile>
@@ -84,6 +87,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SecurityDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="VW_Campos.cs">
+      <DependentUpon>SecurityDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

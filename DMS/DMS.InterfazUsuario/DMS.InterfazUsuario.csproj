@@ -26,10 +26,10 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://sasadesarrollo/DMs/</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.17</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.22</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -223,6 +223,12 @@
     <Compile Include="CreacionEstructura\CopiarColumna.Designer.cs">
       <DependentUpon>CopiarColumna.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreacionEstructura\frmListaScripts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreacionEstructura\frmListaScripts.Designer.cs">
+      <DependentUpon>frmListaScripts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMO.cs">
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreacionEstructura\CopiarColumna.resx">
       <DependentUpon>CopiarColumna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreacionEstructura\frmListaScripts.resx">
+      <DependentUpon>frmListaScripts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -14,6 +14,7 @@ namespace DMS.Servicio
         List<Object> columnasYTablas(string busqueda, CamposCatalogo campos);
         List<Object> obtenerAsociacionesColumna(DMS.Modelos.CamposCatalogo campo);
         List<Object> erroresAsociaciones(int catalogo);
+        List<Object> busquedaGeneral(string busqueda);
 
         void nuevo(DMS.Modelos.CamposCatalogo campo);
         void actualizar(DMS.Modelos.CamposCatalogo campo);

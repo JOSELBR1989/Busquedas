@@ -58,16 +58,123 @@ namespace DMS.InterfazUsuario
             lstColumnas.SelectedValueChanged += LstColumnas_SelectedValueChanged;
             lstCategorias.SelectedIndexChanged += LstCategorias_SelectedIndexChanged;
             lstCampoHacerReferencia.MouseDoubleClick += LstCampoHacerReferencia_MouseDoubleClick;
+
+            btnEliminarScript.Click += BtnEliminarScript_Click;
+            btnAgregarScript.Click += BtnAgregarScript_Click;
             btnCopy.Click += BtnCopy_Click;
             btnEliminar.Click += BtnEliminar_Click;
             btnQuitarRelacion.Click += BtnQuitarRelacion_Click;
+            btnGuardarScript.Click += BtnGuardarScript_Click;
 
             rdbtnTodos.CheckedChanged += RdbtnTodos_CheckedChanged;
             rdbtnActivo.CheckedChanged += RdbtnTodos_CheckedChanged;
             rdbtnInactivo.CheckedChanged += RdbtnTodos_CheckedChanged;
+
+            lstScripts.SelectedIndexChanged += LstScripts_SelectedIndexChanged;
+
+            txtBusquedaGeneral.KeyPress += TxtBusquedaGeneral_KeyPress;
+
+            richScriptExecute.TextChanged += RichScriptExecute_TextChanged;
+
             #endregion
 
             refrescarDatos = true; 
+
+        }
+
+        private void RichScriptExecute_TextChanged(object sender, EventArgs e)
+        {
+            UtilidadesDesktop.RichTextBoxUtilities.Pintar(richScriptExecute.Text, new string[] {
+                "public", "private", "abstract", "namespace", "using", "if", "else", "throw", "try","SELECT","ISNUMERIC","SELECT","FROM","WHERE" }, ref richScriptExecute);
+        }
+
+        private void TxtBusquedaGeneral_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (UtilidadesDesktop.TextboxProcess.PressEnter(e))
+            {
+                dataGridView1.DataSource = (new Servicio.ColumnasTablaServiceImpl()).busquedaGeneral(txtBusquedaGeneral.Text);
+                dataGridView1.Columns["IdCatalogo"].Visible = false;
+                dataGridView1.Columns["IdCategoria"].Visible = false;
+                dataGridView1.Columns["Nombre"].Visible = false;
+                dataGridView1.Columns["TotalEsperado"].Visible = false;
+                dataGridView1.Columns["TotalObligatorio"].Visible = false;
+                dataGridView1.Columns["Activa"].Visible = false;
+                dataGridView1.Columns["TablaCreada"].Visible = false;
+                dataGridView1.Columns["Activo"].Visible = false;
+                dataGridView1.Columns["CatalogoCampoId"].Visible = false;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; 
+
+            }
+        }
+
+        private void LstScripts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dato = lstScripts.SelectedItem;
+                richScriptExecute.Text = UtilidadesDesktop.StringUtilities.getValueOfObject(dato, "ScriptExecute").ToString();
+
+            }
+            catch (Exception)
+            {
+                richScriptExecute.Text = String.Empty; 
+            }
+        }
+
+        private void BtnGuardarScript_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dato = (lstScripts.SelectedItem);
+
+                ConsultasPorCatalogo consultaCatalogo = new ConsultasPorCatalogo();
+                consultaCatalogo.Catalogo = catalogoGeneral;
+                consultaCatalogo.IdCatalogoConsulta = Convert.ToInt16(UtilidadesDesktop.StringUtilities.getValueOfObject(dato, "IdCatalogoConsulta"));
+                consultaCatalogo.Nombre = UtilidadesDesktop.StringUtilities.getValueOfObject(dato, "Nombre").ToString();
+                consultaCatalogo.Descripcion = UtilidadesDesktop.StringUtilities.getValueOfObject(dato, "Descripcion").ToString();
+                consultaCatalogo.Activo = Convert.ToBoolean(UtilidadesDesktop.StringUtilities.getValueOfObject(dato, "Activo"));
+                consultaCatalogo.ScriptExecute = richScriptExecute.Text;
+
+                (new Servicio.CatalogoServiceImpl()).actualizarScript(consultaCatalogo);
+                UtilidadesDesktop.MessageBoxUtilities.registroAlmacenadoCorrectamente();
+                ActualizarScripts();
+
+            }
+            catch (Exception ex)
+            {
+                UtilidadesDesktop.MessageBoxUtilities.errorAlmacenarRegistros(ex);
+            }
+        }
+
+        private void ActualizarScripts()
+        {
+            try
+            {
+                DMS.UtilidadesDesktop.ListBoxUtilities.fill((new DMS.Servicio.CatalogoServiceImpl().listaScripts(catalogoGeneral.CodigoCatalogo)), (new DMS.Modelos.ConsultasPorCatalogo()), ref lstScripts);
+            }
+            catch (Exception)
+            {
+
+            }
+            if (lstScripts.Items.Count == 0)
+            {
+                richScriptExecute.Text = String.Empty; 
+            }
+
+        }
+        private void BtnAgregarScript_Click(object sender, EventArgs e)
+        {
+            CreacionEstructura.frmListaScripts list = new CreacionEstructura.frmListaScripts(catalogoGeneral);
+            list.ShowDialog();
+            ActualizarScripts(); 
+        }
+
+        private void BtnEliminarScript_Click(object sender, EventArgs e)
+        {
+            if (lstScripts.Items.Count > 0)
+            {
+
+            }
 
         }
 
@@ -303,6 +410,14 @@ namespace DMS.InterfazUsuario
                     dtgCatalogos.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).busquedaPorDescripcion(txtBuscarCatalogo.Text, result.ToArray(), rdbtnActivo.Checked);
                 }
                 ObtenerInformacionCatalogo();
+                try
+                {
+                    ActualizarScripts();
+
+                }
+                catch (Exception ex)
+                {
+                }
 
                 refrescarDatos = true;
             }

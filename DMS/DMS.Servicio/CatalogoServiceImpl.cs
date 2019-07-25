@@ -56,5 +56,31 @@ namespace DMS.Servicio
         {
             return catalogoDato.obtenerCatalogo(codigoCatalogo); 
         }
+
+
+        public void actualizarScript(ConsultasPorCatalogo consulta)
+        {
+            catalogoDato.actualizarScript(consulta);
+        }
+
+        public void nuevoScript(ConsultasPorCatalogo consulta)
+        {
+            catalogoDato.nuevoScript(consulta);
+        }
+
+        public List<object> listaScripts(long codigoCategoria)
+        {
+            return catalogoDato.listaScripts(codigoCategoria); 
+        }
+
+        public List<object> busquedaPorDescripcionConScripts(string busqueda, string[] tipoCategoria, bool estado)
+        {
+            return catalogoDato.busquedaPorDescripcionConScripts(busqueda, tipoCategoria, estado);
+        }
+
+        public List<object> busquedaPorDescripcionConScripts(string busqueda, string[] tipoCategoria)
+        {
+            return catalogoDato.busquedaPorDescripcionConScripts(busqueda, tipoCategoria);
+        }
     }
 }

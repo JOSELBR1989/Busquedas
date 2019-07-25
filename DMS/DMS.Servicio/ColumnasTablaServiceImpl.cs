@@ -27,6 +27,11 @@ namespace DMS.Servicio
             columnasTablaDao.actualizarPK(campo);
         }
 
+        public List<object> busquedaGeneral(string busqueda)
+        {
+            return columnasTablaDao.busquedaGeneral(busqueda); 
+        }
+
         public List<Object> columnasTabla(Catalogos catalogoPadre)
         {
             return columnasTablaDao.columnasTabla(catalogoPadre); 
