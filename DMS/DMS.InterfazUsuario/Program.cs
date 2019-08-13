@@ -17,6 +17,8 @@ namespace DMS.InterfazUsuario
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TablesConfiguration());
+            //Application.Run(new SMO());
+            //Application.Run(new CreacionEstructura.NuevoCatalogo());
         }
     }
 }

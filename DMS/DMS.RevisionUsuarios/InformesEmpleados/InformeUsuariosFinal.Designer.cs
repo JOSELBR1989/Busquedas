@@ -45,16 +45,19 @@
             this.Referenciada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.txtBusquedaGenerica = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.cmbScriptsDisponibles = new System.Windows.Forms.ComboBox();
-            this.labelTotal = new System.Windows.Forms.Label();
+            this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgCatalogos)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -229,6 +232,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.numPorcentaje);
             this.tabPage2.Controls.Add(this.labelTotal);
             this.tabPage2.Controls.Add(this.txtBusquedaGenerica);
             this.tabPage2.Controls.Add(this.dataGridView1);
@@ -243,6 +248,15 @@
             this.tabPage2.Tag = "0";
             this.tabPage2.Text = "Informacion";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // labelTotal
+            // 
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotal.Location = new System.Drawing.Point(395, 59);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(0, 16);
+            this.labelTotal.TabIndex = 4;
             // 
             // txtBusquedaGenerica
             // 
@@ -282,17 +296,40 @@
             this.cmbScriptsDisponibles.FormattingEnabled = true;
             this.cmbScriptsDisponibles.Location = new System.Drawing.Point(6, 7);
             this.cmbScriptsDisponibles.Name = "cmbScriptsDisponibles";
-            this.cmbScriptsDisponibles.Size = new System.Drawing.Size(537, 24);
+            this.cmbScriptsDisponibles.Size = new System.Drawing.Size(389, 24);
             this.cmbScriptsDisponibles.TabIndex = 0;
             // 
-            // labelTotal
+            // numPorcentaje
             // 
-            this.labelTotal.AutoSize = true;
-            this.labelTotal.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotal.Location = new System.Drawing.Point(395, 59);
-            this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Size = new System.Drawing.Size(0, 16);
-            this.labelTotal.TabIndex = 4;
+            this.numPorcentaje.DecimalPlaces = 2;
+            this.numPorcentaje.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numPorcentaje.Location = new System.Drawing.Point(398, 26);
+            this.numPorcentaje.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numPorcentaje.Name = "numPorcentaje";
+            this.numPorcentaje.Size = new System.Drawing.Size(142, 22);
+            this.numPorcentaje.TabIndex = 5;
+            this.numPorcentaje.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(398, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Porcentaje de datos";
             // 
             // InformeUsuariosFinal
             // 
@@ -311,6 +348,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -339,5 +377,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtBusquedaGenerica;
         private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.NumericUpDown numPorcentaje;
+        private System.Windows.Forms.Label label1;
     }
 }

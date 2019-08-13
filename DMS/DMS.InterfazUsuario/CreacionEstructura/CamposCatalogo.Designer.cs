@@ -41,16 +41,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnGuardarRegistro = new System.Windows.Forms.Button();
-            this.lblEncabezadoCatalogo = new System.Windows.Forms.Label();
             this.numTamanio = new System.Windows.Forms.NumericUpDown();
             this.numPresicion = new System.Windows.Forms.NumericUpDown();
-            this.txtOrden = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.chkRequerido = new System.Windows.Forms.CheckBox();
+            this.lblEncabezadoCatalogo = new System.Windows.Forms.RichTextBox();
+            this.txtOrden = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numTamanio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPresicion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOrden)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +71,7 @@
             this.txtNombreColumna.MaxLength = 100;
             this.txtNombreColumna.Name = "txtNombreColumna";
             this.txtNombreColumna.Size = new System.Drawing.Size(342, 22);
-            this.txtNombreColumna.TabIndex = 3;
+            this.txtNombreColumna.TabIndex = 203;
             this.txtNombreColumna.Tag = "Nombre";
             // 
             // cmbAgrupacion
@@ -80,15 +81,15 @@
             this.cmbAgrupacion.Location = new System.Drawing.Point(109, 93);
             this.cmbAgrupacion.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAgrupacion.Name = "cmbAgrupacion";
-            this.cmbAgrupacion.Size = new System.Drawing.Size(192, 24);
-            this.cmbAgrupacion.TabIndex = 2;
+            this.cmbAgrupacion.Size = new System.Drawing.Size(342, 24);
+            this.cmbAgrupacion.TabIndex = 202;
             // 
             // txtDescripcionColumna
             // 
             this.txtDescripcionColumna.Location = new System.Drawing.Point(109, 148);
             this.txtDescripcionColumna.Name = "txtDescripcionColumna";
             this.txtDescripcionColumna.Size = new System.Drawing.Size(342, 61);
-            this.txtDescripcionColumna.TabIndex = 4;
+            this.txtDescripcionColumna.TabIndex = 204;
             this.txtDescripcionColumna.Tag = "Descripción";
             this.txtDescripcionColumna.Text = "";
             // 
@@ -118,7 +119,7 @@
             this.txtNombreTecnicoColumna.MaxLength = 20;
             this.txtNombreTecnicoColumna.Name = "txtNombreTecnicoColumna";
             this.txtNombreTecnicoColumna.Size = new System.Drawing.Size(192, 22);
-            this.txtNombreTecnicoColumna.TabIndex = 7;
+            this.txtNombreTecnicoColumna.TabIndex = 205;
             this.txtNombreTecnicoColumna.Tag = "Nombre técnico";
             // 
             // label4
@@ -142,7 +143,7 @@
             this.cmbTipoDato.Location = new System.Drawing.Point(109, 243);
             this.cmbTipoDato.Name = "cmbTipoDato";
             this.cmbTipoDato.Size = new System.Drawing.Size(192, 24);
-            this.cmbTipoDato.TabIndex = 9;
+            this.cmbTipoDato.TabIndex = 206;
             this.cmbTipoDato.Tag = "Tipo de dato";
             // 
             // label5
@@ -177,46 +178,26 @@
             // 
             // btnGuardarRegistro
             // 
-            this.btnGuardarRegistro.Location = new System.Drawing.Point(109, 310);
+            this.btnGuardarRegistro.Location = new System.Drawing.Point(290, 309);
             this.btnGuardarRegistro.Name = "btnGuardarRegistro";
             this.btnGuardarRegistro.Size = new System.Drawing.Size(161, 23);
-            this.btnGuardarRegistro.TabIndex = 18;
+            this.btnGuardarRegistro.TabIndex = 210;
             this.btnGuardarRegistro.Text = "Guardar registro";
             this.btnGuardarRegistro.UseVisualStyleBackColor = true;
-            // 
-            // lblEncabezadoCatalogo
-            // 
-            this.lblEncabezadoCatalogo.AutoSize = true;
-            this.lblEncabezadoCatalogo.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEncabezadoCatalogo.Location = new System.Drawing.Point(104, 9);
-            this.lblEncabezadoCatalogo.Name = "lblEncabezadoCatalogo";
-            this.lblEncabezadoCatalogo.Size = new System.Drawing.Size(0, 25);
-            this.lblEncabezadoCatalogo.TabIndex = 19;
             // 
             // numTamanio
             // 
             this.numTamanio.Location = new System.Drawing.Point(307, 244);
             this.numTamanio.Name = "numTamanio";
             this.numTamanio.Size = new System.Drawing.Size(69, 22);
-            this.numTamanio.TabIndex = 11;
+            this.numTamanio.TabIndex = 207;
             // 
             // numPresicion
             // 
             this.numPresicion.Location = new System.Drawing.Point(382, 244);
             this.numPresicion.Name = "numPresicion";
             this.numPresicion.Size = new System.Drawing.Size(69, 22);
-            this.numPresicion.TabIndex = 12;
-            // 
-            // txtOrden
-            // 
-            this.txtOrden.Location = new System.Drawing.Point(109, 273);
-            this.txtOrden.MaxLength = 20;
-            this.txtOrden.Name = "txtOrden";
-            this.txtOrden.ReadOnly = true;
-            this.txtOrden.Size = new System.Drawing.Size(192, 22);
-            this.txtOrden.TabIndex = 24;
-            this.txtOrden.Tag = "Orden";
-            this.txtOrden.Text = "0";
+            this.numPresicion.TabIndex = 208;
             // 
             // label8
             // 
@@ -239,36 +220,55 @@
             // 
             // txtCodigo
             // 
+            this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCodigo.Location = new System.Drawing.Point(109, 66);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(192, 22);
-            this.txtCodigo.TabIndex = 27;
-            this.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCodigo.Size = new System.Drawing.Size(342, 15);
+            this.txtCodigo.TabIndex = 201;
             // 
             // chkRequerido
             // 
             this.chkRequerido.AutoSize = true;
-            this.chkRequerido.Location = new System.Drawing.Point(374, 93);
+            this.chkRequerido.Location = new System.Drawing.Point(307, 276);
             this.chkRequerido.Name = "chkRequerido";
             this.chkRequerido.Size = new System.Drawing.Size(77, 20);
             this.chkRequerido.TabIndex = 28;
             this.chkRequerido.Text = "Requerido";
             this.chkRequerido.UseVisualStyleBackColor = true;
             // 
+            // lblEncabezadoCatalogo
+            // 
+            this.lblEncabezadoCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lblEncabezadoCatalogo.Enabled = false;
+            this.lblEncabezadoCatalogo.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEncabezadoCatalogo.Location = new System.Drawing.Point(12, 12);
+            this.lblEncabezadoCatalogo.Name = "lblEncabezadoCatalogo";
+            this.lblEncabezadoCatalogo.ReadOnly = true;
+            this.lblEncabezadoCatalogo.Size = new System.Drawing.Size(460, 48);
+            this.lblEncabezadoCatalogo.TabIndex = 29;
+            this.lblEncabezadoCatalogo.Text = "";
+            // 
+            // txtOrden
+            // 
+            this.txtOrden.Location = new System.Drawing.Point(109, 274);
+            this.txtOrden.Name = "txtOrden";
+            this.txtOrden.Size = new System.Drawing.Size(192, 22);
+            this.txtOrden.TabIndex = 209;
+            // 
             // CamposCatalogo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 344);
+            this.ClientSize = new System.Drawing.Size(466, 344);
+            this.Controls.Add(this.txtOrden);
+            this.Controls.Add(this.lblEncabezadoCatalogo);
             this.Controls.Add(this.chkRequerido);
             this.Controls.Add(this.txtCodigo);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtOrden);
             this.Controls.Add(this.numPresicion);
             this.Controls.Add(this.numTamanio);
-            this.Controls.Add(this.lblEncabezadoCatalogo);
             this.Controls.Add(this.btnGuardarRegistro);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -292,6 +292,7 @@
             this.Text = "Agregar campos a Catalogo";
             ((System.ComponentModel.ISupportInitialize)(this.numTamanio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPresicion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOrden)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,13 +313,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnGuardarRegistro;
-        private System.Windows.Forms.Label lblEncabezadoCatalogo;
         private System.Windows.Forms.NumericUpDown numTamanio;
         private System.Windows.Forms.NumericUpDown numPresicion;
-        private System.Windows.Forms.TextBox txtOrden;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.CheckBox chkRequerido;
+        private System.Windows.Forms.RichTextBox lblEncabezadoCatalogo;
+        private System.Windows.Forms.NumericUpDown txtOrden;
     }
 }

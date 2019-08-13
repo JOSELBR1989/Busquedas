@@ -1,6 +1,7 @@
 ﻿using DMS.Modelos;
 using DMS.Servicio;
 using DMS.UtilidadesDesktop;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,27 +59,203 @@ namespace DMS.InterfazUsuario
             lstColumnas.SelectedValueChanged += LstColumnas_SelectedValueChanged;
             lstCategorias.SelectedIndexChanged += LstCategorias_SelectedIndexChanged;
             lstCampoHacerReferencia.MouseDoubleClick += LstCampoHacerReferencia_MouseDoubleClick;
-
+            dtgDetalleColumnas.DoubleClick += DtgDetalleColumnas_DoubleClick;
             btnEliminarScript.Click += BtnEliminarScript_Click;
             btnAgregarScript.Click += BtnAgregarScript_Click;
             btnCopy.Click += BtnCopy_Click;
             btnEliminar.Click += BtnEliminar_Click;
             btnQuitarRelacion.Click += BtnQuitarRelacion_Click;
             btnGuardarScript.Click += BtnGuardarScript_Click;
-
+            lstCatalogosPK.SelectedIndexChanged += LstCamposPK_SelectedIndexChanged;
+            btnEditar.Click += BtnEditar_Click;
             rdbtnTodos.CheckedChanged += RdbtnTodos_CheckedChanged;
             rdbtnActivo.CheckedChanged += RdbtnTodos_CheckedChanged;
             rdbtnInactivo.CheckedChanged += RdbtnTodos_CheckedChanged;
 
-            lstScripts.SelectedIndexChanged += LstScripts_SelectedIndexChanged;
+            btnAgregarReferencia.Click += BtnAgregarReferencia_Click;
 
+            numericUpDown1.ValueChanged += NumericUpDown1_ValueChanged;
+            lstScripts.SelectedIndexChanged += LstScripts_SelectedIndexChanged;
+            lstColumnasPK.SelectedIndexChanged += LstColumnasPK_SelectedIndexChanged;
+            cmbPosiblesCampos.SelectedValueChanged += CbPosiblesCampos_SelectedValueChanged;
             txtBusquedaGeneral.KeyPress += TxtBusquedaGeneral_KeyPress;
 
+            btnEliminarRelacionColumna.Click += BtnEliminarRelacionColumna_Click;
             richScriptExecute.TextChanged += RichScriptExecute_TextChanged;
 
             #endregion
 
             refrescarDatos = true; 
+
+        }
+
+        private void BtnEditar_Click(object sender, EventArgs e)
+        {
+            CreacionEstructura.NuevoCatalogo nuevo = new CreacionEstructura.NuevoCatalogo(catalogoGeneral);
+            nuevo.Show();
+
+            catalogoGeneral = nuevo.catalogoActualizar;
+
+            try
+            {
+                ObtenerInformacionCatalogo(catalogoGeneral);
+            }
+            catch
+            {
+            }
+
+
+        }
+
+        private void BtnEliminarRelacionColumna_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Quitar la relación al campo: " + UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "ValorMostrarCampo").ToString() + "?", "Asignar", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                try
+                {
+                    (new Servicio.CatalogoRelacionesServicieImpl()).agregarRelacionColumna(
+                        Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "IdRelacionCatalogo").ToString()),
+                        Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "CatalogoCampoId").ToString()),
+                        null);
+
+                }
+                catch (Exception ex)
+                {
+                    UtilidadesDesktop.MessageBoxUtilities.errorAlmacenarRegistros(ex);
+                }
+
+
+            }
+        }
+
+        bool validar = true; 
+        private void CbPosiblesCampos_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (validar)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Agregar la relación al campo: " + UtilidadesDesktop.StringUtilities.getValueOfObject(cmbPosiblesCampos.SelectedItem, "NombreTecnico").ToString() + "?", "Asignar", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    try
+                    {
+                        (new Servicio.CatalogoRelacionesServicieImpl()).agregarRelacionColumna(
+                            Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "IdRelacionCatalogo").ToString()),
+                            Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "CatalogoCampoId").ToString()),
+                            Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(cmbPosiblesCampos.SelectedItem, "CatalogoCampoId").ToString())
+                            );
+
+                    }
+                    catch (Exception ex)
+                    {
+                        UtilidadesDesktop.MessageBoxUtilities.errorAlmacenarRegistros(ex);
+                    }
+                    
+
+                }
+            }
+        }
+
+        private void LstColumnasPK_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                var resultado = (new Servicio.CatalogoRelacionesServicieImpl()).columnasParaAsignarComoFK(Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "IdRelacionCatalogo")));
+                validar = false;
+                UtilidadesDesktop.ComboboxUtilities.fillCombobox(resultado, ref cmbPosiblesCampos, "NombreCampoMostrar", "CatalogoCampoId");
+                UtilidadesDesktop.ComboboxUtilities.fillComboboxSuggest(resultado, ref cmbPosiblesCampos, "NombreCampoMostrar", "CatalogoCampoId");
+
+                ////CatalogoCampoIdFK
+                /***************************************************************************************/
+                var dato = UtilidadesDesktop.StringUtilities.getValueOfObject(lstColumnasPK.SelectedItem, "CatalogoCampoIdFK");
+                if (dato != null)
+                {
+                    Modelos.CamposCatalogo campo = new CamposCatalogo();
+                    campo.CodigoCampoCatalogo = Convert.ToInt64(dato);
+                    var result = (new Servicio.ColumnasTablaServiceImpl()).obtenePorId(campo);
+                    richTextBox1.Text = JsonConvert.SerializeObject(result);
+
+                    for (int i = 0; i < cmbPosiblesCampos.Items.Count; i++)
+                    {
+                        if (Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(cmbPosiblesCampos.Items[i], "CatalogoCampoId")) == result.CodigoCampoCatalogo)
+                        {
+                            cmbPosiblesCampos.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text = "{ No Tiene Relacion }";
+                }
+                /***************************************************************************************/
+                validar = true;
+            
+        }
+
+        private void BtnAgregarReferencia_Click(object sender, EventArgs e)
+        {
+            CreacionEstructura.SeleccionarTabla sel = new CreacionEstructura.SeleccionarTabla(catalogoGeneral);
+            sel.ShowDialog();
+            ObtenerTablasRelacionadas(); 
+        }
+
+        private void LstCamposPK_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                var objeto = (new DMS.Servicio.CatalogoRelacionesServicieImpl()).obtenerColumnasTablasRelacionadas(catalogoGeneral.CodigoCatalogo, Convert.ToInt64(UtilidadesDesktop.StringUtilities.getValueOfObject(lstCatalogosPK.SelectedItem, "IdRelacionCatalogo")));
+
+                try
+                {
+                    var validarTemp = validar; 
+                    validar = false; 
+                    UtilidadesDesktop.ListBoxUtilities.fill(objeto, ref lstColumnasPK, "ValorMostrarCampo", "CatalogoCampoId");
+
+                    validar = validarTemp;
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
+            catch (Exception EX)
+            {
+                throw;
+            }
+        }
+
+        private void DtgDetalleColumnas_DoubleClick(object sender, EventArgs e)
+        {
+            var dato = new Modelos.CamposCatalogo();
+            dato.CodigoCampoCatalogo = Convert.ToInt16(DMS.UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgDetalleColumnas, "CatalogoCampoId").ToString());
+            var campo = (new Servicio.ColumnasTablaServiceImpl()).obtenePorId(dato);
+
+            CreacionEstructura.CamposCatalogo campos = new CreacionEstructura.CamposCatalogo(catalogoGeneral, campo);
+            campos.ShowDialog();
+            btnActualizarCampos.PerformClick();
+
+            try
+            {
+                dataGridView2.Visible = true;
+                dataGridView2.DataSource = (new Servicio.CatalogoServiceImpl()).executeQuery(StringUtilities.getSqlQuery("[" + catalogoGeneral.TipoCategoria.EsquemaFisico + "].[" + txtNombreFisicoCatalogo.Text + "]", dtgDetalleColumnas, numericUpDown1.Value));
+
+            }
+            catch (Exception ex)
+            {
+                dataGridView2.Visible = false;
+            }
+        }
+
+        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridView2.Visible = true;
+                dataGridView2.DataSource = (new Servicio.CatalogoServiceImpl()).executeQuery(StringUtilities.getSqlQuery("[" + catalogoGeneral.TipoCategoria.EsquemaFisico + "].[" + txtNombreFisicoCatalogo.Text + "]", dtgDetalleColumnas, numericUpDown1.Value));
+
+            }
+            catch (Exception ex)
+            {
+                dataGridView2.Visible = false;
+            }
 
         }
 
@@ -217,7 +394,7 @@ namespace DMS.InterfazUsuario
             {
                 if (UtilidadesDesktop.MessageBoxUtilities.mensajePreguntaBorrar(catalogoGeneral.NombreFisico) == DialogResult.Yes)
                 {
-                    if (chkPendienteCrear.Enabled)
+                    if (!chkPendienteCrear.Checked)
                     {
                         (new DMS.Servicio.ColumnasTablaServiceImpl()).eliminarCampo(Convert.ToInt64(UtilidadesDesktop.DatagridViewUtilities.ObtenerValorCeldaActual(dtgDetalleColumnas, "CatalogoCampoId")));
                     }
@@ -353,17 +530,29 @@ namespace DMS.InterfazUsuario
 
         private void BtnNuevo_Click(object sender, EventArgs e)
         {
-            if (!creandoNuevo)
+            //if (!creandoNuevo)
+            //{
+            //    creandoNuevo = true;
+            //    LimpiarDatos(); 
+            //    btnNuevo.Text = "Cancelar";
+            //}
+            //else {
+            //    creandoNuevo = false;
+            //    btnNuevo.Text = "Nuevo";
+            //    ObtenerInformacionCatalogo(); 
+            //}
+            CreacionEstructura.NuevoCatalogo nuevo = new CreacionEstructura.NuevoCatalogo();
+            nuevo.ShowDialog();
+            catalogoGeneral = nuevo.catalogoActualizar;
+
+            try
             {
-                creandoNuevo = true;
-                LimpiarDatos(); 
-                btnNuevo.Text = "Cancelar";
+                ObtenerInformacionCatalogo(catalogoGeneral);
             }
-            else {
-                creandoNuevo = false;
-                btnNuevo.Text = "Nuevo";
-                ObtenerInformacionCatalogo(); 
+            catch
+            {
             }
+
 
         }
 
@@ -456,7 +645,6 @@ namespace DMS.InterfazUsuario
             cmbTipoCatalogo.Enabled = true; 
 
             txtNombreCatalogo.Enabled = txtNombreFisicoCatalogo.Enabled = true;
-            groupGrupos.Visible = false; 
             obtenerTipoCatalogos();
             chkPendienteCrear.Checked = chkReferenciaDesdeOtra.Checked = false;
             dtgLLavePrimaria.Rows.Clear();
@@ -511,23 +699,18 @@ namespace DMS.InterfazUsuario
                         cmbTipoCatalogo.SelectedIndex = i;
                 }
                 cmbTipoCatalogo.Enabled = !chkPendienteCrear.Checked;
-                
-
-                var objeto = (new DMS.Servicio.ColumnasTablaServiceImpl()).columnasTabla(catalogos);
-                catalogoPadre = catalogos;
+                ObtenerTablasRelacionadas();
                 try
                 {
-                    DMS.UtilidadesDesktop.DatagridViewUtilities.llenarDatagridView(objeto, ref dtgDetalleColumnas, false);
-                    ListBoxUtilities.fill(objeto, ref lstColumnas, "NameWithTechnicalCode", "CatalogoCampoId");
-                    fillPrimaryKeyINfo(objeto);
-
+                    ActualizarScripts(); 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                 }
+                catalogoPadre = catalogos;
+                ObtenerColumnasListBox(); 
 
                 mostrarRelaciones();
-                groupGrupos.Visible = true;
                 validarReferencias();
             }
             catch (Exception ex)
@@ -537,13 +720,96 @@ namespace DMS.InterfazUsuario
 
 
         }
+
+        public void ObtenerInformacionCatalogo(Catalogos catalogo)
+        {
+            try
+            {
+                catalogoGeneral = (new Servicio.CatalogoServiceImpl()).obtenerCatalogo(catalogo.CodigoCatalogo);
+
+                txtCodigoCatalogo.Text = catalogoGeneral.CodigoCatalogo.ToString();
+                txtNombreCatalogo.Text = catalogoGeneral.NombreCatalogo;
+                txtNombreFisicoCatalogo.Text = catalogoGeneral.NombreFisico;
+                txtNombreFisicoCatalogo.Enabled = !catalogoGeneral.TablaCreada;
+                chkActivo.Checked = catalogoGeneral.Activo;
+                chkPendienteCrear.Checked = catalogoGeneral.TablaCreada;
+                chkReferenciaDesdeOtra.Checked = catalogoGeneral.TablaReferenciada;
+                chkListoCrear.Checked = catalogoGeneral.ListoParaCrear;
+
+                for (int i = 0; i < cmbTipoCatalogo.Items.Count; i++)
+                {
+                    if (((TipoCategoria)cmbTipoCatalogo.Items[i]).Codigo == catalogoGeneral.TipoCategoria.Codigo)
+                        cmbTipoCatalogo.SelectedIndex = i;
+                }
+                cmbTipoCatalogo.Enabled = !chkPendienteCrear.Checked;
+                ObtenerTablasRelacionadas();
+                try
+                {
+                    ActualizarScripts();
+                }
+                catch (Exception)
+                {
+                }
+                catalogoPadre = catalogoGeneral;
+                ObtenerColumnasListBox();
+
+                mostrarRelaciones();
+                validarReferencias();
+            }
+            catch (Exception ex)
+            {
+                LimpiarDatos();
+            }
+
+
+        }
+        private void ObtenerTablasRelacionadas()
+        {
+            try
+            {
+                lstCatalogosPK.Visible = true; 
+                var dato = (new CatalogoRelacionesServicieImpl()).obtenerTablasRelacionadas(catalogoGeneral.CodigoCatalogo);
+                UtilidadesDesktop.ListBoxUtilities.fill(dato, ref lstCatalogosPK, "ValorMostrarCatalogo", "IdRelacionCatalogo");
+                richTextBox1.Text = String.Empty;
+                if (lstCatalogosPK.Items.Count > 0)
+                {
+                    lstColumnasPK.Visible = cmbPosiblesCampos.Visible = true; 
+                }
+                else
+                    lstColumnasPK.Visible = cmbPosiblesCampos.Visible = false;
+
+            }
+            catch (Exception)
+            {
+                lstCatalogosPK.Visible = lstColumnasPK.Visible = cmbPosiblesCampos.Visible = false;
+
+            }
+        }
+        public void ObtenerColumnasListBox()
+        {
+
+            var objeto = (new DMS.Servicio.ColumnasTablaServiceImpl()).columnasTabla(catalogoPadre);
+            
+            try
+            {
+                DMS.UtilidadesDesktop.DatagridViewUtilities.llenarDatagridView(objeto, ref dtgDetalleColumnas, false);
+                ListBoxUtilities.fill(objeto, ref lstColumnas, "NameWithTechnicalCode", "CatalogoCampoId");
+
+                fillPrimaryKeyINfo(objeto);
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+        }
         public void mostrarRelaciones()
         {
             bool mostrarPendienteCrear = false;
             try
             {
                 dataGridView2.Visible = true;
-                dataGridView2.DataSource = (new Servicio.CatalogoServiceImpl()).executeQuery(StringUtilities.getSqlQuery("[" + catalogoGeneral.TipoCategoria.EsquemaFisico + "].[" + txtNombreFisicoCatalogo.Text + "]", dtgDetalleColumnas));
+                dataGridView2.DataSource = (new Servicio.CatalogoServiceImpl()).executeQuery(StringUtilities.getSqlQuery("[" + catalogoGeneral.TipoCategoria.EsquemaFisico + "].[" + txtNombreFisicoCatalogo.Text + "]", dtgDetalleColumnas,(int)numericUpDown1.Value));
                 mostrarPendienteCrear = true;
             }
             catch (Exception ex)

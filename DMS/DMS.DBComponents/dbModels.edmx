@@ -1,0 +1,1059 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_DMComponentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ANKAZ_0001">
+          <Key>
+            <PropertyRef Name="ANLN1" />
+          </Key>
+          <Property Name="ANLN1" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="TXT50" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PT006">
+          <Key>
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="MSEHI" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="MSEHL" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="RQSKT">
+          <Key>
+            <PropertyRef Name="KATALOGART" />
+          </Key>
+          <Property Name="KATALOGART" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="KATALOGTXT" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="SKAT">
+          <Key>
+            <PropertyRef Name="SAKNR" />
+          </Key>
+          <Property Name="SAKNR" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TXT50" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T001">
+          <Key>
+            <PropertyRef Name="BUKRS" />
+          </Key>
+          <Property Name="BUKRS" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="BUTXT" Type="nvarchar" MaxLength="25" />
+          <Property Name="COMPANYID" Type="decimal" Precision="4" Scale="0" />
+        </EntityType>
+        <EntityType Name="T001L">
+          <Key>
+            <PropertyRef Name="WERKS" />
+            <PropertyRef Name="LGORT" />
+          </Key>
+          <Property Name="WERKS" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="LGORT" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="LGOBE" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="T001W">
+          <Key>
+            <PropertyRef Name="WERKS" />
+          </Key>
+          <Property Name="WERKS" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="NAME1" Type="nvarchar" MaxLength="30" />
+          <Property Name="BUKRS" Type="nvarchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T002">
+          <Key>
+            <PropertyRef Name="SPRAS" />
+          </Key>
+          <Property Name="SPRAS" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LTEXT" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="T003O">
+          <Key>
+            <PropertyRef Name="AUART" />
+          </Key>
+          <Property Name="AUART" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="ZTEXT" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="T005F">
+          <Key>
+            <PropertyRef Name="LAND1" />
+            <PropertyRef Name="REGIO" />
+          </Key>
+          <Property Name="LAND1" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="REGIO" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="BEZEI" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_DMs.scCategorization.T005H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T005H">
+          <Key>
+            <PropertyRef Name="LAND1" />
+            <PropertyRef Name="CITYC" />
+          </Key>
+          <Property Name="LAND1" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="REGIO" Type="nvarchar" MaxLength="3" />
+          <Property Name="CITYC" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="BEZEI" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="T005T">
+          <Key>
+            <PropertyRef Name="LAND1" />
+          </Key>
+          <Property Name="LAND1" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="LANDX50" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T006">
+          <Key>
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="MSEHI" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="MSEH3" Type="nvarchar" MaxLength="50" />
+          <Property Name="MSEHL" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T023">
+          <Key>
+            <PropertyRef Name="MATKL" />
+          </Key>
+          <Property Name="MATKL" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="WGBEZ" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T035T">
+          <Key>
+            <PropertyRef Name="GRUPP" />
+          </Key>
+          <Property Name="GRUPP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TEXTL" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T042Z">
+          <Key>
+            <PropertyRef Name="ZLSCH" />
+          </Key>
+          <Property Name="ZLSCH" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="TEXT1" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T047T">
+          <Key>
+            <PropertyRef Name="MAHNA" />
+          </Key>
+          <Property Name="MAHNA" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="TEXTM" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_DMs.scCategorization.T077K' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="T077K">
+          <Property Name="KTOKK" Type="nvarchar" MaxLength="5" />
+        </EntityType>-->
+        <EntityType Name="T090NAT">
+          <Key>
+            <PropertyRef Name="AFASL" />
+          </Key>
+          <Property Name="AFASL" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="AFATXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T093S">
+          <Key>
+            <PropertyRef Name="AFBKTX" />
+          </Key>
+          <Property Name="AFBKTX" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="AFBTXT" Type="nvarchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="T134">
+          <Key>
+            <PropertyRef Name="MTART" />
+          </Key>
+          <Property Name="MTART" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="MTBEZ" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T137">
+          <Key>
+            <PropertyRef Name="MBRSH" />
+          </Key>
+          <Property Name="MBRSH" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="MBBEZ" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T151T">
+          <Key>
+            <PropertyRef Name="KDGRP" />
+          </Key>
+          <Property Name="KDGRP" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="KTEXT" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="T171T">
+          <Key>
+            <PropertyRef Name="BZIRK" />
+          </Key>
+          <Property Name="BZIRK" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="BZTXT" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_DMs.scCategorization.TB001' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TB001">
+          <Property Name="BU_GROUP" Type="nvarchar" MaxLength="4" />
+        </EntityType>-->
+        <EntityType Name="TB002">
+          <Key>
+            <PropertyRef Name="BU_GROUP" />
+          </Key>
+          <Property Name="BU_GROUP" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="TXT40" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="TCURT">
+          <Key>
+            <PropertyRef Name="WAERS" />
+          </Key>
+          <Property Name="WAERS" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="LTEXT" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="TFKB">
+          <Key>
+            <PropertyRef Name="FKBER" />
+          </Key>
+          <Property Name="FKBER" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="ZTXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TFKTAXNUMTYPE_C">
+          <Key>
+            <PropertyRef Name="TAXTYPE" />
+          </Key>
+          <Property Name="TAXTYPE" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CHECKDUPL" Type="nvarchar" MaxLength="1" />
+          <Property Name="TEXT" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="TKA01">
+          <Key>
+            <PropertyRef Name="KOKRS" />
+          </Key>
+          <Property Name="KOKRS" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="BEZEI" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="TKA05">
+          <Key>
+            <PropertyRef Name="KOSAR" />
+          </Key>
+          <Property Name="KOSAR" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="FUNC_AREA" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="TPART">
+          <Key>
+            <PropertyRef Name="PARVW" />
+          </Key>
+          <Property Name="PARVW" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="VTEXT" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TSPAT">
+          <Key>
+            <PropertyRef Name="SPART" />
+          </Key>
+          <Property Name="SPART" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="VTEXT" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TVGRT">
+          <Key>
+            <PropertyRef Name="VKGRP" />
+          </Key>
+          <Property Name="VKGRP" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="BEZEI" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TVKBT">
+          <Key>
+            <PropertyRef Name="VKBUR" />
+          </Key>
+          <Property Name="VKBUR" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="BEZEI" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TVKOT">
+          <Key>
+            <PropertyRef Name="VKORG" />
+          </Key>
+          <Property Name="VKORG" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Denominación" Type="nvarchar" MaxLength="20" />
+          <Property Name="COMPANYID" Type="decimal" Precision="4" Scale="0" />
+        </EntityType>
+        <EntityType Name="TVTWT">
+          <Key>
+            <PropertyRef Name="VTWEG" />
+          </Key>
+          <Property Name="VTWEG" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="VTEXT" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TZONT">
+          <Key>
+            <PropertyRef Name="LAND1" />
+            <PropertyRef Name="ZONE1" />
+          </Key>
+          <Property Name="LAND1" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ZONE1" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="VTEXT" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="V_134_K">
+          <Key>
+            <PropertyRef Name="MTART" />
+          </Key>
+          <Property Name="MTART" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MTBEZ" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_T001W_T001">
+          <End Role="T001" Type="Self.T001" Multiplicity="1" />
+          <End Role="T001W" Type="Self.T001W" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T001">
+              <PropertyRef Name="BUKRS" />
+            </Principal>
+            <Dependent Role="T001W">
+              <PropertyRef Name="BUKRS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TZONT_T005T">
+          <End Role="T005T" Type="Self.T005T" Multiplicity="1" />
+          <End Role="TZONT" Type="Self.TZONT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T005T">
+              <PropertyRef Name="LAND1" />
+            </Principal>
+            <Dependent Role="TZONT">
+              <PropertyRef Name="LAND1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_DMComponentsModelStoreContainer">
+          <EntitySet Name="ANKAZ_0001" EntityType="Self.ANKAZ_0001" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="PT006" EntityType="Self.PT006" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="RQSKT" EntityType="Self.RQSKT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="SKAT" EntityType="Self.SKAT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T001" EntityType="Self.T001" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T001L" EntityType="Self.T001L" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T001W" EntityType="Self.T001W" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T002" EntityType="Self.T002" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T003O" EntityType="Self.T003O" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T005F" EntityType="Self.T005F" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T005T" EntityType="Self.T005T" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T006" EntityType="Self.T006" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T023" EntityType="Self.T023" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T035T" EntityType="Self.T035T" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T042Z" EntityType="Self.T042Z" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T047T" EntityType="Self.T047T" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T090NAT" EntityType="Self.T090NAT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T093S" EntityType="Self.T093S" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T134" EntityType="Self.T134" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T137" EntityType="Self.T137" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T151T" EntityType="Self.T151T" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T171T" EntityType="Self.T171T" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TB002" EntityType="Self.TB002" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TCURT" EntityType="Self.TCURT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TFKB" EntityType="Self.TFKB" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TFKTAXNUMTYPE_C" EntityType="Self.TFKTAXNUMTYPE_C" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TKA01" EntityType="Self.TKA01" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TKA05" EntityType="Self.TKA05" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TPART" EntityType="Self.TPART" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TSPAT" EntityType="Self.TSPAT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TVGRT" EntityType="Self.TVGRT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TVKBT" EntityType="Self.TVKBT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TVKOT" EntityType="Self.TVKOT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TVTWT" EntityType="Self.TVTWT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="TZONT" EntityType="Self.TZONT" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="V_134_K" EntityType="Self.V_134_K" Schema="scCategorization" store:Type="Tables" />
+          <EntitySet Name="T005H" EntityType="Self.T005H" store:Type="Tables" store:Schema="scCategorization">
+            <DefiningQuery>SELECT 
+    [T005H].[LAND1] AS [LAND1], 
+    [T005H].[REGIO] AS [REGIO], 
+    [T005H].[CITYC] AS [CITYC], 
+    [T005H].[BEZEI] AS [BEZEI]
+    FROM [scCategorization].[T005H] AS [T005H]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_T001W_T001" Association="Self.FK_T001W_T001">
+            <End Role="T001" EntitySet="T001" />
+            <End Role="T001W" EntitySet="T001W" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TZONT_T005T" Association="Self.FK_TZONT_T005T">
+            <End Role="T005T" EntitySet="T005T" />
+            <End Role="TZONT" EntitySet="TZONT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_DMComponentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ANKAZ_0001">
+          <Key>
+            <PropertyRef Name="ANLN1" />
+          </Key>
+          <Property Name="ANLN1" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TXT50" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PT006">
+          <Key>
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="MSEHI" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MSEHL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RQSKT">
+          <Key>
+            <PropertyRef Name="KATALOGART" />
+          </Key>
+          <Property Name="KATALOGART" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="KATALOGTXT" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SKAT">
+          <Key>
+            <PropertyRef Name="SAKNR" />
+          </Key>
+          <Property Name="SAKNR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TXT50" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T001">
+          <Key>
+            <PropertyRef Name="BUKRS" />
+          </Key>
+          <Property Name="BUKRS" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BUTXT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="COMPANYID" Type="Decimal" Precision="4" Scale="0" />
+          <NavigationProperty Name="T001W" Relationship="Self.FK_T001W_T001" FromRole="T001" ToRole="T001W" />
+        </EntityType>
+        <EntityType Name="T001L">
+          <Key>
+            <PropertyRef Name="WERKS" />
+            <PropertyRef Name="LGORT" />
+          </Key>
+          <Property Name="WERKS" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LGORT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LGOBE" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T001W">
+          <Key>
+            <PropertyRef Name="WERKS" />
+          </Key>
+          <Property Name="WERKS" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NAME1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BUKRS" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="T001" Relationship="Self.FK_T001W_T001" FromRole="T001W" ToRole="T001" />
+        </EntityType>
+        <EntityType Name="T002">
+          <Key>
+            <PropertyRef Name="SPRAS" />
+          </Key>
+          <Property Name="SPRAS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LTEXT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T003O">
+          <Key>
+            <PropertyRef Name="AUART" />
+          </Key>
+          <Property Name="AUART" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZTEXT" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T005F">
+          <Key>
+            <PropertyRef Name="LAND1" />
+            <PropertyRef Name="REGIO" />
+          </Key>
+          <Property Name="LAND1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="REGIO" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BEZEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T005T">
+          <Key>
+            <PropertyRef Name="LAND1" />
+          </Key>
+          <Property Name="LAND1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LANDX50" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TZONT" Relationship="Self.FK_TZONT_T005T" FromRole="T005T" ToRole="TZONT" />
+        </EntityType>
+        <EntityType Name="T006">
+          <Key>
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="MSEHI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MSEH3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MSEHL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T023">
+          <Key>
+            <PropertyRef Name="MATKL" />
+          </Key>
+          <Property Name="MATKL" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WGBEZ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T035T">
+          <Key>
+            <PropertyRef Name="GRUPP" />
+          </Key>
+          <Property Name="GRUPP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEXTL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T042Z">
+          <Key>
+            <PropertyRef Name="ZLSCH" />
+          </Key>
+          <Property Name="ZLSCH" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEXT1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T047T">
+          <Key>
+            <PropertyRef Name="MAHNA" />
+          </Key>
+          <Property Name="MAHNA" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEXTM" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T090NAT">
+          <Key>
+            <PropertyRef Name="AFASL" />
+          </Key>
+          <Property Name="AFASL" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AFATXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T093S">
+          <Key>
+            <PropertyRef Name="AFBKTX" />
+          </Key>
+          <Property Name="AFBKTX" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AFBTXT" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T134">
+          <Key>
+            <PropertyRef Name="MTART" />
+          </Key>
+          <Property Name="MTART" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MTBEZ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T137">
+          <Key>
+            <PropertyRef Name="MBRSH" />
+          </Key>
+          <Property Name="MBRSH" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MBBEZ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T151T">
+          <Key>
+            <PropertyRef Name="KDGRP" />
+          </Key>
+          <Property Name="KDGRP" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KTEXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T171T">
+          <Key>
+            <PropertyRef Name="BZIRK" />
+          </Key>
+          <Property Name="BZIRK" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BZTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB002">
+          <Key>
+            <PropertyRef Name="BU_GROUP" />
+          </Key>
+          <Property Name="BU_GROUP" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TXT40" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TCURT">
+          <Key>
+            <PropertyRef Name="WAERS" />
+          </Key>
+          <Property Name="WAERS" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LTEXT" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TFKB">
+          <Key>
+            <PropertyRef Name="FKBER" />
+          </Key>
+          <Property Name="FKBER" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZTXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TFKTAXNUMTYPE_C">
+          <Key>
+            <PropertyRef Name="TAXTYPE" />
+          </Key>
+          <Property Name="TAXTYPE" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CHECKDUPL" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="TEXT" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TKA01">
+          <Key>
+            <PropertyRef Name="KOKRS" />
+          </Key>
+          <Property Name="KOKRS" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BEZEI" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TKA05">
+          <Key>
+            <PropertyRef Name="KOSAR" />
+          </Key>
+          <Property Name="KOSAR" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FUNC_AREA" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TPART">
+          <Key>
+            <PropertyRef Name="PARVW" />
+          </Key>
+          <Property Name="PARVW" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VTEXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TSPAT">
+          <Key>
+            <PropertyRef Name="SPART" />
+          </Key>
+          <Property Name="SPART" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VTEXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TVGRT">
+          <Key>
+            <PropertyRef Name="VKGRP" />
+          </Key>
+          <Property Name="VKGRP" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BEZEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TVKBT">
+          <Key>
+            <PropertyRef Name="VKBUR" />
+          </Key>
+          <Property Name="VKBUR" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BEZEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TVKOT">
+          <Key>
+            <PropertyRef Name="VKORG" />
+          </Key>
+          <Property Name="VKORG" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Denominación" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="COMPANYID" Type="Decimal" Precision="4" Scale="0" />
+        </EntityType>
+        <EntityType Name="TVTWT">
+          <Key>
+            <PropertyRef Name="VTWEG" />
+          </Key>
+          <Property Name="VTWEG" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VTEXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TZONT">
+          <Key>
+            <PropertyRef Name="LAND1" />
+            <PropertyRef Name="ZONE1" />
+          </Key>
+          <Property Name="LAND1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZONE1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VTEXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="T005T" Relationship="Self.FK_TZONT_T005T" FromRole="TZONT" ToRole="T005T" />
+        </EntityType>
+        <EntityType Name="V_134_K">
+          <Key>
+            <PropertyRef Name="MTART" />
+          </Key>
+          <Property Name="MTART" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MTBEZ" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T005H">
+          <Key>
+            <PropertyRef Name="LAND1" />
+            <PropertyRef Name="CITYC" />
+          </Key>
+          <Property Name="LAND1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="REGIO" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="CITYC" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BEZEI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_T001W_T001">
+          <End Role="T001" Type="Self.T001" Multiplicity="1" />
+          <End Role="T001W" Type="Self.T001W" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T001">
+              <PropertyRef Name="BUKRS" />
+            </Principal>
+            <Dependent Role="T001W">
+              <PropertyRef Name="BUKRS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TZONT_T005T">
+          <End Role="T005T" Type="Self.T005T" Multiplicity="1" />
+          <End Role="TZONT" Type="Self.TZONT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T005T">
+              <PropertyRef Name="LAND1" />
+            </Principal>
+            <Dependent Role="TZONT">
+              <PropertyRef Name="LAND1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_DMComponentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ANKAZ_0001" EntityType="Self.ANKAZ_0001" />
+          <EntitySet Name="PT006" EntityType="Self.PT006" />
+          <EntitySet Name="RQSKT" EntityType="Self.RQSKT" />
+          <EntitySet Name="SKAT" EntityType="Self.SKAT" />
+          <EntitySet Name="T001" EntityType="Self.T001" />
+          <EntitySet Name="T001L" EntityType="Self.T001L" />
+          <EntitySet Name="T001W" EntityType="Self.T001W" />
+          <EntitySet Name="T002" EntityType="Self.T002" />
+          <EntitySet Name="T003O" EntityType="Self.T003O" />
+          <EntitySet Name="T005F" EntityType="Self.T005F" />
+          <EntitySet Name="T005T" EntityType="Self.T005T" />
+          <EntitySet Name="T006" EntityType="Self.T006" />
+          <EntitySet Name="T023" EntityType="Self.T023" />
+          <EntitySet Name="T035T" EntityType="Self.T035T" />
+          <EntitySet Name="T042Z" EntityType="Self.T042Z" />
+          <EntitySet Name="T047T" EntityType="Self.T047T" />
+          <EntitySet Name="T090NAT" EntityType="Self.T090NAT" />
+          <EntitySet Name="T093S" EntityType="Self.T093S" />
+          <EntitySet Name="T134" EntityType="Self.T134" />
+          <EntitySet Name="T137" EntityType="Self.T137" />
+          <EntitySet Name="T151T" EntityType="Self.T151T" />
+          <EntitySet Name="T171T" EntityType="Self.T171T" />
+          <EntitySet Name="TB002" EntityType="Self.TB002" />
+          <EntitySet Name="TCURT" EntityType="Self.TCURT" />
+          <EntitySet Name="TFKB" EntityType="Self.TFKB" />
+          <EntitySet Name="TFKTAXNUMTYPE_C" EntityType="Self.TFKTAXNUMTYPE_C" />
+          <EntitySet Name="TKA01" EntityType="Self.TKA01" />
+          <EntitySet Name="TKA05" EntityType="Self.TKA05" />
+          <EntitySet Name="TPART" EntityType="Self.TPART" />
+          <EntitySet Name="TSPAT" EntityType="Self.TSPAT" />
+          <EntitySet Name="TVGRT" EntityType="Self.TVGRT" />
+          <EntitySet Name="TVKBT" EntityType="Self.TVKBT" />
+          <EntitySet Name="TVKOT" EntityType="Self.TVKOT" />
+          <EntitySet Name="TVTWT" EntityType="Self.TVTWT" />
+          <EntitySet Name="TZONT" EntityType="Self.TZONT" />
+          <EntitySet Name="V_134_K" EntityType="Self.V_134_K" />
+          <EntitySet Name="T005H" EntityType="Self.T005H" />
+          <AssociationSet Name="FK_T001W_T001" Association="Self.FK_T001W_T001">
+            <End Role="T001" EntitySet="T001" />
+            <End Role="T001W" EntitySet="T001W" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TZONT_T005T" Association="Self.FK_TZONT_T005T">
+            <End Role="T005T" EntitySet="T005T" />
+            <End Role="TZONT" EntitySet="TZONT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_DMComponentsModelStoreContainer" CdmEntityContainer="DB_DMComponentsEntities">
+          <EntitySetMapping Name="ANKAZ_0001">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.ANKAZ_0001">
+              <MappingFragment StoreEntitySet="ANKAZ_0001">
+                <ScalarProperty Name="ANLN1" ColumnName="ANLN1" />
+                <ScalarProperty Name="TXT50" ColumnName="TXT50" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT006">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.PT006">
+              <MappingFragment StoreEntitySet="PT006">
+                <ScalarProperty Name="MSEHI" ColumnName="MSEHI" />
+                <ScalarProperty Name="MSEHL" ColumnName="MSEHL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RQSKT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.RQSKT">
+              <MappingFragment StoreEntitySet="RQSKT">
+                <ScalarProperty Name="KATALOGART" ColumnName="KATALOGART" />
+                <ScalarProperty Name="KATALOGTXT" ColumnName="KATALOGTXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SKAT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.SKAT">
+              <MappingFragment StoreEntitySet="SKAT">
+                <ScalarProperty Name="SAKNR" ColumnName="SAKNR" />
+                <ScalarProperty Name="TXT50" ColumnName="TXT50" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T001">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T001">
+              <MappingFragment StoreEntitySet="T001">
+                <ScalarProperty Name="BUKRS" ColumnName="BUKRS" />
+                <ScalarProperty Name="BUTXT" ColumnName="BUTXT" />
+                <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T001L">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T001L">
+              <MappingFragment StoreEntitySet="T001L">
+                <ScalarProperty Name="WERKS" ColumnName="WERKS" />
+                <ScalarProperty Name="LGORT" ColumnName="LGORT" />
+                <ScalarProperty Name="LGOBE" ColumnName="LGOBE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T001W">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T001W">
+              <MappingFragment StoreEntitySet="T001W">
+                <ScalarProperty Name="WERKS" ColumnName="WERKS" />
+                <ScalarProperty Name="NAME1" ColumnName="NAME1" />
+                <ScalarProperty Name="BUKRS" ColumnName="BUKRS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T002">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T002">
+              <MappingFragment StoreEntitySet="T002">
+                <ScalarProperty Name="SPRAS" ColumnName="SPRAS" />
+                <ScalarProperty Name="LTEXT" ColumnName="LTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T003O">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T003O">
+              <MappingFragment StoreEntitySet="T003O">
+                <ScalarProperty Name="AUART" ColumnName="AUART" />
+                <ScalarProperty Name="ZTEXT" ColumnName="ZTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T005F">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T005F">
+              <MappingFragment StoreEntitySet="T005F">
+                <ScalarProperty Name="LAND1" ColumnName="LAND1" />
+                <ScalarProperty Name="REGIO" ColumnName="REGIO" />
+                <ScalarProperty Name="BEZEI" ColumnName="BEZEI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T005T">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T005T">
+              <MappingFragment StoreEntitySet="T005T">
+                <ScalarProperty Name="LAND1" ColumnName="LAND1" />
+                <ScalarProperty Name="LANDX50" ColumnName="LANDX50" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T006">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T006">
+              <MappingFragment StoreEntitySet="T006">
+                <ScalarProperty Name="MSEHI" ColumnName="MSEHI" />
+                <ScalarProperty Name="MSEH3" ColumnName="MSEH3" />
+                <ScalarProperty Name="MSEHL" ColumnName="MSEHL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T023">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T023">
+              <MappingFragment StoreEntitySet="T023">
+                <ScalarProperty Name="MATKL" ColumnName="MATKL" />
+                <ScalarProperty Name="WGBEZ" ColumnName="WGBEZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T035T">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T035T">
+              <MappingFragment StoreEntitySet="T035T">
+                <ScalarProperty Name="GRUPP" ColumnName="GRUPP" />
+                <ScalarProperty Name="TEXTL" ColumnName="TEXTL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T042Z">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T042Z">
+              <MappingFragment StoreEntitySet="T042Z">
+                <ScalarProperty Name="ZLSCH" ColumnName="ZLSCH" />
+                <ScalarProperty Name="TEXT1" ColumnName="TEXT1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T047T">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T047T">
+              <MappingFragment StoreEntitySet="T047T">
+                <ScalarProperty Name="MAHNA" ColumnName="MAHNA" />
+                <ScalarProperty Name="TEXTM" ColumnName="TEXTM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T090NAT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T090NAT">
+              <MappingFragment StoreEntitySet="T090NAT">
+                <ScalarProperty Name="AFASL" ColumnName="AFASL" />
+                <ScalarProperty Name="AFATXT" ColumnName="AFATXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T093S">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T093S">
+              <MappingFragment StoreEntitySet="T093S">
+                <ScalarProperty Name="AFBKTX" ColumnName="AFBKTX" />
+                <ScalarProperty Name="AFBTXT" ColumnName="AFBTXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T134">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T134">
+              <MappingFragment StoreEntitySet="T134">
+                <ScalarProperty Name="MTART" ColumnName="MTART" />
+                <ScalarProperty Name="MTBEZ" ColumnName="MTBEZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T137">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T137">
+              <MappingFragment StoreEntitySet="T137">
+                <ScalarProperty Name="MBRSH" ColumnName="MBRSH" />
+                <ScalarProperty Name="MBBEZ" ColumnName="MBBEZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T151T">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T151T">
+              <MappingFragment StoreEntitySet="T151T">
+                <ScalarProperty Name="KDGRP" ColumnName="KDGRP" />
+                <ScalarProperty Name="KTEXT" ColumnName="KTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T171T">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T171T">
+              <MappingFragment StoreEntitySet="T171T">
+                <ScalarProperty Name="BZIRK" ColumnName="BZIRK" />
+                <ScalarProperty Name="BZTXT" ColumnName="BZTXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB002">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TB002">
+              <MappingFragment StoreEntitySet="TB002">
+                <ScalarProperty Name="BU_GROUP" ColumnName="BU_GROUP" />
+                <ScalarProperty Name="TXT40" ColumnName="TXT40" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCURT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TCURT">
+              <MappingFragment StoreEntitySet="TCURT">
+                <ScalarProperty Name="WAERS" ColumnName="WAERS" />
+                <ScalarProperty Name="LTEXT" ColumnName="LTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TFKB">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TFKB">
+              <MappingFragment StoreEntitySet="TFKB">
+                <ScalarProperty Name="FKBER" ColumnName="FKBER" />
+                <ScalarProperty Name="ZTXT" ColumnName="ZTXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TFKTAXNUMTYPE_C">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TFKTAXNUMTYPE_C">
+              <MappingFragment StoreEntitySet="TFKTAXNUMTYPE_C">
+                <ScalarProperty Name="TAXTYPE" ColumnName="TAXTYPE" />
+                <ScalarProperty Name="CHECKDUPL" ColumnName="CHECKDUPL" />
+                <ScalarProperty Name="TEXT" ColumnName="TEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TKA01">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TKA01">
+              <MappingFragment StoreEntitySet="TKA01">
+                <ScalarProperty Name="KOKRS" ColumnName="KOKRS" />
+                <ScalarProperty Name="BEZEI" ColumnName="BEZEI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TKA05">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TKA05">
+              <MappingFragment StoreEntitySet="TKA05">
+                <ScalarProperty Name="KOSAR" ColumnName="KOSAR" />
+                <ScalarProperty Name="FUNC_AREA" ColumnName="FUNC_AREA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TPART">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TPART">
+              <MappingFragment StoreEntitySet="TPART">
+                <ScalarProperty Name="PARVW" ColumnName="PARVW" />
+                <ScalarProperty Name="VTEXT" ColumnName="VTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSPAT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TSPAT">
+              <MappingFragment StoreEntitySet="TSPAT">
+                <ScalarProperty Name="SPART" ColumnName="SPART" />
+                <ScalarProperty Name="VTEXT" ColumnName="VTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TVGRT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TVGRT">
+              <MappingFragment StoreEntitySet="TVGRT">
+                <ScalarProperty Name="VKGRP" ColumnName="VKGRP" />
+                <ScalarProperty Name="BEZEI" ColumnName="BEZEI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TVKBT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TVKBT">
+              <MappingFragment StoreEntitySet="TVKBT">
+                <ScalarProperty Name="VKBUR" ColumnName="VKBUR" />
+                <ScalarProperty Name="BEZEI" ColumnName="BEZEI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TVKOT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TVKOT">
+              <MappingFragment StoreEntitySet="TVKOT">
+                <ScalarProperty Name="VKORG" ColumnName="VKORG" />
+                <ScalarProperty Name="Denominación" ColumnName="Denominación" />
+                <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TVTWT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TVTWT">
+              <MappingFragment StoreEntitySet="TVTWT">
+                <ScalarProperty Name="VTWEG" ColumnName="VTWEG" />
+                <ScalarProperty Name="VTEXT" ColumnName="VTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TZONT">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.TZONT">
+              <MappingFragment StoreEntitySet="TZONT">
+                <ScalarProperty Name="LAND1" ColumnName="LAND1" />
+                <ScalarProperty Name="ZONE1" ColumnName="ZONE1" />
+                <ScalarProperty Name="VTEXT" ColumnName="VTEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_134_K">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.V_134_K">
+              <MappingFragment StoreEntitySet="V_134_K">
+                <ScalarProperty Name="MTART" ColumnName="MTART" />
+                <ScalarProperty Name="MTBEZ" ColumnName="MTBEZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T005H">
+            <EntityTypeMapping TypeName="DB_DMComponentsModel.T005H">
+              <MappingFragment StoreEntitySet="T005H">
+                <ScalarProperty Name="LAND1" ColumnName="LAND1" />
+                <ScalarProperty Name="REGIO" ColumnName="REGIO" />
+                <ScalarProperty Name="CITYC" ColumnName="CITYC" />
+                <ScalarProperty Name="BEZEI" ColumnName="BEZEI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -17,8 +17,8 @@ namespace DMS.db
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CatalogoCampos()
         {
-            this.CamposCatalogoReferencias = new HashSet<CamposCatalogoReferencias>();
-            this.CamposCatalogoReferenciasFK = new HashSet<CamposCatalogoReferencias>();
+            this.RelacionCatalogoCampos = new HashSet<RelacionCatalogoCampos>();
+            this.RelacionCatalogoCampos1 = new HashSet<RelacionCatalogoCampos>();
         }
     
         public long CatalogoCampoId { get; set; }
@@ -37,10 +37,10 @@ namespace DMS.db
         public bool Activo { get; set; }
     
         public virtual Agrupaciones Agrupaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CamposCatalogoReferencias> CamposCatalogoReferencias { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CamposCatalogoReferencias> CamposCatalogoReferenciasFK { get; set; }
         public virtual Catalogos Catalogos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RelacionCatalogoCampos> RelacionCatalogoCampos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RelacionCatalogoCampos> RelacionCatalogoCampos1 { get; set; }
     }
 }

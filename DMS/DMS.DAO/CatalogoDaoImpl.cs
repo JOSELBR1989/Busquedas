@@ -35,7 +35,8 @@ namespace DMS.DAO
                     catalogos.Activo = dato.Activa;
                     catalogos.ListoParaCrear = dato.ListoParaCrear;
                     catalogos.TipoCategoria = new TipoCategoria(dato.CAT_Categoria.IdCategoria, dato.CAT_Categoria.Nombre,dato.CAT_Categoria.Esquema);
-                    catalogos.ListoParaCrear = dato.ListoParaCrear; 
+                    catalogos.ListoParaCrear = dato.ListoParaCrear;
+                    catalogos.CantidadRegistrosEsperados = (int)dato.CantidadRegistros; 
 
                 }
             }
@@ -55,12 +56,13 @@ namespace DMS.DAO
                     var dato = (from da in db.Catalogos
                                 where da.IdCatalogo == catalogoUpdate.CodigoCatalogo
                                 select da).FirstOrDefault();
-
+                    dato.IdCategoria = catalogoUpdate.TipoCategoria.Codigo; 
+                    dato.NombreFisico = catalogoUpdate.NombreFisico; 
                     dato.NombreCatalogo = catalogoUpdate.NombreCatalogo;
                     dato.TablaCreada = catalogoUpdate.TablaCreada;
                     dato.Activa = catalogoUpdate.Activo;
-                    dato.ListoParaCrear = catalogoUpdate.ListoParaCrear;
-
+                    dato.ListoParaCrear = false;
+                    dato.CantidadRegistros = catalogoUpdate.CantidadRegistrosEsperados; 
                     db.SaveChanges(); 
                 }
             }
@@ -113,7 +115,7 @@ namespace DMS.DAO
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
                                  Activo = (da.Activa == true) ? "SI" : "NO",
                                  ListoParaCrear = da.ListoParaCrear
-                             }).ToList().Cast<Object>().ToList();
+                             }).ToList().OrderBy(x => x.NombreCategoria).Cast<Object>().ToList();
             }
             return resultado;
 
@@ -219,14 +221,15 @@ namespace DMS.DAO
                     cat.ListoParaCrear = catalogo.ListoParaCrear;
                     cat.IdCategoria = catalogo.TipoCategoria.Codigo;
                     cat.ListoParaCrear = false;
+                    cat.CantidadRegistros = catalogo.CantidadRegistrosEsperados; 
 
                     db.Catalogos.Add(cat);
                     db.SaveChanges();
                 }
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -250,7 +253,7 @@ namespace DMS.DAO
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
                                  Activo = (da.Activa == true) ? "SI" : "NO",
                                  ListoParaCrear = da.ListoParaCrear
-                             }).ToList().Cast<Object>().ToList();
+                             }).ToList().OrderBy(x => x.NombreCategoria).Cast<Object>().ToList();
             }
             return resultado;
         }
@@ -261,6 +264,7 @@ namespace DMS.DAO
             using (db = new DMS.db.DB_DMsEntities())
             {
                 result = (from da in db.CatalogoConsultas
+                          where da.Activo == true
                           where da.Catalogos.IdCatalogo == codigoCategoria
                           select da).ToList().Cast<Object>().ToList();
             }
@@ -326,7 +330,8 @@ namespace DMS.DAO
                              join catalogo in db.CatalogoConsultas on da.IdCatalogo equals catalogo.IdCatalogo
                              where (da.NombreCatalogo.Contains(busqueda) ||
                              da.NombreFisico.Contains(busqueda)) &&
-                             tipoCategoria.Contains(da.CAT_Categoria.Esquema) && da.Activa == estado
+                             tipoCategoria.Contains(da.CAT_Categoria.Esquema) && da.Activa == estado &&
+                             catalogo.Activo == true
                              select new
                              {
                                  IdCategoria = da.CAT_Categoria.IdCategoria,
@@ -338,7 +343,7 @@ namespace DMS.DAO
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
                                  Activo = (da.Activa == true) ? "SI" : "NO",
                                  ListoParaCrear = da.ListoParaCrear
-                             }).ToList().Cast<Object>().Distinct().ToList();
+                             }).ToList().OrderBy(x => x.NombreCategoria).Cast<Object>().Distinct().ToList();
             }
             return resultado;
         }
@@ -352,7 +357,8 @@ namespace DMS.DAO
                              join catalogo in db.CatalogoConsultas on da.IdCatalogo equals catalogo.IdCatalogo
                              where (da.NombreCatalogo.Contains(busqueda) ||
                              da.NombreFisico.Contains(busqueda)) &&
-                             tipoCategoria.Contains(da.CAT_Categoria.Esquema)
+                             tipoCategoria.Contains(da.CAT_Categoria.Esquema) &&
+                             catalogo.Activo == true
                              select new
                              {
                                  IdCategoria = da.CAT_Categoria.IdCategoria,
@@ -364,9 +370,36 @@ namespace DMS.DAO
                                  Referenciada = (da.Referenciada == true) ? "SI" : "NO",
                                  Activo = (da.Activa == true) ? "SI" : "NO",
                                  ListoParaCrear = da.ListoParaCrear
-                             }).ToList().Cast<Object>().Distinct().ToList();
+                             }).ToList().OrderBy(x => x.NombreCategoria).Cast<Object>().Distinct().ToList();
             }
             return resultado;
+        }
+
+        public Catalogos obtenerCatalogo(string schema, string technicalName)
+        {
+            Catalogos catalogo = new Catalogos();
+            using (db = new DMS.db.DB_DMsEntities())
+            {
+                try
+                {
+                    catalogo = (from da in db.Catalogos
+                                where da.CAT_Categoria.Esquema == schema
+                                && da.NombreFisico == technicalName
+                                select new Modelos.Catalogos {
+                                    CodigoCatalogo = da.IdCatalogo,
+                                    NombreCatalogo = da.NombreCatalogo,
+                                    NombreFisico = da.NombreFisico
+
+                                }).FirstOrDefault();
+
+                }
+                catch (Exception)
+                {
+                    catalogo = new Catalogos(); 
+                }
+            }
+
+            return catalogo; 
         }
     }
 }

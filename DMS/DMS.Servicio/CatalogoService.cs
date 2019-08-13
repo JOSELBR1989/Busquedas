@@ -10,6 +10,7 @@ namespace DMS.Servicio
     public interface CatalogoService: ExecuteQuery
     {
         Modelos.Catalogos obtenerCatalogo(long codigoCatalogo);
+        Modelos.Catalogos obtenerCatalogo(string schema, string technicalName);
         List<Object> busquedaPorDescripcion(string busqueda);
         List<object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria, bool estado);
         List<Object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria);
@@ -18,7 +19,6 @@ namespace DMS.Servicio
         List<Object> listaScripts(long codigoCategoria);
         List<Object> busquedaPorDescripcionConScripts(string busqueda, string[] tipoCategoria, bool estado);
         List<Object> busquedaPorDescripcionConScripts(string busqueda, string[] tipoCategoria);
-
         void actualizarCatalogo(DMS.Modelos.Catalogos catalogoUpdate);
         void actualizarScript(DMS.Modelos.ConsultasPorCatalogo consulta);
         void nuevoScript(DMS.Modelos.ConsultasPorCatalogo consulta);

@@ -31,7 +31,7 @@ namespace DMS.UtilidadesDesktop
 
             try
             {
-                mensaje = ex.InnerException.Message.ToString();
+                mensaje = getErrorDetails(ex);
             }
             catch
             {
@@ -39,6 +39,19 @@ namespace DMS.UtilidadesDesktop
             }
 
             MessageBox.Show("Registro no se pudo almacenar, error: " + mensaje, "Almacenado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private static string getErrorDetails(Exception ex)
+        {
+            string valor = string.Empty;
+            if (ex.InnerException.Message.ToString().Contains("inner exeption"))
+            {
+                valor = getErrorDetails(ex);
+            }
+            else
+                valor = ex.InnerException.Message.ToString();
+
+            return valor; 
         }
 
         public static void camposIncompletos(string Objetos)

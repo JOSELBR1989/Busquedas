@@ -82,5 +82,10 @@ namespace DMS.Servicio
         {
             return catalogoDato.busquedaPorDescripcionConScripts(busqueda, tipoCategoria);
         }
+
+        public Catalogos obtenerCatalogo(string schema, string technicalName)
+        {
+            return this.catalogoDato.obtenerCatalogo(schema, technicalName);
+        }
     }
 }

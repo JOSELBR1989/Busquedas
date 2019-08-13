@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMS.Modelos
 {
-    public class Catalogos
+    public class Catalogos: IDefaultDatasource
     {
         private TipoCategoria tipoCategoria;
         private long codigoCatalogo;
@@ -16,6 +16,8 @@ namespace DMS.Modelos
         private bool tablaReferenciada;
         private bool activo;
         private bool listoParaCrear;
+        private int registrosEnTabla;
+        private int cantidadRegistrosEsperados; 
         public Catalogos()
         {
         }
@@ -131,6 +133,48 @@ namespace DMS.Modelos
             set
             {
                 listoParaCrear = value;
+            }
+        }
+
+        public string getDisplayName
+        {
+            get
+            {
+                return "NombreCatalogo"; 
+            }
+        }
+
+        public string getValueMember
+        {
+            get
+            {
+                return "CodigoCatalogo"; 
+            }
+        }
+
+        public int CantidadRegistrosEsperados
+        {
+            get
+            {
+                return cantidadRegistrosEsperados;
+            }
+
+            set
+            {
+                cantidadRegistrosEsperados = value;
+            }
+        }
+
+        public int RegistrosEnTabla
+        {
+            get
+            {
+                return registrosEnTabla;
+            }
+
+            set
+            {
+                registrosEnTabla = value;
             }
         }
     }

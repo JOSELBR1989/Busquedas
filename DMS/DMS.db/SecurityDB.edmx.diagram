@@ -9,17 +9,21 @@
         <EntityTypeShape EntityType="DB_DMsModel.CAT_Categoria" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_DMsModel.CatalogoCampos" Width="2.875" PointX="7.5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_DMsModel.Catalogos" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_DMsModel.CamposCatalogoReferencias" Width="4" PointX="11.5" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="DB_DMsModel.FK_Agrupaciones_Catalogos" ManuallyRouted="false" />
         <AssociationConnector Association="DB_DMsModel.FK_CatalogoCampos_Agrupaciones" ManuallyRouted="false" />
         <AssociationConnector Association="DB_DMsModel.FK_Catalogos_CAT_Categoria" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_DMsModel.FK_CamposCatalogoReferencias_CatalogoCampos" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_DMsModel.FK_CamposCatalogoReferencias_CatalogoCampos1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_DMsModel.FK_CatalogoCampos_Catalogos" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DB_DMsModel.CatalogoConsultas" Width="1.5" PointX="5.25" PointY="5.25" />
-        <AssociationConnector Association="DB_DMsModel.FK_CatalogoConsultas_Catalogos" />
+        <EntityTypeShape EntityType="DB_DMsModel.CatalogoConsultas" Width="3.125" PointX="6.125" PointY="6" />
         <EntityTypeShape EntityType="DB_DMsModel.VW_Campos" Width="1.5" PointX="0.75" PointY="6.75" />
-      </Diagram>
+        <AssociationConnector Association="DB_DMsModel.FK_CatalogoConsultas_Catalogos" />
+        <EntityTypeShape EntityType="DB_DMsModel.RelacionCatalogos" Width="1.5" PointX="5.25" PointY="9.375" />
+        <AssociationConnector Association="DB_DMsModel.FK_RelacionCatalogos_Catalogos" />
+        <AssociationConnector Association="DB_DMsModel.FK_RelacionCatalogos_Catalogos1" />
+        <EntityTypeShape EntityType="DB_DMsModel.RelacionCatalogoCampos" Width="1.5" PointX="11.125" PointY="5.125" />
+        <AssociationConnector Association="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos" />
+        <AssociationConnector Association="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos1" />
+        <AssociationConnector Association="DB_DMsModel.FK_RelacionCatalogoCampos_RelacionCatalogos" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

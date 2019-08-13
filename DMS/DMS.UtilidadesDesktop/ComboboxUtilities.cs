@@ -23,6 +23,33 @@ namespace DMS.UtilidadesDesktop
                 
             }
         }
+        public static void fillCombobox(List<Object> objetos, ref ComboBox combo, string DisplayName, string ValueMember)
+        {
+            try
+            {
+                combo.DataSource = objetos;
+                combo.DisplayMember = DisplayName;
+                combo.ValueMember = ValueMember;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public static void fillComboboxSuggest(List<Object> objetos, ref ComboBox combo, string DisplayName, string ValueMember)
+        {
+            try
+            {
+                combo.AutoCompleteMode = AutoCompleteMode.Suggest;
+                combo.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
 
         public static string tagsComboboxString(params ComboBox[] combos)
         {

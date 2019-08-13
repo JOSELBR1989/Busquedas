@@ -31,9 +31,10 @@ namespace DMS.db
         public virtual DbSet<CAT_Categoria> CAT_Categoria { get; set; }
         public virtual DbSet<CatalogoCampos> CatalogoCampos { get; set; }
         public virtual DbSet<Catalogos> Catalogos { get; set; }
-        public virtual DbSet<CamposCatalogoReferencias> CamposCatalogoReferencias { get; set; }
         public virtual DbSet<CatalogoConsultas> CatalogoConsultas { get; set; }
         public virtual DbSet<VW_Campos> VW_Campos { get; set; }
+        public virtual DbSet<RelacionCatalogos> RelacionCatalogos { get; set; }
+        public virtual DbSet<RelacionCatalogoCampos> RelacionCatalogoCampos { get; set; }
     
         [DbFunction("DB_DMsEntities", "CamposCatalogoReferenciasPorCatalogo")]
         public virtual IQueryable<CamposCatalogoReferenciasPorCatalogo_Result> CamposCatalogoReferenciasPorCatalogo(Nullable<int> pIdCatalogo)
@@ -43,6 +44,50 @@ namespace DMS.db
                 new ObjectParameter("pIdCatalogo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<CamposCatalogoReferenciasPorCatalogo_Result>("[DB_DMsEntities].[CamposCatalogoReferenciasPorCatalogo](@pIdCatalogo)", pIdCatalogoParameter);
+        }
+    
+        public virtual ObjectResult<RelacionCatalogos_INS_Result> RelacionCatalogos_INS(Nullable<long> pIdCatalogoPK, Nullable<long> pIdCatalogoFK, Nullable<bool> pActivo)
+        {
+            var pIdCatalogoPKParameter = pIdCatalogoPK.HasValue ?
+                new ObjectParameter("pIdCatalogoPK", pIdCatalogoPK) :
+                new ObjectParameter("pIdCatalogoPK", typeof(long));
+    
+            var pIdCatalogoFKParameter = pIdCatalogoFK.HasValue ?
+                new ObjectParameter("pIdCatalogoFK", pIdCatalogoFK) :
+                new ObjectParameter("pIdCatalogoFK", typeof(long));
+    
+            var pActivoParameter = pActivo.HasValue ?
+                new ObjectParameter("pActivo", pActivo) :
+                new ObjectParameter("pActivo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RelacionCatalogos_INS_Result>("RelacionCatalogos_INS", pIdCatalogoPKParameter, pIdCatalogoFKParameter, pActivoParameter);
+        }
+    
+        public virtual ObjectResult<RelacionCatalogoCampos_Get_Result> RelacionCatalogoCampos_Get(Nullable<long> pIdCatalogoFK)
+        {
+            var pIdCatalogoFKParameter = pIdCatalogoFK.HasValue ?
+                new ObjectParameter("pIdCatalogoFK", pIdCatalogoFK) :
+                new ObjectParameter("pIdCatalogoFK", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RelacionCatalogoCampos_Get_Result>("RelacionCatalogoCampos_Get", pIdCatalogoFKParameter);
+        }
+    
+        public virtual int CatalogoCamposCreatePK(Nullable<int> pIdCatalogo)
+        {
+            var pIdCatalogoParameter = pIdCatalogo.HasValue ?
+                new ObjectParameter("pIdCatalogo", pIdCatalogo) :
+                new ObjectParameter("pIdCatalogo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatalogoCamposCreatePK", pIdCatalogoParameter);
+        }
+    
+        public virtual ObjectResult<CatalogoCamposParaAsignarFK_Result> CatalogoCamposParaAsignarFK(Nullable<long> pIdRelacionCatalogo)
+        {
+            var pIdRelacionCatalogoParameter = pIdRelacionCatalogo.HasValue ?
+                new ObjectParameter("pIdRelacionCatalogo", pIdRelacionCatalogo) :
+                new ObjectParameter("pIdRelacionCatalogo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatalogoCamposParaAsignarFK_Result>("CatalogoCamposParaAsignarFK", pIdRelacionCatalogoParameter);
         }
     }
 }

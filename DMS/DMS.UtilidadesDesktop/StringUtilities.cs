@@ -28,9 +28,9 @@ namespace DMS.UtilidadesDesktop
             {
                 if(prop.Name == ObjectName)
                     resultado = prop.GetValue(myObject, null);
-
                 // Do something with propValue
             }
+
 
             return resultado; 
         }
@@ -39,6 +39,10 @@ namespace DMS.UtilidadesDesktop
         public static string getSqlQuery(string tableName, DataGridView dtg)
         {
             return getQueryExecuted(tableName, dtg);
+        }
+        public static string getSqlQuery(string tableName, DataGridView dtg,decimal percent)
+        {
+            return getQueryExecuted(tableName, dtg,percent);
         }
 
         private static string getQueryExecuted(string tableName, DataGridView dtg)
@@ -69,7 +73,34 @@ namespace DMS.UtilidadesDesktop
             return strb.ToString();
         }
 
-        
+        private static string getQueryExecuted(string tableName, DataGridView dtg, decimal percent)
+        {
+            StringBuilder strb = new StringBuilder();
+            strb.AppendLine("SELECT TOP " + percent + " PERCENT");
+
+            for (int i = 0; i < dtg.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dtg.Rows[i].Cells["dtActivo"].Value))
+                {
+                    if (i > 0)
+                    {
+                        strb.AppendLine(",[" + dtg.Rows[i].Cells["NombreTecnico"].Value.ToString() + "] ");
+                    }
+                    else
+                    {
+                        strb.AppendLine("[" + dtg.Rows[i].Cells["NombreTecnico"].Value.ToString() + "] ");
+                    }
+
+                }
+            }
+
+
+            strb.AppendLine("FROM [DB_DMs]." + tableName);
+
+
+            return strb.ToString();
+        }
+
 
     }
 }

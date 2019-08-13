@@ -14,20 +14,6 @@
           <Property Name="NombreAgrupacion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_DMASAs.scConfiguration.CamposCatalogoReferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="CamposCatalogoReferencias">
-          <Key>
-            <PropertyRef Name="CatalogoCampoId" />
-            <PropertyRef Name="CatalogoCampoIdRef" />
-            <PropertyRef Name="Activo" />
-            <PropertyRef Name="UpdateRule" />
-          </Key>
-          <Property Name="CatalogoCampoId" Type="bigint" Nullable="false" />
-          <Property Name="CatalogoCampoIdRef" Type="bigint" Nullable="false" />
-          <Property Name="UpdateRule" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Activo" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="CAT_Categoria">
           <Key>
             <PropertyRef Name="IdCategoria" />
@@ -80,6 +66,28 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.CamposCatalogoReferencia
           <Property Name="Referenciada" Type="bit" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
           <Property Name="ListoParaCrear" Type="bit" Nullable="false" />
+          <Property Name="CantidadRegistros" Type="bigint" />
+        </EntityType>
+        <EntityType Name="RelacionCatalogoCampos">
+          <Key>
+            <PropertyRef Name="IdRelacionCatalogoCampos" />
+          </Key>
+          <Property Name="IdRelacionCatalogoCampos" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRelacionCatalogo" Type="bigint" Nullable="false" />
+          <Property Name="CatalogoCampoIdPK" Type="bigint" Nullable="false" />
+          <Property Name="CatalogoCampoIdFK" Type="bigint" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="UpdateRule" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="RelacionCatalogos">
+          <Key>
+            <PropertyRef Name="IdRelacionCatalogo" />
+          </Key>
+          <Property Name="IdRelacionCatalogo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCatalogoPK" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFK" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="NombreRelacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -135,30 +143,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos">
-          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
-          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatalogoCampos">
-              <PropertyRef Name="CatalogoCampoId" />
-            </Principal>
-            <Dependent Role="CamposCatalogoReferencias">
-              <PropertyRef Name="CatalogoCampoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos1">
-          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
-          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatalogoCampos">
-              <PropertyRef Name="CatalogoCampoId" />
-            </Principal>
-            <Dependent Role="CamposCatalogoReferencias">
-              <PropertyRef Name="CatalogoCampoIdRef" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CatalogoCampos_Agrupaciones">
           <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="0..1" />
           <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="*" />
@@ -207,6 +191,66 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RelacionCatalogoCampos_CatalogoCampos">
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
+          <End Role="RelacionCatalogoCampos" Type="Self.RelacionCatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="RelacionCatalogoCampos">
+              <PropertyRef Name="CatalogoCampoIdPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogoCampos_CatalogoCampos1">
+          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="0..1" />
+          <End Role="RelacionCatalogoCampos" Type="Self.RelacionCatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="RelacionCatalogoCampos">
+              <PropertyRef Name="CatalogoCampoIdFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogoCampos_RelacionCatalogos">
+          <End Role="RelacionCatalogos" Type="Self.RelacionCatalogos" Multiplicity="1" />
+          <End Role="RelacionCatalogoCampos" Type="Self.RelacionCatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RelacionCatalogos">
+              <PropertyRef Name="IdRelacionCatalogo" />
+            </Principal>
+            <Dependent Role="RelacionCatalogoCampos">
+              <PropertyRef Name="IdRelacionCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogos_Catalogos">
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
+          <End Role="RelacionCatalogos" Type="Self.RelacionCatalogos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="RelacionCatalogos">
+              <PropertyRef Name="IdCatalogoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogos_Catalogos1">
+          <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
+          <End Role="RelacionCatalogos" Type="Self.RelacionCatalogos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="RelacionCatalogos">
+              <PropertyRef Name="IdCatalogoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="CamposCatalogoReferenciasPorCatalogo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="scConfiguration">
           <Parameter Name="pIdCatalogo" Type="int" Mode="In" />
           <ReturnType>
@@ -225,20 +269,28 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="CatalogoCamposCreatePK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scConfiguration">
+          <Parameter Name="pIdCatalogo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatalogoCamposParaAsignarFK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scConfiguration">
+          <Parameter Name="pIdRelacionCatalogo" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="RelacionCatalogoCampos_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scConfiguration">
+          <Parameter Name="pIdCatalogoFK" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="RelacionCatalogos_INS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="scConfiguration">
+          <Parameter Name="pIdCatalogoPK" Type="bigint" Mode="In" />
+          <Parameter Name="pIdCatalogoFK" Type="bigint" Mode="In" />
+          <Parameter Name="pActivo" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="DB_DMsModelStoreContainer">
           <EntitySet Name="Agrupaciones" EntityType="Self.Agrupaciones" Schema="scConfiguration" store:Type="Tables" />
           <EntitySet Name="CAT_Categoria" EntityType="Self.CAT_Categoria" Schema="scConfiguration" store:Type="Tables" />
           <EntitySet Name="CatalogoCampos" EntityType="Self.CatalogoCampos" Schema="scConfiguration" store:Type="Tables" />
           <EntitySet Name="CatalogoConsultas" EntityType="Self.CatalogoConsultas" Schema="scConfiguration" store:Type="Tables" />
           <EntitySet Name="Catalogos" EntityType="Self.Catalogos" Schema="scConfiguration" store:Type="Tables" />
-          <EntitySet Name="CamposCatalogoReferencias" EntityType="Self.CamposCatalogoReferencias" store:Type="Tables" store:Schema="scConfiguration">
-            <DefiningQuery>SELECT 
-    [CamposCatalogoReferencias].[CatalogoCampoId] AS [CatalogoCampoId], 
-    [CamposCatalogoReferencias].[CatalogoCampoIdRef] AS [CatalogoCampoIdRef], 
-    [CamposCatalogoReferencias].[UpdateRule] AS [UpdateRule], 
-    [CamposCatalogoReferencias].[Activo] AS [Activo]
-    FROM [scConfiguration].[CamposCatalogoReferencias] AS [CamposCatalogoReferencias]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="RelacionCatalogoCampos" EntityType="Self.RelacionCatalogoCampos" Schema="scConfiguration" store:Type="Tables" />
+          <EntitySet Name="RelacionCatalogos" EntityType="Self.RelacionCatalogos" Schema="scConfiguration" store:Type="Tables" />
           <EntitySet Name="VW_Campos" EntityType="Self.VW_Campos" store:Type="Views" store:Schema="scConfiguration">
             <DefiningQuery>SELECT 
     [VW_Campos].[IdCatalogo] AS [IdCatalogo], 
@@ -267,14 +319,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
             <End Role="Catalogos" EntitySet="Catalogos" />
             <End Role="Agrupaciones" EntitySet="Agrupaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos">
-            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
-            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos1" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos1">
-            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
-            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
-          </AssociationSet>
           <AssociationSet Name="FK_CatalogoCampos_Agrupaciones" Association="Self.FK_CatalogoCampos_Agrupaciones">
             <End Role="Agrupaciones" EntitySet="Agrupaciones" />
             <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
@@ -290,6 +334,26 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <AssociationSet Name="FK_Catalogos_CAT_Categoria" Association="Self.FK_Catalogos_CAT_Categoria">
             <End Role="CAT_Categoria" EntitySet="CAT_Categoria" />
             <End Role="Catalogos" EntitySet="Catalogos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogoCampos_CatalogoCampos" Association="Self.FK_RelacionCatalogoCampos_CatalogoCampos">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="RelacionCatalogoCampos" EntitySet="RelacionCatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogoCampos_CatalogoCampos1" Association="Self.FK_RelacionCatalogoCampos_CatalogoCampos1">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="RelacionCatalogoCampos" EntitySet="RelacionCatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogoCampos_RelacionCatalogos" Association="Self.FK_RelacionCatalogoCampos_RelacionCatalogos">
+            <End Role="RelacionCatalogos" EntitySet="RelacionCatalogos" />
+            <End Role="RelacionCatalogoCampos" EntitySet="RelacionCatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogos_Catalogos" Association="Self.FK_RelacionCatalogos_Catalogos">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="RelacionCatalogos" EntitySet="RelacionCatalogos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogos_Catalogos1" Association="Self.FK_RelacionCatalogos_Catalogos1">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="RelacionCatalogos" EntitySet="RelacionCatalogos" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -336,11 +400,11 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <Property Name="LlavePrimaria" Type="Boolean" Nullable="false" />
           <Property Name="Orden" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agrupaciones" Relationship="Self.FK_CatalogoCampos_Agrupaciones" FromRole="CatalogoCampos" ToRole="Agrupaciones" />
-          <NavigationProperty Name="CamposCatalogoReferencias" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos" FromRole="CatalogoCampos" ToRole="CamposCatalogoReferencias" />
-          <NavigationProperty Name="CamposCatalogoReferenciasFK" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos1" FromRole="CatalogoCampos" ToRole="CamposCatalogoReferencias" />
           <NavigationProperty Name="Catalogos" Relationship="Self.FK_CatalogoCampos_Catalogos" FromRole="CatalogoCampos" ToRole="Catalogos" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
-        </EntityType>
+          <NavigationProperty Name="RelacionCatalogoCampos" Relationship="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos" FromRole="CatalogoCampos" ToRole="RelacionCatalogoCampos" />
+          <NavigationProperty Name="RelacionCatalogoCampos1" Relationship="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos1" FromRole="CatalogoCampos" ToRole="RelacionCatalogoCampos" />
+          </EntityType>
         <EntityType Name="Catalogos">
           <Key>
             <PropertyRef Name="IdCatalogo" />
@@ -356,22 +420,11 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <NavigationProperty Name="CatalogoCampos" Relationship="Self.FK_CatalogoCampos_Catalogos" FromRole="Catalogos" ToRole="CatalogoCampos" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <Property Name="ListoParaCrear" Type="Boolean" Nullable="false" />
+          <Property Name="CantidadRegistros" Type="Int64" />
           <NavigationProperty Name="CatalogoConsultas" Relationship="DB_DMsModel.FK_CatalogoConsultas_Catalogos" FromRole="Catalogos" ToRole="CatalogoConsultas" />
-        </EntityType>
-        <EntityType Name="CamposCatalogoReferencias">
-          <Key>
-            <PropertyRef Name="CatalogoCampoId" />
-            <PropertyRef Name="CatalogoCampoIdRef" />
-            <PropertyRef Name="UpdateRule" />
-            <PropertyRef Name="Activo" />
-          </Key>
-          <Property Name="CatalogoCampoId" Type="Int64" Nullable="false" />
-          <Property Name="CatalogoCampoIdRef" Type="Int64" Nullable="false" />
-          <Property Name="UpdateRule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="CatalogoCampos" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos" FromRole="CamposCatalogoReferencias" ToRole="CatalogoCampos" />
-          <NavigationProperty Name="CatalogoCamposFK" Relationship="Self.FK_CamposCatalogoReferencias_CatalogoCampos1" FromRole="CamposCatalogoReferencias" ToRole="CatalogoCampos" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-        </EntityType>
+          <NavigationProperty Name="RelacionCatalogos" Relationship="DB_DMsModel.FK_RelacionCatalogos_Catalogos" FromRole="Catalogos" ToRole="RelacionCatalogos" />
+          <NavigationProperty Name="RelacionCatalogos1" Relationship="DB_DMsModel.FK_RelacionCatalogos_Catalogos1" FromRole="Catalogos" ToRole="RelacionCatalogos" />
+          </EntityType>
         <Association Name="FK_Agrupaciones_Catalogos">
           <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
           <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="*" />
@@ -408,30 +461,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos">
-          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
-          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatalogoCampos">
-              <PropertyRef Name="CatalogoCampoId" />
-            </Principal>
-            <Dependent Role="CamposCatalogoReferencias">
-              <PropertyRef Name="CatalogoCampoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CamposCatalogoReferencias_CatalogoCampos1">
-          <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="1" />
-          <End Role="CamposCatalogoReferencias" Type="Self.CamposCatalogoReferencias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatalogoCampos">
-              <PropertyRef Name="CatalogoCampoId" />
-            </Principal>
-            <Dependent Role="CamposCatalogoReferencias">
-              <PropertyRef Name="CatalogoCampoIdRef" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CatalogoCampos_Catalogos">
           <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="1" />
           <End Role="CatalogoCampos" Type="Self.CatalogoCampos" Multiplicity="*" />
@@ -449,7 +478,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <EntitySet Name="CAT_Categoria" EntityType="Self.CAT_Categoria" />
           <EntitySet Name="CatalogoCampos" EntityType="Self.CatalogoCampos" />
           <EntitySet Name="Catalogos" EntityType="Self.Catalogos" />
-          <EntitySet Name="CamposCatalogoReferencias" EntityType="Self.CamposCatalogoReferencias" />
           <AssociationSet Name="FK_Agrupaciones_Catalogos" Association="Self.FK_Agrupaciones_Catalogos">
             <End Role="Catalogos" EntitySet="Catalogos" />
             <End Role="Agrupaciones" EntitySet="Agrupaciones" />
@@ -462,14 +490,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
             <End Role="CAT_Categoria" EntitySet="CAT_Categoria" />
             <End Role="Catalogos" EntitySet="Catalogos" />
           </AssociationSet>
-          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos">
-            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
-            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CamposCatalogoReferencias_CatalogoCampos1" Association="Self.FK_CamposCatalogoReferencias_CatalogoCampos1">
-            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
-            <End Role="CamposCatalogoReferencias" EntitySet="CamposCatalogoReferencias" />
-          </AssociationSet>
           <AssociationSet Name="FK_CatalogoCampos_Catalogos" Association="Self.FK_CatalogoCampos_Catalogos">
             <End Role="Catalogos" EntitySet="Catalogos" />
             <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
@@ -478,12 +498,48 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <Parameter Name="pIdCatalogo" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="CatalogoConsultas" EntityType="DB_DMsModel.CatalogoConsultas" />
+          <EntitySet Name="VW_Campos" EntityType="DB_DMsModel.VW_Campos" />
           <AssociationSet Name="FK_CatalogoConsultas_Catalogos" Association="DB_DMsModel.FK_CatalogoConsultas_Catalogos">
             <End Role="Catalogos" EntitySet="Catalogos" />
             <End Role="CatalogoConsultas" EntitySet="CatalogoConsultas" />
           </AssociationSet>
-          <EntitySet Name="VW_Campos" EntityType="DB_DMsModel.VW_Campos" />
-        </EntityContainer>
+          <FunctionImport Name="RelacionCatalogos_INS" ReturnType="Collection(DB_DMsModel.RelacionCatalogos_INS_Result)">
+            <Parameter Name="pIdCatalogoPK" Mode="In" Type="Int64" />
+            <Parameter Name="pIdCatalogoFK" Mode="In" Type="Int64" />
+            <Parameter Name="pActivo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="RelacionCatalogoCampos_Get" ReturnType="Collection(DB_DMsModel.RelacionCatalogoCampos_Get_Result)">
+          <Parameter Name="pIdCatalogoFK" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="RelacionCatalogos" EntityType="DB_DMsModel.RelacionCatalogos" />
+          <AssociationSet Name="FK_RelacionCatalogos_Catalogos" Association="DB_DMsModel.FK_RelacionCatalogos_Catalogos">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="RelacionCatalogos" EntitySet="RelacionCatalogos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogos_Catalogos1" Association="DB_DMsModel.FK_RelacionCatalogos_Catalogos1">
+            <End Role="Catalogos" EntitySet="Catalogos" />
+            <End Role="RelacionCatalogos" EntitySet="RelacionCatalogos" />
+          </AssociationSet>
+          <FunctionImport Name="CatalogoCamposCreatePK">
+          <Parameter Name="pIdCatalogo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatalogoCamposParaAsignarFK" ReturnType="Collection(DB_DMsModel.CatalogoCamposParaAsignarFK_Result)">
+          <Parameter Name="pIdRelacionCatalogo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="RelacionCatalogoCampos" EntityType="DB_DMsModel.RelacionCatalogoCampos" />
+          <AssociationSet Name="FK_RelacionCatalogoCampos_CatalogoCampos" Association="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="RelacionCatalogoCampos" EntitySet="RelacionCatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogoCampos_CatalogoCampos1" Association="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos1">
+            <End Role="CatalogoCampos" EntitySet="CatalogoCampos" />
+            <End Role="RelacionCatalogoCampos" EntitySet="RelacionCatalogoCampos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelacionCatalogoCampos_RelacionCatalogos" Association="DB_DMsModel.FK_RelacionCatalogoCampos_RelacionCatalogos">
+            <End Role="RelacionCatalogos" EntitySet="RelacionCatalogos" />
+            <End Role="RelacionCatalogoCampos" EntitySet="RelacionCatalogoCampos" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="CamposCatalogoReferenciasPorCatalogo_Result">
           <Property Type="Int32" Name="CatalogoCampoIdPK" Nullable="true" />
           <Property Type="String" Name="NombreCompletoCatalogoPK" Nullable="true" />
@@ -507,18 +563,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Catalogos" Relationship="DB_DMsModel.FK_CatalogoConsultas_Catalogos" FromRole="CatalogoConsultas" ToRole="Catalogos" />
         </EntityType>
-        <Association Name="FK_CatalogoConsultas_Catalogos">
-          <End Type="DB_DMsModel.Catalogos" Role="Catalogos" Multiplicity="1" />
-          <End Type="DB_DMsModel.CatalogoConsultas" Role="CatalogoConsultas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Catalogos">
-              <PropertyRef Name="IdCatalogo" />
-            </Principal>
-            <Dependent Role="CatalogoConsultas">
-              <PropertyRef Name="IdCatalogo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="VW_Campos">
           <Key>
             <PropertyRef Name="IdCatalogo" />
@@ -559,7 +603,142 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <Property Name="Requerido" Type="Boolean" Nullable="false" />
           <Property Name="CatalogoCampoId" Type="Int64" Nullable="false" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_CatalogoConsultas_Catalogos">
+          <End Type="DB_DMsModel.Catalogos" Role="Catalogos" Multiplicity="1" />
+          <End Type="DB_DMsModel.CatalogoConsultas" Role="CatalogoConsultas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="CatalogoConsultas">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="RelacionCatalogos_INS_Result">
+          <Property Type="Int64" Name="IdRelacionCatalogo" Nullable="false" />
+          <Property Type="String" Name="NombreCatalogo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NombreCompletoCatalogo" Nullable="false" MaxLength="105" />
+          <Property Type="String" Name="ValorMostrarCatalogo" Nullable="false" MaxLength="308" />
+          <Property Type="String" Name="DescriptionCampo" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NombreTecnico" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="CatalogoCampoId" Nullable="false" />
+          <Property Type="String" Name="ValorMostrarCampo" Nullable="false" MaxLength="1052" />
+          <Property Type="Int64" Name="CatalogoCampoIdFK" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RelacionCatalogoCampos_Get_Result">
+          <Property Type="Int64" Name="IdRelacionCatalogo" Nullable="false" />
+          <Property Type="String" Name="NombreCatalogo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NombreCompletoCatalogo" Nullable="false" MaxLength="105" />
+          <Property Type="String" Name="ValorMostrarCatalogo" Nullable="false" MaxLength="308" />
+          <Property Type="String" Name="DescriptionCampo" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NombreTecnico" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="CatalogoCampoId" Nullable="false" />
+          <Property Type="String" Name="ValorMostrarCampo" Nullable="false" MaxLength="1052" />
+          <Property Type="Int64" Name="CatalogoCampoIdFK" Nullable="true" />
+          <Property Type="String" Name="TipoDato" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Tamanio" Nullable="false" />
+          <Property Type="Int32" Name="Precision" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="RelacionCatalogos">
+          <Key>
+            <PropertyRef Name="IdRelacionCatalogo" />
+          </Key>
+          <Property Name="IdRelacionCatalogo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCatalogoPK" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFK" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="NombreRelacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Catalogos" Relationship="DB_DMsModel.FK_RelacionCatalogos_Catalogos" FromRole="RelacionCatalogos" ToRole="Catalogos" />
+          <NavigationProperty Name="Catalogos1" Relationship="DB_DMsModel.FK_RelacionCatalogos_Catalogos1" FromRole="RelacionCatalogos" ToRole="Catalogos" />
+          <NavigationProperty Name="RelacionCatalogoCampos" Relationship="DB_DMsModel.FK_RelacionCatalogoCampos_RelacionCatalogos" FromRole="RelacionCatalogos" ToRole="RelacionCatalogoCampos" />
+        </EntityType>
+        <Association Name="FK_RelacionCatalogos_Catalogos">
+          <End Type="DB_DMsModel.Catalogos" Role="Catalogos" Multiplicity="1" />
+          <End Type="DB_DMsModel.RelacionCatalogos" Role="RelacionCatalogos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="RelacionCatalogos">
+              <PropertyRef Name="IdCatalogoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogos_Catalogos1">
+          <End Type="DB_DMsModel.Catalogos" Role="Catalogos" Multiplicity="1" />
+          <End Type="DB_DMsModel.RelacionCatalogos" Role="RelacionCatalogos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogos">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="RelacionCatalogos">
+              <PropertyRef Name="IdCatalogoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="CatalogoCamposParaAsignarFK_Result">
+          <Property Type="String" Name="NombreTecnico" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DescriptionCampo" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NombreCampoMostrar" Nullable="false" MaxLength="1053" />
+          <Property Type="String" Name="TipoDato" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Tamanio" Nullable="false" />
+          <Property Type="Int32" Name="Precision" Nullable="true" />
+          <Property Type="Boolean" Name="Requerido" Nullable="false" />
+          <Property Type="Int64" Name="CatalogoCampoId" Nullable="false" />
+          <Property Type="Int32" Name="IdCatalogo" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="RelacionCatalogoCampos">
+          <Key>
+            <PropertyRef Name="IdRelacionCatalogoCampos" />
+          </Key>
+          <Property Name="IdRelacionCatalogoCampos" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRelacionCatalogo" Type="Int64" Nullable="false" />
+          <Property Name="CatalogoCampoIdPK" Type="Int64" Nullable="false" />
+          <Property Name="CatalogoCampoIdFK" Type="Int64" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateRule" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CatalogoCampos" Relationship="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos" FromRole="RelacionCatalogoCampos" ToRole="CatalogoCampos" />
+          <NavigationProperty Name="CatalogoCampos1" Relationship="DB_DMsModel.FK_RelacionCatalogoCampos_CatalogoCampos1" FromRole="RelacionCatalogoCampos" ToRole="CatalogoCampos" />
+          <NavigationProperty Name="RelacionCatalogos" Relationship="DB_DMsModel.FK_RelacionCatalogoCampos_RelacionCatalogos" FromRole="RelacionCatalogoCampos" ToRole="RelacionCatalogos" />
+        </EntityType>
+        <Association Name="FK_RelacionCatalogoCampos_CatalogoCampos">
+          <End Type="DB_DMsModel.CatalogoCampos" Role="CatalogoCampos" Multiplicity="1" />
+          <End Type="DB_DMsModel.RelacionCatalogoCampos" Role="RelacionCatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="RelacionCatalogoCampos">
+              <PropertyRef Name="CatalogoCampoIdPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogoCampos_CatalogoCampos1">
+          <End Type="DB_DMsModel.CatalogoCampos" Role="CatalogoCampos" Multiplicity="0..1" />
+          <End Type="DB_DMsModel.RelacionCatalogoCampos" Role="RelacionCatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoCampos">
+              <PropertyRef Name="CatalogoCampoId" />
+            </Principal>
+            <Dependent Role="RelacionCatalogoCampos">
+              <PropertyRef Name="CatalogoCampoIdFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelacionCatalogoCampos_RelacionCatalogos">
+          <End Type="DB_DMsModel.RelacionCatalogos" Role="RelacionCatalogos" Multiplicity="1" />
+          <End Type="DB_DMsModel.RelacionCatalogoCampos" Role="RelacionCatalogoCampos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RelacionCatalogos">
+              <PropertyRef Name="IdRelacionCatalogo" />
+            </Principal>
+            <Dependent Role="RelacionCatalogoCampos">
+              <PropertyRef Name="IdRelacionCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -609,6 +788,7 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
           <EntitySetMapping Name="Catalogos">
             <EntityTypeMapping TypeName="DB_DMsModel.Catalogos">
               <MappingFragment StoreEntitySet="Catalogos">
+                <ScalarProperty Name="CantidadRegistros" ColumnName="CantidadRegistros" />
                 <ScalarProperty Name="ListoParaCrear" ColumnName="ListoParaCrear" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
                 <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
@@ -617,16 +797,6 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
                 <ScalarProperty Name="NombreFisico" ColumnName="NombreFisico" />
                 <ScalarProperty Name="TablaCreada" ColumnName="TablaCreada" />
                 <ScalarProperty Name="Referenciada" ColumnName="Referenciada" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CamposCatalogoReferencias">
-            <EntityTypeMapping TypeName="DB_DMsModel.CamposCatalogoReferencias">
-              <MappingFragment StoreEntitySet="CamposCatalogoReferencias">
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="CatalogoCampoId" ColumnName="CatalogoCampoId" />
-                <ScalarProperty Name="CatalogoCampoIdRef" ColumnName="CatalogoCampoIdRef" />
-                <ScalarProperty Name="UpdateRule" ColumnName="UpdateRule" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -680,6 +850,78 @@ warning 6002: The table/view 'DB_DMASAs.scConfiguration.VW_Campos' does not have
                 <ScalarProperty Name="NombreFisico" ColumnName="NombreFisico" />
                 <ScalarProperty Name="NombreCatalogo" ColumnName="NombreCatalogo" />
                 <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RelacionCatalogos_INS" FunctionName="DB_DMsModel.Store.RelacionCatalogos_INS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.RelacionCatalogos_INS_Result">
+                <ScalarProperty Name="IdRelacionCatalogo" ColumnName="IdRelacionCatalogo" />
+                <ScalarProperty Name="NombreCatalogo" ColumnName="NombreCatalogo" />
+                <ScalarProperty Name="NombreCompletoCatalogo" ColumnName="NombreCompletoCatalogo" />
+                <ScalarProperty Name="ValorMostrarCatalogo" ColumnName="ValorMostrarCatalogo" />
+                <ScalarProperty Name="DescriptionCampo" ColumnName="DescriptionCampo" />
+                <ScalarProperty Name="NombreTecnico" ColumnName="NombreTecnico" />
+                <ScalarProperty Name="CatalogoCampoId" ColumnName="CatalogoCampoId" />
+                <ScalarProperty Name="ValorMostrarCampo" ColumnName="ValorMostrarCampo" />
+                <ScalarProperty Name="CatalogoCampoIdFK" ColumnName="CatalogoCampoIdFK" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RelacionCatalogoCampos_Get" FunctionName="DB_DMsModel.Store.RelacionCatalogoCampos_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.RelacionCatalogoCampos_Get_Result">
+                <ScalarProperty Name="IdRelacionCatalogo" ColumnName="IdRelacionCatalogo" />
+                <ScalarProperty Name="NombreCatalogo" ColumnName="NombreCatalogo" />
+                <ScalarProperty Name="NombreCompletoCatalogo" ColumnName="NombreCompletoCatalogo" />
+                <ScalarProperty Name="ValorMostrarCatalogo" ColumnName="ValorMostrarCatalogo" />
+                <ScalarProperty Name="DescriptionCampo" ColumnName="DescriptionCampo" />
+                <ScalarProperty Name="NombreTecnico" ColumnName="NombreTecnico" />
+                <ScalarProperty Name="CatalogoCampoId" ColumnName="CatalogoCampoId" />
+                <ScalarProperty Name="ValorMostrarCampo" ColumnName="ValorMostrarCampo" />
+                <ScalarProperty Name="CatalogoCampoIdFK" ColumnName="CatalogoCampoIdFK" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+                <ScalarProperty Name="Tamanio" ColumnName="Tamanio" />
+                <ScalarProperty Name="Precision" ColumnName="Precision" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="RelacionCatalogos">
+            <EntityTypeMapping TypeName="DB_DMsModel.RelacionCatalogos">
+              <MappingFragment StoreEntitySet="RelacionCatalogos">
+                <ScalarProperty Name="NombreRelacion" ColumnName="NombreRelacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdCatalogoFK" ColumnName="IdCatalogoFK" />
+                <ScalarProperty Name="IdCatalogoPK" ColumnName="IdCatalogoPK" />
+                <ScalarProperty Name="IdRelacionCatalogo" ColumnName="IdRelacionCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CatalogoCamposCreatePK" FunctionName="DB_DMsModel.Store.CatalogoCamposCreatePK" />
+          <FunctionImportMapping FunctionImportName="CatalogoCamposParaAsignarFK" FunctionName="DB_DMsModel.Store.CatalogoCamposParaAsignarFK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DMsModel.CatalogoCamposParaAsignarFK_Result">
+                <ScalarProperty Name="NombreTecnico" ColumnName="NombreTecnico" />
+                <ScalarProperty Name="DescriptionCampo" ColumnName="DescriptionCampo" />
+                <ScalarProperty Name="NombreCampoMostrar" ColumnName="NombreCampoMostrar" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+                <ScalarProperty Name="Tamanio" ColumnName="Tamanio" />
+                <ScalarProperty Name="Precision" ColumnName="Precision" />
+                <ScalarProperty Name="Requerido" ColumnName="Requerido" />
+                <ScalarProperty Name="CatalogoCampoId" ColumnName="CatalogoCampoId" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="RelacionCatalogoCampos">
+            <EntityTypeMapping TypeName="DB_DMsModel.RelacionCatalogoCampos">
+              <MappingFragment StoreEntitySet="RelacionCatalogoCampos">
+                <ScalarProperty Name="UpdateRule" ColumnName="UpdateRule" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CatalogoCampoIdFK" ColumnName="CatalogoCampoIdFK" />
+                <ScalarProperty Name="CatalogoCampoIdPK" ColumnName="CatalogoCampoIdPK" />
+                <ScalarProperty Name="IdRelacionCatalogo" ColumnName="IdRelacionCatalogo" />
+                <ScalarProperty Name="IdRelacionCatalogoCampos" ColumnName="IdRelacionCatalogoCampos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

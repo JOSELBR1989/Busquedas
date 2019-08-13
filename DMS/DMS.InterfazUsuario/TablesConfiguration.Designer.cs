@@ -101,20 +101,29 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dtgErroresReferencia = new System.Windows.Forms.DataGridView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnEliminarScript = new System.Windows.Forms.Button();
             this.btnAgregarScript = new System.Windows.Forms.Button();
             this.lstScripts = new System.Windows.Forms.ListBox();
             this.btnGuardarScript = new System.Windows.Forms.Button();
             this.richScriptExecute = new System.Windows.Forms.RichTextBox();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.cmbPosiblesCampos = new System.Windows.Forms.ComboBox();
+            this.btnEliminarRelacionColumna = new System.Windows.Forms.Button();
+            this.lstColumnasPK = new System.Windows.Forms.ListBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btnAgregarReferencia = new System.Windows.Forms.Button();
+            this.lstCatalogosPK = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkListoCrear = new System.Windows.Forms.CheckBox();
             this.chkActivo = new System.Windows.Forms.CheckBox();
-            this.groupGrupos = new System.Windows.Forms.GroupBox();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.Nuevo = new System.Windows.Forms.Button();
-            this.dtgColumns = new System.Windows.Forms.DataGridView();
             this.txtCodigoCatalogo = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
@@ -128,7 +137,7 @@
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.txtBusquedaGeneral = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label6 = new System.Windows.Forms.Label();
+            this.btnEditar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgCatalogos)).BeginInit();
             this.tabControlGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -144,11 +153,13 @@
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage7.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage10.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupGrupos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).BeginInit();
             this.tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -364,6 +375,7 @@
             this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Controls.Add(this.tabPage9);
             this.tabControl2.Location = new System.Drawing.Point(452, 6);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -876,6 +888,8 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label7);
+            this.tabPage5.Controls.Add(this.numericUpDown1);
             this.tabPage5.Controls.Add(this.dataGridView2);
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
@@ -884,6 +898,28 @@
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Datos";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(132, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 16);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "% de registros";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(6, 6);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             // 
             // dataGridView2
             // 
@@ -894,10 +930,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 27);
+            this.dataGridView2.Location = new System.Drawing.Point(6, 48);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(689, 380);
+            this.dataGridView2.Size = new System.Drawing.Size(689, 359);
             this.dataGridView2.TabIndex = 4;
             // 
             // tabPage7
@@ -915,6 +951,17 @@
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "Script Usuario";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(21, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(646, 16);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Agregar una busqueda debe de ser con  @pBusqueda, @pPercent para un SELECT top % " +
+    "y siempre colocar USE DB_DMs";
             // 
             // btnEliminarScript
             // 
@@ -969,13 +1016,126 @@
             this.richScriptExecute.TabIndex = 0;
             this.richScriptExecute.Text = "";
             // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.tabControl1);
+            this.tabPage9.Location = new System.Drawing.Point(4, 25);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(701, 413);
+            this.tabPage9.TabIndex = 6;
+            this.tabPage9.Text = "Relacion";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Location = new System.Drawing.Point(6, 6);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(689, 404);
+            this.tabControl1.TabIndex = 3;
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.richTextBox1);
+            this.tabPage10.Controls.Add(this.cmbPosiblesCampos);
+            this.tabPage10.Controls.Add(this.btnEliminarRelacionColumna);
+            this.tabPage10.Controls.Add(this.lstColumnasPK);
+            this.tabPage10.Controls.Add(this.button4);
+            this.tabPage10.Controls.Add(this.btnAgregarReferencia);
+            this.tabPage10.Controls.Add(this.lstCatalogosPK);
+            this.tabPage10.Location = new System.Drawing.Point(4, 25);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(681, 375);
+            this.tabPage10.TabIndex = 0;
+            this.tabPage10.Text = "Tablas";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(326, 251);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(349, 89);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
+            // cmbPosiblesCampos
+            // 
+            this.cmbPosiblesCampos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbPosiblesCampos.FormattingEnabled = true;
+            this.cmbPosiblesCampos.Location = new System.Drawing.Point(326, 221);
+            this.cmbPosiblesCampos.Name = "cmbPosiblesCampos";
+            this.cmbPosiblesCampos.Size = new System.Drawing.Size(349, 24);
+            this.cmbPosiblesCampos.TabIndex = 7;
+            // 
+            // btnEliminarRelacionColumna
+            // 
+            this.btnEliminarRelacionColumna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminarRelacionColumna.Location = new System.Drawing.Point(549, 346);
+            this.btnEliminarRelacionColumna.Name = "btnEliminarRelacionColumna";
+            this.btnEliminarRelacionColumna.Size = new System.Drawing.Size(126, 23);
+            this.btnEliminarRelacionColumna.TabIndex = 6;
+            this.btnEliminarRelacionColumna.Text = "Quitar Relacion";
+            this.btnEliminarRelacionColumna.UseVisualStyleBackColor = true;
+            // 
+            // lstColumnasPK
+            // 
+            this.lstColumnasPK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstColumnasPK.FormattingEnabled = true;
+            this.lstColumnasPK.HorizontalScrollbar = true;
+            this.lstColumnasPK.ItemHeight = 16;
+            this.lstColumnasPK.Location = new System.Drawing.Point(6, 221);
+            this.lstColumnasPK.Name = "lstColumnasPK";
+            this.lstColumnasPK.Size = new System.Drawing.Size(304, 116);
+            this.lstColumnasPK.TabIndex = 5;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(158, 6);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(98, 23);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Quitar Referencia";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarReferencia
+            // 
+            this.btnAgregarReferencia.Location = new System.Drawing.Point(6, 6);
+            this.btnAgregarReferencia.Name = "btnAgregarReferencia";
+            this.btnAgregarReferencia.Size = new System.Drawing.Size(146, 23);
+            this.btnAgregarReferencia.TabIndex = 3;
+            this.btnAgregarReferencia.Text = "Agregar referencia a Tabla";
+            this.btnAgregarReferencia.UseVisualStyleBackColor = true;
+            // 
+            // lstCatalogosPK
+            // 
+            this.lstCatalogosPK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstCatalogosPK.FormattingEnabled = true;
+            this.lstCatalogosPK.ItemHeight = 16;
+            this.lstCatalogosPK.Location = new System.Drawing.Point(6, 35);
+            this.lstCatalogosPK.Name = "lstCatalogosPK";
+            this.lstCatalogosPK.Size = new System.Drawing.Size(669, 180);
+            this.lstCatalogosPK.TabIndex = 1;
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.btnEditar);
             this.groupBox1.Controls.Add(this.chkListoCrear);
             this.groupBox1.Controls.Add(this.chkActivo);
-            this.groupBox1.Controls.Add(this.groupGrupos);
             this.groupBox1.Controls.Add(this.txtCodigoCatalogo);
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.cmbTipoCatalogo);
@@ -997,6 +1157,9 @@
             // chkListoCrear
             // 
             this.chkListoCrear.AutoSize = true;
+            this.chkListoCrear.Checked = true;
+            this.chkListoCrear.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkListoCrear.Enabled = false;
             this.chkListoCrear.Location = new System.Drawing.Point(217, 202);
             this.chkListoCrear.Name = "chkListoCrear";
             this.chkListoCrear.Size = new System.Drawing.Size(101, 20);
@@ -1009,51 +1172,13 @@
             this.chkActivo.AutoSize = true;
             this.chkActivo.Checked = true;
             this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActivo.Enabled = false;
             this.chkActivo.Location = new System.Drawing.Point(217, 173);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(55, 20);
             this.chkActivo.TabIndex = 13;
             this.chkActivo.Text = "Activo";
             this.chkActivo.UseVisualStyleBackColor = true;
-            // 
-            // groupGrupos
-            // 
-            this.groupGrupos.Controls.Add(this.btnQuitar);
-            this.groupGrupos.Controls.Add(this.Nuevo);
-            this.groupGrupos.Controls.Add(this.dtgColumns);
-            this.groupGrupos.Location = new System.Drawing.Point(6, 228);
-            this.groupGrupos.Name = "groupGrupos";
-            this.groupGrupos.Size = new System.Drawing.Size(428, 204);
-            this.groupGrupos.TabIndex = 12;
-            this.groupGrupos.TabStop = false;
-            this.groupGrupos.Text = "Grupos";
-            // 
-            // btnQuitar
-            // 
-            this.btnQuitar.Location = new System.Drawing.Point(87, 21);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitar.TabIndex = 13;
-            this.btnQuitar.Text = "Quitar";
-            this.btnQuitar.UseVisualStyleBackColor = true;
-            // 
-            // Nuevo
-            // 
-            this.Nuevo.Location = new System.Drawing.Point(6, 21);
-            this.Nuevo.Name = "Nuevo";
-            this.Nuevo.Size = new System.Drawing.Size(75, 23);
-            this.Nuevo.TabIndex = 13;
-            this.Nuevo.Text = "Nuevo";
-            this.Nuevo.UseVisualStyleBackColor = true;
-            // 
-            // dtgColumns
-            // 
-            this.dtgColumns.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dtgColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgColumns.Location = new System.Drawing.Point(6, 48);
-            this.dtgColumns.Name = "dtgColumns";
-            this.dtgColumns.Size = new System.Drawing.Size(416, 150);
-            this.dtgColumns.TabIndex = 11;
             // 
             // txtCodigoCatalogo
             // 
@@ -1065,12 +1190,13 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(329, 199);
+            this.btnGuardar.Location = new System.Drawing.Point(6, 113);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(16, 23);
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Visible = false;
             // 
             // btnNuevo
             // 
@@ -1104,6 +1230,7 @@
             this.txtNombreCatalogo.Location = new System.Drawing.Point(123, 79);
             this.txtNombreCatalogo.MaxLength = 200;
             this.txtNombreCatalogo.Name = "txtNombreCatalogo";
+            this.txtNombreCatalogo.ReadOnly = true;
             this.txtNombreCatalogo.Size = new System.Drawing.Size(281, 57);
             this.txtNombreCatalogo.TabIndex = 2;
             this.txtNombreCatalogo.Text = "";
@@ -1181,15 +1308,14 @@
             this.dataGridView1.Size = new System.Drawing.Size(1155, 379);
             this.dataGridView1.TabIndex = 0;
             // 
-            // label6
+            // btnEditar
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(205, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(461, 16);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Agregar una busqueda debe de ser con  @pBusqueda y siempre colocar USE DB_DMs";
+            this.btnEditar.Location = new System.Drawing.Point(329, 199);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(75, 23);
+            this.btnEditar.TabIndex = 15;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
             // 
             // TablesConfiguration
             // 
@@ -1219,13 +1345,16 @@
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgErroresReferencia)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage10.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupGrupos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgColumns)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -1267,10 +1396,6 @@
         private System.Windows.Forms.DataGridView dtgDetalleColumnas;
         private System.Windows.Forms.Button btnAgregarCampo;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.DataGridView dtgColumns;
-        private System.Windows.Forms.GroupBox groupGrupos;
-        private System.Windows.Forms.Button Nuevo;
-        private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnActualizarCampos;
         private System.Windows.Forms.DataGridView dtgLLavePrimaria;
         private System.Windows.Forms.DataGridViewTextBoxColumn dtCatalogoCampoId;
@@ -1336,5 +1461,18 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtBusquedaGeneral;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.ListBox lstCatalogosPK;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnAgregarReferencia;
+        private System.Windows.Forms.ListBox lstColumnasPK;
+        private System.Windows.Forms.Button btnEliminarRelacionColumna;
+        private System.Windows.Forms.ComboBox cmbPosiblesCampos;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button btnEditar;
     }
 }

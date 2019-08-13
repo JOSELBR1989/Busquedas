@@ -9,7 +9,9 @@ namespace DMS.DAO
 {
     public interface CatalogoDao: ExecuteQuery
     {
-        Catalogos obtenerCatalogo(long codigoCatalogo); 
+        Catalogos obtenerCatalogo(long codigoCatalogo);
+
+        Catalogos obtenerCatalogo(string schema, string technicalName);
         List<Object> busquedaPorDescripcion(string busqueda);
         List<Object> busquedaPorDescripcion(string busqueda, string[] tipoCategoria,bool estado);
         List<Object> busquedaPorDescripcionConScripts(string busqueda, string[] tipoCategoria, bool estado);

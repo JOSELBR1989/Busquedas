@@ -26,6 +26,7 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
             dtgCatalogos.SelectionChanged += DtgCatalogos_SelectionChanged;
 
             txtBusquedaGenerica.KeyPress += TxtBusquedaGenerica_KeyPress;
+            numPorcentaje.ValueChanged += NumPorcentaje_ValueChanged;
 
             cmbScriptsDisponibles.SelectedIndexChanged += CmbScriptsDisponibles_SelectedIndexChanged;
 
@@ -34,6 +35,11 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
             dtgCatalogos.DoubleClick += DtgCatalogos_DoubleClick;
 
 
+        }
+
+        private void NumPorcentaje_ValueChanged(object sender, EventArgs e)
+        {
+            ObtenerValoresConsulta(); 
         }
 
         private void TxtBusquedaGenerica_KeyPress(object sender, KeyPressEventArgs e)
@@ -55,7 +61,17 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
                     else
                         txtBusquedaGenerica.Enabled = false;
 
-                    dataGridView1.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).executeQuery(strb.ToString().Replace("@pBusqueda", (" '" + txtBusquedaGenerica.Text + "'")));
+                    if (strb.ToString().Contains("@pPercent"))
+                    {
+                        numPorcentaje.Enabled = true;
+                    }
+                    else
+                    {
+                        numPorcentaje.Enabled = false;
+                    }
+
+                    dataGridView1.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).executeQuery(strb.ToString().Replace("@pBusqueda", (" '" + txtBusquedaGenerica.Text + "'")).
+                        Replace("@pPercent", numPorcentaje.Value.ToString()));
                     dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                     labelTotal.Text = "Total de registros: " + dataGridView1.Rows.Count.ToString();
 
@@ -71,7 +87,14 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
 
         private void CmbScriptsDisponibles_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ObtenerValoresConsulta(); 
+
+        }
+
+        private void ObtenerValoresConsulta()
+        {
             txtBusquedaGenerica.Text = String.Empty;
+            numPorcentaje.Enabled = false;
             dataGridView1.Visible = true;
             var dato = cmbScriptsDisponibles.SelectedItem;
 
@@ -86,11 +109,20 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
                 }
                 else
                     txtBusquedaGenerica.Enabled = false;
+                if (strb.ToString().Contains("@pPercent"))
+                {
+                    numPorcentaje.Enabled = true;
+                }
+                else
+                {
+                    numPorcentaje.Enabled = false;
+                }
 
-                dataGridView1.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).executeQuery(strb.ToString().Replace("@pBusqueda", (" '" + txtBusquedaGenerica.Text + "'")));
+                dataGridView1.DataSource = (new DMS.Servicio.CatalogoServiceImpl()).executeQuery(strb.ToString().Replace("@pBusqueda", (" '" + txtBusquedaGenerica.Text + "'")).
+                        Replace("@pPercent", numPorcentaje.Value.ToString()));
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-                labelTotal.Text = "Total de registros: " +dataGridView1.Rows.Count.ToString();
+                labelTotal.Text = "Total de registros: " + dataGridView1.Rows.Count.ToString();
 
             }
             catch (Exception ex)
@@ -98,7 +130,6 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
                 dataGridView1.Visible = false;
                 labelTotal.Text = String.Empty;
             }
-
         }
 
         private void DtgCatalogos_DoubleClick(object sender, EventArgs e)
@@ -115,6 +146,7 @@ namespace DMS.RevisionUsuarios.InformesEmpleados
             try
             {
                 UtilidadesDesktop.ComboboxUtilities.fillCombobox(objeto, (new Modelos.ConsultasPorCatalogo()), ref cmbScriptsDisponibles);
+                ObtenerValoresConsulta(); 
             }
             catch (Exception ex)
             {

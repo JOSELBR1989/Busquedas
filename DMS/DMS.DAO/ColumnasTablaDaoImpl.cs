@@ -22,12 +22,14 @@ namespace DMS.DAO
                                 where da.CatalogoCampoId == campo.CodigoCampoCatalogo
                                 select da).FirstOrDefault();
                     dato.NombreCampo = campo.NombreCampo;
+                    if(!dato.Catalogos.TablaCreada)
+                        dato.NombreTecnico = campo.NombreTecnicoCampo; 
                     dato.Descripcion = campo.DescripcionCampo;
                     try
                     {
                         dato.IdAgrupacion = (int?)campo.Agrupacion.IdAgrupacion;
                     }
-                    catch
+                    catch(Exception ex)
                     {
                     }
                     dato.TipoDato = campo.TipoDatoCampo;
@@ -40,8 +42,9 @@ namespace DMS.DAO
                     db.SaveChanges();
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                throw ex;
             }
         }
         public void actualizarGrupo(CamposCatalogo campo)
@@ -92,7 +95,7 @@ namespace DMS.DAO
                              da.NombreCompletoCatalogo.Contains(busqueda) ||
                              da.NombreTecnico.Contains(busqueda) ||
                              da.DescriptionCampo.Contains(busqueda)) && da.Activa == true && da.Activo == true
-                             select da).ToList().Cast<Object>().ToList();
+                             select da).ToList().OrderBy(x=> x.Esquema) .Cast<Object>().ToList();
             }
 
             return resultado; 
@@ -124,7 +127,7 @@ namespace DMS.DAO
                                  da.Orden,
                                  da.Activo,
                                  NameWithTechnicalCode = da.NombreCampo + " (" + da.NombreTecnico + ")"
-                             }).ToList().Cast<Object>().ToList(); 
+                             }).ToList().OrderBy(x=> x.Orden).Cast<Object>().ToList(); 
             }
 
             return resultado;
@@ -286,31 +289,41 @@ namespace DMS.DAO
         }
         public void nuevo(CamposCatalogo campo)
         {
-            using (db = new DMS.db.DB_DMsEntities())
+            try
             {
-                db.CatalogoCampos catalogo = new DMS.db.CatalogoCampos();
-                catalogo.IdCatalogo = (int)campo.Catalogo.CodigoCatalogo;
-                try{
-                    catalogo.IdAgrupacion = (int?)campo.Agrupacion.IdAgrupacion;
-
-                }
-                catch
+                using (db = new DMS.db.DB_DMsEntities())
                 {
-                }
-                catalogo.NombreCampo = campo.NombreCampo;
-                catalogo.Descripcion = campo.DescripcionCampo;
-                catalogo.NombreTecnico = campo.NombreTecnicoCampo;
-                catalogo.TipoDato = campo.TipoDatoCampo;
-                catalogo.Tamanio = campo.Tamanio;
-                catalogo.Precision = campo.Presicion;
-                catalogo.CampoConReferencia = campo.ConReferencia;
-                catalogo.Requerido = campo.Requerido;
-                catalogo.LlavePrimaria = campo.LlavePrimaria;
-                catalogo.Activo = campo.Activo;
+                    db.CatalogoCampos catalogo = new DMS.db.CatalogoCampos();
+                    catalogo.IdCatalogo = (int)campo.Catalogo.CodigoCatalogo;
+                    try
+                    {
+                        catalogo.IdAgrupacion = (int?)campo.Agrupacion.IdAgrupacion;
 
-                db.CatalogoCampos.Add(catalogo);
-                db.SaveChanges(); 
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                    catalogo.NombreCampo = campo.NombreCampo;
+                    catalogo.Descripcion = campo.DescripcionCampo;
+                    catalogo.NombreTecnico = campo.NombreTecnicoCampo;
+                    catalogo.TipoDato = campo.TipoDatoCampo;
+                    catalogo.Tamanio = campo.Tamanio;
+                    catalogo.Precision = campo.Presicion;
+                    catalogo.CampoConReferencia = campo.ConReferencia;
+                    catalogo.Requerido = campo.Requerido;
+                    catalogo.LlavePrimaria = campo.LlavePrimaria;
+                    catalogo.Activo = campo.Activo;
+
+                    db.CatalogoCampos.Add(catalogo);
+                    db.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         public CamposCatalogo obtenePorId(CamposCatalogo campoBusqueda)
         {
@@ -321,6 +334,7 @@ namespace DMS.DAO
                           where da.CatalogoCampoId == campoBusqueda.CodigoCampoCatalogo
                           select new CamposCatalogo
                           {
+                              CodigoCampoCatalogo = da.CatalogoCampoId,
                               NombreCampo = da.NombreCampo,
                               DescripcionCampo = da.Descripcion,
                               NombreTecnicoCampo = da.NombreTecnico,
@@ -329,9 +343,9 @@ namespace DMS.DAO
                               Presicion = da.Precision,
                               ConReferencia = da.CampoConReferencia,
                               Requerido = da.Requerido,
-                              LlavePrimaria = false,
-                              Orden = 0,
-                              Activo = true
+                              LlavePrimaria = da.LlavePrimaria,
+                              Orden = da.Orden,
+                              Activo = da.Activo
                           }).ToList().FirstOrDefault();
             }
             return result; 
@@ -339,20 +353,20 @@ namespace DMS.DAO
         public List<Object> obtenerAsociacionesColumna(CamposCatalogo campo)
         {
             List<Object> resultado = new List<object>();
-            using (db = new DMS.db.DB_DMsEntities())
-            {
-                resultado = (from da in db.CamposCatalogoReferencias
-                             where da.CatalogoCampoId == campo.CodigoCampoCatalogo &&
-                             da.Activo == true
-                             select new
-                             {
-                                 CodigoCatalogoBase = da.CatalogoCampos.CatalogoCampoId,
-                                 NombreCampoCatalogoBase = da.CatalogoCampos.NombreCampo + " [" + da.CatalogoCampos.NombreTecnico + "]",
-                                 NombreTablaReferencia = da.CatalogoCamposFK.Catalogos.NombreCatalogo + " [" + da.CatalogoCamposFK.Catalogos.NombreFisico + "]",
-                                 CodigoCataloReferencia = da.CatalogoCampoIdRef,
-                                 NombreCataloReferencia = da.CatalogoCamposFK.NombreCampo + " [" + da.CatalogoCamposFK.NombreTecnico  + "]"
-                             }).ToList().Cast<Object>().ToList();
-            }
+            //using (db = new DMS.db.DB_DMsEntities())
+            //{
+            //    resultado = (from da in db.CamposCatalogoReferencias
+            //                 where da.CatalogoCampoId == campo.CodigoCampoCatalogo &&
+            //                 da.Activo == true
+            //                 select new
+            //                 {
+            //                     CodigoCatalogoBase = da.CatalogoCampos.CatalogoCampoId,
+            //                     NombreCampoCatalogoBase = da.CatalogoCampos.NombreCampo + " [" + da.CatalogoCampos.NombreTecnico + "]",
+            //                     NombreTablaReferencia = da.CatalogoCamposFK.Catalogos.NombreCatalogo + " [" + da.CatalogoCamposFK.Catalogos.NombreFisico + "]",
+            //                     CodigoCataloReferencia = da.CatalogoCampoIdRef,
+            //                     NombreCataloReferencia = da.CatalogoCamposFK.NombreCampo + " [" + da.CatalogoCamposFK.NombreTecnico  + "]"
+            //                 }).ToList().Cast<Object>().ToList();
+            //}
             return resultado; 
         }
         public void quitarAsociacionCampos(long CatalogoCampoId, long CatalogoCampoIdRef)

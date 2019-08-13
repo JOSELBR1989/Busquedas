@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
+using DMS.Componentes;
 
 namespace DMS.InterfazUsuario
 {
@@ -17,6 +18,11 @@ namespace DMS.InterfazUsuario
         public SMO()
         {
             InitializeComponent();
+
+            //fillControlCombobox.FillControls(this);
         }
+
+
+       
     }
 }

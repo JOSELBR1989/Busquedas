@@ -14,7 +14,7 @@ namespace DMS.InterfazUsuario.CreacionEstructura
     public partial class CamposCatalogo : Form
     {
         Catalogos catalogoPadre;
-        CamposCatalogo camposCatalogo;
+        DMS.Modelos.CamposCatalogo camposCatalogo;
         public CamposCatalogo()
         {
             InitializeComponent();
@@ -35,7 +35,10 @@ namespace DMS.InterfazUsuario.CreacionEstructura
                 btnGuardarRegistro.Enabled = true;
             else
                 btnGuardarRegistro.Enabled = false;
+
+
             lblEncabezadoCatalogo.Text = catalogoPadre.NombreCatalogo + " [" +  catalogoPadre.NombreFisico + "]";
+
 
             ResetEnabledNumeric(false,-1,-1,-1, numPresicion, numTamanio);
             obtenerAgrupaciones();
@@ -44,14 +47,14 @@ namespace DMS.InterfazUsuario.CreacionEstructura
             txtNombreTecnicoColumna.KeyPress += TxtNombreTecnicoColumna_KeyPress;
             cmbTipoDato.SelectedValueChanged += CmbTipoDato_SelectedValueChanged;
             btnGuardarRegistro.Click += BtnGuardarRegistro_Click;
-            txtOrden.KeyPress += TxtOrden_KeyPress;
 
         }
 
-        public CamposCatalogo(Catalogos catalogo, DMS.Modelos.CamposCatalogo camposColumna)
+        public CamposCatalogo(Catalogos catalogo, DMS.Modelos.CamposCatalogo camposColumnaParam)
         {
             InitializeComponent();
-
+            camposCatalogo = new DMS.Modelos.CamposCatalogo();
+            camposCatalogo = camposColumnaParam; 
             catalogoPadre = new Catalogos();
             catalogoPadre = catalogo;
             if (catalogoPadre != null)
@@ -59,14 +62,37 @@ namespace DMS.InterfazUsuario.CreacionEstructura
             else
                 btnGuardarRegistro.Enabled = false;
             lblEncabezadoCatalogo.Text = catalogoPadre.NombreCatalogo + " [" + catalogoPadre.NombreFisico + "]";
+            lblEncabezadoCatalogo.SelectAll();
+            lblEncabezadoCatalogo.SelectionAlignment = HorizontalAlignment.Center;
 
-            ResetEnabledNumeric(false, -1, -1, -1, numPresicion, numTamanio);
+            txtCodigo.Text = camposColumnaParam.CodigoCampoCatalogo.ToString();
+            txtNombreColumna.Text = camposColumnaParam.NombreCampo;
+            txtDescripcionColumna.Text = camposColumnaParam.DescripcionCampo;
+            txtNombreTecnicoColumna.Text = camposColumnaParam.NombreTecnicoCampo;
+            for (int i = 0; i < cmbTipoDato.Items.Count; i++)
+            {
+                if (cmbTipoDato.Items[i].ToString() == camposColumnaParam.TipoDatoCampo)
+                {
+                    cmbTipoDato.SelectedIndex = i;
+                    break;
+                } 
+            }
+            ManejoValoresTamaniPresision();
+
+            numTamanio.Value = camposColumnaParam.Tamanio;
+            numPresicion.Value = (int)camposColumnaParam.Presicion;
+            txtOrden.Value = (int)camposColumnaParam.Orden;
+            chkRequerido.Checked = camposColumnaParam.Requerido;
+            if (catalogo.TablaCreada)
+            {
+                cmbTipoDato.Enabled = false;
+                txtNombreTecnicoColumna.Enabled = false; 
+            }
 
 
             txtNombreTecnicoColumna.KeyPress += TxtNombreTecnicoColumna_KeyPress;
             cmbTipoDato.SelectedValueChanged += CmbTipoDato_SelectedValueChanged;
             btnGuardarRegistro.Click += BtnGuardarRegistro_Click;
-            txtOrden.KeyPress += TxtOrden_KeyPress;
 
 
         }
@@ -75,23 +101,49 @@ namespace DMS.InterfazUsuario.CreacionEstructura
         {
             if (txtCodigo.Text != "")
             {
-
+                actualizarRegistro();
             }
             else
                 guardarNuevoRegistro(); 
 
         }
-
+        private void actualizarRegistro()
+        {
+            if (DMS.UtilidadesDesktop.TextboxProcess.validarRequeridos(txtNombreColumna, txtNombreTecnicoColumna) &&
+                UtilidadesDesktop.ComboboxUtilities.selectedTextValidate(cmbTipoDato)){
+                camposCatalogo.NombreCampo = txtNombreColumna.Text;
+                camposCatalogo.DescripcionCampo = txtDescripcionColumna.Text;
+                camposCatalogo.NombreTecnicoCampo = txtNombreTecnicoColumna.Text;
+                camposCatalogo.TipoDatoCampo = cmbTipoDato.Text;
+                camposCatalogo.Tamanio = (int)numTamanio.Value;
+                camposCatalogo.Presicion = (int)numPresicion.Value;
+                camposCatalogo.Requerido = chkRequerido.Checked;
+                camposCatalogo.Orden = Convert.ToInt16(txtOrden.Value);
+                try
+                {
+                    (new DMS.Servicio.ColumnasTablaServiceImpl()).actualizar(camposCatalogo);
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    DMS.UtilidadesDesktop.MessageBoxUtilities.errorAlmacenarRegistros(ex);
+                }
+            }
+            else
+            {
+                string mensaje = "\n" + DMS.UtilidadesDesktop.TextboxProcess.tagsTextBoxString(txtNombreColumna, txtNombreTecnicoColumna);
+                if (mensaje.Length > 0) mensaje = mensaje + ",";
+                mensaje = mensaje + UtilidadesDesktop.ComboboxUtilities.tagsComboboxString(cmbTipoDato);
+                UtilidadesDesktop.MessageBoxUtilities.camposIncompletos(mensaje);
+            }
+        }
         private void guardarNuevoRegistro()
         {
-            if (DMS.UtilidadesDesktop.TextboxProcess.validarRequeridos(txtNombreColumna, txtNombreTecnicoColumna, txtOrden) &&
+            if (DMS.UtilidadesDesktop.TextboxProcess.validarRequeridos(txtNombreColumna, txtNombreTecnicoColumna) &&
                     UtilidadesDesktop.ComboboxUtilities.selectedTextValidate(cmbTipoDato))
             {
                 DMS.Modelos.CamposCatalogo campos = new Modelos.CamposCatalogo();
-                if (cmbAgrupacion.Items.Count > 0)
-                {
 
-                }
                 campos.Catalogo = catalogoPadre;
                 campos.NombreCampo = txtNombreColumna.Text;
                 campos.DescripcionCampo = txtDescripcionColumna.Text;
@@ -117,7 +169,7 @@ namespace DMS.InterfazUsuario.CreacionEstructura
 
             }
             else {
-                string mensaje = "\n" + DMS.UtilidadesDesktop.TextboxProcess.tagsTextBoxString(txtNombreColumna, txtNombreTecnicoColumna, txtOrden);
+                string mensaje = "\n" + DMS.UtilidadesDesktop.TextboxProcess.tagsTextBoxString(txtNombreColumna, txtNombreTecnicoColumna);
                 if (mensaje.Length > 0) mensaje = mensaje + ",";
                 mensaje = mensaje + UtilidadesDesktop.ComboboxUtilities.tagsComboboxString(cmbTipoDato);
                 UtilidadesDesktop.MessageBoxUtilities.camposIncompletos(mensaje);
@@ -127,19 +179,21 @@ namespace DMS.InterfazUsuario.CreacionEstructura
 
         }
 
-        private void TxtOrden_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = DMS.UtilidadesDesktop.TextboxProcess.isNumber(e); 
-        }
 
         private void CmbTipoDato_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ManejoValoresTamaniPresision(); 
+        }
+
+        public void ManejoValoresTamaniPresision()
         {
             ResetEnabledNumeric(false, -1, -1, -1, numPresicion, numTamanio);
             if (cmbTipoDato.Text == "NVARCHAR")
             {
                 ResetEnabledNumeric(true, 1, 4000, 1, numTamanio);
             }
-            else {
+            else
+            {
                 if (cmbTipoDato.Text == "DECIMAL")
                 {
                     ResetEnabledNumeric(true, 0, 8, 1, numPresicion);
@@ -148,7 +202,6 @@ namespace DMS.InterfazUsuario.CreacionEstructura
 
             }
         }
-
         public void ResetEnabledNumeric(bool activo, int minNum, int maxNum, int defaultValue, params NumericUpDown[] numerics)
         {
             foreach (NumericUpDown num in numerics)

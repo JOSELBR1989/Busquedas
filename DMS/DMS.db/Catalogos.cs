@@ -20,6 +20,8 @@ namespace DMS.db
             this.Agrupaciones = new HashSet<Agrupaciones>();
             this.CatalogoCampos = new HashSet<CatalogoCampos>();
             this.CatalogoConsultas = new HashSet<CatalogoConsultas>();
+            this.RelacionCatalogos = new HashSet<RelacionCatalogos>();
+            this.RelacionCatalogos1 = new HashSet<RelacionCatalogos>();
         }
     
         public int IdCatalogo { get; set; }
@@ -30,6 +32,7 @@ namespace DMS.db
         public bool Referenciada { get; set; }
         public bool Activa { get; set; }
         public bool ListoParaCrear { get; set; }
+        public Nullable<long> CantidadRegistros { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agrupaciones> Agrupaciones { get; set; }
@@ -38,5 +41,9 @@ namespace DMS.db
         public virtual ICollection<CatalogoCampos> CatalogoCampos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CatalogoConsultas> CatalogoConsultas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RelacionCatalogos> RelacionCatalogos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RelacionCatalogos> RelacionCatalogos1 { get; set; }
     }
 }

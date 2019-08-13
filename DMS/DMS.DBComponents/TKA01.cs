@@ -7,19 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DMS.db
+namespace DMS.DBComponents
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class CamposCatalogoReferencias
+    public partial class TKA01
     {
-        public long CatalogoCampoId { get; set; }
-        public long CatalogoCampoIdRef { get; set; }
-        public string UpdateRule { get; set; }
-        public bool Activo { get; set; }
-    
-        public virtual CatalogoCampos CatalogoCampos { get; set; }
-        public virtual CatalogoCampos CatalogoCamposFK { get; set; }
+        public string KOKRS { get; set; }
+        public string BEZEI { get; set; }
     }
 }
